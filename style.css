@@ -1,0 +1,13 @@
+:root{
+    /* Color Palette */
+    --primary : #001524;
+    --secondary : #445D48;
+    --third-color : #D6CC99;
+    --fourth-color : #FDE5D4;
+    --dark : #1a1a1a;
+
+    /* Font Style */
+    --logo : "Yeseva One", serif;
+    --default : "Josefin Sans", sans-serif;
+    --script : "Poppins", sans-serif;
+}

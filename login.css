@@ -1,0 +1,139 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+    border: none;
+    text-decoration: none;
+    list-style: none;
+}
+body{
+    background: none;
+    overflow: hidden;
+}
+.bg-img{
+    background-image: url(images/beatriz-perez-moya-XN4T2PVUUgk-unsplash.jpg);
+    width: 100vw;
+    height: 100vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    filter: brightness(85%);
+    position: absolute;
+    z-index: 0;
+}
+.head-page{
+    width: 100vw;
+    height: 10vh;
+    padding: 5px 30px;
+    position: absolute;
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+}
+.page-login{
+    width: 40vw;
+    height: 70vh;
+    background-color: #fff;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 1;
+    margin: 15vh 30vw;
+    border-radius: 10px;
+    padding: 0 50px;
+}
+.logo{
+    font-family: var(--logo);
+    font-size: 1.5rem;
+    color: #fff;
+    opacity: 80%;
+}
+.logo span{
+    color: var(--secondary);
+}
+.account-confirm{
+    margin: auto 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    text-align: center;
+}
+.account-confirm p{
+    font-family: var(--default);
+    color: #fff;
+    margin: auto 0;
+    font-size: 0.8rem;
+}
+.sign-up{
+    font-family: var(--default);
+    color: #fff;
+    background: none;
+    width: 100px;
+    height: 30px;
+    border: 1px solid #fff;
+    border-radius: 15px;
+    margin: 0 15px;
+}
+.sign-up a{
+    color: #fff;
+}
+.hdr{
+    font-family: var(--default);
+    margin: 7vh 0 1vh;
+    color: #445D48;
+}
+form{
+    width: 30vw;
+    height: 35vh;
+    padding: 10px 20px;margin-top: 20px;
+}
+.input-form{
+    display: flex;
+    flex-direction: column;
+}
+.input-form label{
+    font-family: var(--default);
+    font-size: 1rem;
+    color: var(--dark);
+    font-weight: 600;
+    margin: 10px 0 0;
+}
+.input-form input[type="password"],
+.input-form input[type="text"]{
+    width: 100%;
+    height: 40px;
+    margin: 5px 0;
+    padding: 0px 10px;
+    border: 2px solid #e2e2e2;
+    border-radius: 10px;
+    font-family: var(--default); 
+    font-weight: 600;  
+    color: #7daa85;
+}
+.input-form input[type="password"]::placeholder,
+.input-form input[type="text"]::placeholder{
+    color: #e2e2e2;
+    font-family: var(--default);
+}
+.input-form input[type="password"]:focus,
+.input-form input[type="text"]:focus{
+    border-color: #7daa85;
+}
+form input[type="submit"]{
+    width: 120px;
+    height: 35px;
+    margin: 20px 0;
+    font-family: var(--default);
+    font-weight: bold;
+    border-radius: 10px;
+    background-color: var(--secondary);
+    color: #fff;
+    transition: .3s;
+}
+form input[type="submit"]:hover{
+    background-color: #7daa85;
+}
