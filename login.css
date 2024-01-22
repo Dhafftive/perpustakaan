@@ -100,6 +100,7 @@ form{
     font-family: var(--default); 
     font-weight: 600;  
     color: #7daa85;
+    transition: .3s;
 }
 .input-form input[type="password"]::placeholder,
 .input-form input[type="text"]::placeholder{

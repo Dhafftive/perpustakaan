@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,15 +19,17 @@
     </div>
     <div class="page-login">
         <h1 class="hdr">Masuk Akun</h1>
-        <form action="" method="post">
+        <form action="process_login.php" method="post">
             <div class="input-form">
                 <label for="username">Username atau email</label>
                 <input placeholder="Masukkan username atau email" id="username" type="text" name="username" required>
                 <label for="password">Password</label>
                 <input placeholder="Masukkan password" type="password" id="password" name="password" required>
             </div>
-            <input type="submit" value="Login" name="Login">
+            <input type="submit" value="Login" name="login">
         </form>
     </div>
+
+    <script src="script-login.js"></script>
 </body>
 </html>
