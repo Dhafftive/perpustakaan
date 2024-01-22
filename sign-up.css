@@ -24,24 +24,22 @@ body{
     align-items: center;
     display: flex;
 }
-.page-login{
-    width: 40vw;
-    height: 70vh;
-    background-color: #fff;
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    z-index: 1;
-    margin: 15vh 30vw;
-    border-radius: 10px;
-    padding: 0 50px;
-}
 .logo{
     font-size: 1.5rem;
     color: #fff;
     opacity: 80%;
 }
+.page-signup{
+    width: 70vw;
+    height: 75vh;
+    background-color: #fff;
+    position: absolute;
+    z-index: 1;
+    margin: 13vh 15vw;
+    border-radius: 10px;
+    padding: 0 50px;
+}
+
 .account-confirm{
     margin: auto 0;
     display: flex;
@@ -68,19 +66,24 @@ body{
 .sign-up a{
     color: #fff;
 }
-.hdr{
-    font-family: var(--default);
-    margin: 7vh 0 1vh;
-    color: #445D48;
-}
 form{
-    width: 30vw;
+    width: 60vw;
     height: 35vh;
-    padding: 10px 20px;margin-top: 20px;
+    padding: 10px;
+}
+.input-data{
+    display: flex;
+    justify-content: space-between;
 }
 .input-form{
     display: flex;
     flex-direction: column;
+    width: 25vw;
+}
+.hdr{
+    font-family: var(--default);
+    margin: 5vh 0 0;
+    color: #445D48;
 }
 .input-form label{
     font-family: var(--default);
@@ -89,26 +92,29 @@ form{
     font-weight: 600;
     margin: 10px 0 0;
 }
+.default-select,
 .input-form input[type="password"],
 .input-form input[type="text"]{
     width: 100%;
-    height: 40px;
+    height: 40px !important;
     margin: 5px 0;
     padding: 0px 10px;
-    border: 2px solid #e2e2e2;
-    border-radius: 10px;
-    font-family: var(--default); 
-    font-weight: 600;  
+    border: 2px solid #e2e2e2 !important;
+    border-radius: 7px !important;
+    font-family: var(--default) !important; 
+    font-weight: 600 !important;  
     color: #7daa85;
+    transition: .3s;
 }
 .input-form input[type="password"]::placeholder,
 .input-form input[type="text"]::placeholder{
     color: #e2e2e2;
     font-family: var(--default);
 }
+.default-select:focus,
 .input-form input[type="password"]:focus,
 .input-form input[type="text"]:focus{
-    border-color: #7daa85;
+    border-color: #7daa85 !important;
 }
 form input[type="submit"]{
     width: 120px;
