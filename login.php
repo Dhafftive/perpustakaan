@@ -30,6 +30,5 @@
         </form>
     </div>
 
-    <script src="script-login.js"></script>
 </body>
 </html>
