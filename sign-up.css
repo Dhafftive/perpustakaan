@@ -27,7 +27,6 @@ body{
 .logo{
     font-size: 1.5rem;
     color: #fff;
-    opacity: 80%;
 }
 .page-signup{
     width: 70vw;
@@ -92,29 +91,38 @@ form{
     font-weight: 600;
     margin: 10px 0 0;
 }
-.default-select,
 .input-form input[type="password"],
 .input-form input[type="text"]{
     width: 100%;
-    height: 40px !important;
+    height: 40px;
     margin: 5px 0;
     padding: 0px 10px;
-    border: 2px solid #e2e2e2 !important;
-    border-radius: 7px !important;
-    font-family: var(--default) !important; 
-    font-weight: 600 !important;  
+    border: 3px solid #cccccc;
+    border-radius: 7px;
+    font-family: var(--default); 
+    font-weight: 600;  
     color: #7daa85;
     transition: .3s;
 }
+.input-form input[readonly]{
+    color: #acacac;
+    border: none;
+    transition: none;
+    background-color: #eeeeee;
+}
 .input-form input[type="password"]::placeholder,
 .input-form input[type="text"]::placeholder{
-    color: #e2e2e2;
+    color: #cccccc;
     font-family: var(--default);
+    transition: .3s;
 }
-.default-select:focus,
+.input-form input[type="password"]:focus::placeholder,
+.input-form input[type="text"]:focus::placeholder{
+    transform: translateX(10px);
+}
 .input-form input[type="password"]:focus,
 .input-form input[type="text"]:focus{
-    border-color: #7daa85 !important;
+    border-color: #7daa85;
 }
 form input[type="submit"]{
     width: 120px;

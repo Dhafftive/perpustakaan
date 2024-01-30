@@ -1,3 +1,14 @@
+<?php
+    // Ambil data perpustakaan dari database
+    include "koneksi.php";
+    $query = "SELECT * FROM perpus";
+    $result = mysqli_query($koneksi, $query);
+    $dataPerpustakaan = array();
+    if ($row = mysqli_fetch_assoc($result)) {
+        $perpusID = $row['perpusID'];
+        $namaperpus = $row ['nama_perpus'];
+    }
+?>;
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,12 +17,6 @@
     <title>Buat Akun Baru</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="sign-up.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Yeseva+One&display=swap" rel="stylesheet">
-	
-    <!-- JQuery animation -->
-    <link href="vendor/jquery-nice-select/css/nice-select.css" rel="stylesheet">
 </head>
 <body>
     <div class="bg-img"></div>
@@ -28,10 +33,8 @@
                     <input placeholder="Masukkan username" id="username" type="text" name="username" required>
                     <label for="namalengkap">Nama Lengkap</label>
                     <input placeholder="Masukkan nama  lengkapmu" type="text" id="namalengkap" name="namalengkap" required>
-                    <label for="perpustakaan">Perpustakaan</label>
-                    <select name="perpustakaan" id="perpustakaan" class="default-select" required>
-                        <!-- Options will be added dynamically using JavaScript -->
-                    </select>
+                    <label for="alamat">Alamat</label>
+                    <input placeholder="Masukkan alamat rumahmu" type="text" id="alamat" name="alamat" required>
                     <label for="password">Password</label>
                     <input placeholder="Masukkan password" type="password" id="password" name="password" required>
                 </div>
@@ -40,8 +43,9 @@
                     <input placeholder="Masukkan email" id="email" type="text" name="email" required>
                     <label for="telepon">No. Telepon</label>
                     <input placeholder="Masukkan nomor telepon" type="text" id="telepon" name="telepon" required>
-                    <label for="alamat">Alamat</label>
-                    <input placeholder="Masukkan alamat rumahmu" type="text" id="alamat" name="alamat" required>
+                    <label for="perpustakaan">Perpustakaan</label>
+                    <input type="text" name="perpustakaan" id="" value="<?= $namaperpus ?>" readonly>
+                    <input type="hidden" name="idperpus" value="<?= $perpusID ?>">
                     <label for="confirm">Konfirmasi</label>
                     <input placeholder="Masukkan password sekali lagi" type="password" id="confirm" name="confirm" required>
                 </div>
@@ -49,35 +53,7 @@
             <input type="submit" value="Submit" name="Submit">
         </form>
     </div>
-
-    <!-- Required vendors -->
-    <script src="vendor/global/global.min.js"></script>
-    <script src="vendor/jquery-nice-select/js/jquery.nice-select.min.js"></script>
-
     <script>
-        // Ambil referensi elemen select
-        var perpustakaanSelect = document.getElementById('perpustakaan');
-
-        // Daftar perpustakaan yang Anda dapatkan dari database
-        var daftarPerpustakaan = <?php
-            // Ambil data perpustakaan dari database
-            include "koneksi.php";
-            $query = "SELECT * FROM perpus";
-            $result = mysqli_query($koneksi, $query);
-            $dataPerpustakaan = array();
-            while ($row = mysqli_fetch_assoc($result)) {
-                $dataPerpustakaan[] = $row;
-            }
-            echo json_encode($dataPerpustakaan);
-        ?>;
-
-        // Isi elemen select dengan data perpustakaan
-        for (var i = 0; i < daftarPerpustakaan.length; i++) {
-            var option = document.createElement('option');
-            option.value = daftarPerpustakaan[i].perpusID;
-            option.textContent = daftarPerpustakaan[i].nama_perpus;
-            perpustakaanSelect.appendChild(option);
-        }
 
         // Validasi form pada sisi klien menggunakan JavaScript
         document.getElementById('signupForm').addEventListener('submit', function (event) {

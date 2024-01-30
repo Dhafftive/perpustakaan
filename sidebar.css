@@ -1,0 +1,221 @@
+.container{
+    display: flex;
+    min-height: 100vh;
+}
+.sidebar{
+    background-color: #fff;
+    width: 260px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    transition: all ease-in .3s;
+}
+.sidebar.hide{
+    width: 87px;
+    transition: all ease-out .3s;
+    padding: 15px;
+}
+.sidebar.hide .header .ilustration{
+    opacity: 0;
+}
+.sidebar.hide .logo{
+    display: none;
+}
+.sidebar.hide .main .list-item{
+    width: 50px;
+    height: 50px;
+    padding: auto;
+    margin: 20px 0;
+    transition: all ease-out .3s;
+}
+.sidebar.hide .main .list-item:hover{
+    border-color: none;
+}
+/* .sidebar.hide .header .ilustration{
+    display: none;
+} */
+.sidebar.hide .main .list-item .description{
+    display: none;
+    margin: 0;
+}
+.main-content{
+    background-color: #dedede;
+    flex-grow: 1;
+}
+.sidebar .logo{
+    font-size: 20px;
+    line-height: 16px;
+    text-align: center;
+    color: var(--primary);
+    margin-top: 5px;
+}
+.sidebar .header .list-item{
+    display: flex;
+    justify-content: center;
+    /* flex-direction: row; */
+    align-items: center;
+    padding: auto;
+    height: 40px;
+}
+.sidebar .header .list-item a{
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+}
+.sidebar.hide .main .list-item .icon i{
+    color: #7daa85;
+}
+/* .sidebar .list-item .icon{
+    width: 24px;
+    height: 24px;
+    margin-right: 12px
+} */
+.sidebar .header .ilustration{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 22px;
+}
+.sidebar .main .list-item .description{
+    font-size: 16px;
+    text-align: center;
+    margin: auto 0 auto 15px;
+}
+.sidebar .main .list-item:hover .icon i{
+    color: #fff;
+}
+.sidebar .main .list-item .icon i{
+    color: #FFB000;
+    font-size: 22px;
+}
+.sidebar .main .list-item a{
+    display: flex;
+    align-items: center;
+    color: #1a1a1a;
+    flex-direction: row;
+    justify-content: center;
+}
+.sidebar .main .list-item{
+    display: flex;
+    margin: 10px 0;
+    flex-direction: row;
+    align-self: center;
+    padding: 12px 10px;
+    border-radius: 8px;
+    font-family: var(--default);
+    transition: all ease-in .2s;
+}
+.sidebar .main .list-item:hover{
+    background-color: #7daa85;
+}
+.sidebar .main .list-item:hover a{
+    color: #fff;
+}
+/* Toggle Menu */
+.menu-container{
+    width: 50px;
+    height: 50px;
+    margin: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+    position: relative;
+}
+#menu-button {
+    transform: translate(8px, 15px);
+    width: 32px;
+    position: absolute;
+    overflow: hidden;
+}
+#menu-label{
+    display: block;
+    height: 20px;
+    cursor: pointer;
+}
+#menu-checkbox{
+    display: none;
+}
+#hamburger, #menu-label::after, #menu-label::before{
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: #7daa85;
+}
+#menu-label::after, #menu-label::before{
+    content: "";
+    transition: 0.4s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+#menu-label::before{
+    top: 0;
+}
+#menu-label::after{
+    top: 8px;
+}
+#hamburger {
+    top: 16px;
+}
+#hamburger::before{
+    content: "MENU";
+    position: absolute;
+    top: 5px;
+    right: 0;
+    left: 0;
+    color: #1a1a1a;
+    font-size: 10px;
+    font-weight: bold;
+    text-align: center;
+    font-family: var(--default);
+}
+#menu-checkbox:checked + #menu-label::before{
+    left: -39px;
+}
+#menu-checkbox:checked + #menu-label::after{
+    left: 39px;
+}
+#menu-checkbox:checked + #menu-label #hamburger::before{
+    animation: moveUpThenDown 0.8s ease 0.2s forwards, shakeUp 0.8s ease 0.2s forwards, shakedown 0.2s ease 0.8s forwards;
+}
+@keyframes moveUpThenDown {
+    0%{
+        top: 0;
+    }
+    50%{
+        top: -27px;
+    }
+    100%{
+        top: -14px;
+    }
+}
+@keyframes shakeUp {
+    0%{
+        transform: rotateZ(0);
+    }
+    25%{
+        transform: rotateZ(-10deg);
+    }
+    50%{
+        transform: rotateZ(0);
+    }
+    75%{
+        transform: rotateZ(10deg);
+    }
+    100%{
+        transform: rotateZ(0);
+    }
+}
+@keyframes shakedown {
+    0%{
+        transform: rotateZ(0);
+    } 
+    80%{
+        transform: rotateZ(3deg);
+    }
+    90%{
+        transform: rotateZ(-3deg);
+    }
+    100%{
+        transform: rotateZ(0);
+    }
+}

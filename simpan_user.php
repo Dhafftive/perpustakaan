@@ -19,7 +19,7 @@
 
     // Struktur fungsi registrasi
     function registrasi($koneksi, $data) {
-        $perpusID = $data["perpustakaan"];
+        $perpusID = $data["idperpus"];
         $username = htmlspecialchars(stripslashes($data["username"]));
         $password = mysqli_real_escape_string($koneksi, $data["password"]);
         $confirm = mysqli_real_escape_string($koneksi, $data["confirm"]);
@@ -54,6 +54,9 @@
             </script>";
             return false;
         }
+
+        $confirm = password_hash($password, PASSWORD_DEFAULT);
+
 
         // Tambahkan user ke database
         $query = "INSERT INTO user (username, namalengkap, password, email, no_hp, alamat, acces_level, perpusID) VALUES ('$username', '$namalengkap', '$confirm', '$email', '$telepon', '$alamat', '$acces_level', '$perpusID')";

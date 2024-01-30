@@ -6,10 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Masuk Akun</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="login.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Yeseva+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="login.css?v=<?php echo time(); ?>">
 </head>
 <body>
     <div class="bg-img"></div>

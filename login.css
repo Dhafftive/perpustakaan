@@ -76,7 +76,8 @@ body{
 form{
     width: 30vw;
     height: 35vh;
-    padding: 10px 20px;margin-top: 20px;
+    padding: 10px 20px;
+    margin-top: 20px;
 }
 .input-form{
     display: flex;
@@ -95,21 +96,27 @@ form{
     height: 40px;
     margin: 5px 0;
     padding: 0px 10px;
-    border: 2px solid #e2e2e2;
+    border: 3px solid #cccccc;
     border-radius: 10px;
     font-family: var(--default); 
     font-weight: 600;  
     color: #7daa85;
     transition: .3s;
 }
+
 .input-form input[type="password"]::placeholder,
 .input-form input[type="text"]::placeholder{
-    color: #e2e2e2;
+    color: #cccccc;
     font-family: var(--default);
+    transition: .3s;
 }
 .input-form input[type="password"]:focus,
 .input-form input[type="text"]:focus{
     border-color: #7daa85;
+}
+.input-form input[type="password"]:focus::placeholder,
+.input-form input[type="text"]:focus::placeholder{
+    transform: translateX(10px);
 }
 form input[type="submit"]{
     width: 120px;
