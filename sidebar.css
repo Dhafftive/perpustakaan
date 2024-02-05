@@ -39,8 +39,10 @@
     margin: 0;
 }
 .main-content{
-    background-color: #dedede;
+    background-color: #e0e0e0;
     flex-grow: 1;
+    overflow-y: scroll;
+    height: 100vh;
 }
 .sidebar .logo{
     font-size: 20px;
@@ -108,7 +110,7 @@
     transition: all ease-in .2s;
 }
 .sidebar .main .list-item:hover{
-    background-color: #7daa85;
+    background-color: #9ec5a5;
 }
 .sidebar .main .list-item:hover a{
     color: #fff;
@@ -120,7 +122,8 @@
     margin: 10px;
     background-color: #fff;
     border-radius: 5px;
-    position: relative;
+    position: fixed;
+    z-index: 990;
 }
 #menu-button {
     transform: translate(8px, 15px);

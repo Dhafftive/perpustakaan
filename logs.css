@@ -1,0 +1,12 @@
+/* Selected Sidebar */
+.sidebar .main .list-item:nth-child(6){
+    background-color: #5c8063;
+}
+.sidebar .main .list-item:nth-child(6) .icon i,
+.sidebar .main .list-item:nth-child(6) a{
+    color: #fff;
+}
+.sidebar.hide .main .list-item:nth-child(6) .icon i{
+    color: #fff;
+}
+/* == End Selected Sidebar == */

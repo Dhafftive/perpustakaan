@@ -8,7 +8,7 @@
         $perpusID = $row['perpusID'];
         $namaperpus = $row ['nama_perpus'];
     }
-?>;
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
