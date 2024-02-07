@@ -60,7 +60,7 @@ if (!empty($_POST)) {
     
         if (mysqli_query($koneksi, $query)) {
             // Tambahkan logs aktivitas
-            $logs = "INSERT INTO c_logs (detail_histori) VALUES ('User bernama $username berhasil registrasi ke database')";
+            $logs = "INSERT INTO c_logs (detail_histori) VALUES ('User bernama $username berhasil ditambahkan oleh $admin ke database')";
             if (!mysqli_query($koneksi, $logs)) {
                 // Jika ada kesalahan, kirim pesan kesalahan logs
                 echo 'Error logs: ' . mysqli_error($koneksi);
@@ -371,25 +371,24 @@ if (!empty($_POST)) {
             });
         });
         
-function highlightInputField(fieldName) {
-    // Hapus class highlight pada input field sebelumnya (jika ada)
-    resetInputFieldStyles();
+        function highlightInputField(fieldName) {
+            // Hapus class highlight pada input field sebelumnya (jika ada)
+            resetInputFieldStyles();
 
-    // Tambahkan class untuk highlight pada input field dengan nama tertentu
-    $('#' + fieldName).addClass('highlight-error');
+            // Tambahkan class untuk highlight pada input field dengan nama tertentu
+            $('#' + fieldName).addClass('highlight-error');
 
-    // Tambahkan event listener untuk menghapus class highlight saat kontennya berubah
-    $('#' + fieldName).on('input', function () {
-        $('#' + fieldName).removeClass('highlight-error');
-        resetInputFieldStyles();
-    });
-}
-
+            // Tambahkan event listener untuk menghapus class highlight saat kontennya berubah
+            $('#' + fieldName).on('input', function () {
+                $('#' + fieldName).removeClass('highlight-error');
+                resetInputFieldStyles();
+            });
+        }
         
-function resetInputFieldStyles() {
-    // Hapus class highlight pada semua input field
-    $('input').removeClass('highlight-error');
-}
+        function resetInputFieldStyles() {
+            // Hapus class highlight pada semua input field
+            $('input').removeClass('highlight-error');
+        }
 
     </script>
     <!-- Include toastr library at the end of your body section -->
