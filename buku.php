@@ -288,9 +288,13 @@
             success: function (response) {
                 console.log(response); 
 
+                // Jika berhasil disimpan, kirim respons 'success'
                 if (response === 'success') {
                     // Handle berhasil
                     console.log('Buku berhasil ditambahkan.');
+
+                    // Tutup popup form addbook
+                    hideAddbookPopup();
 
                     // Tampilkan notifikasi SweetAlert untuk sukses
                     Swal.fire({
@@ -307,7 +311,6 @@
                         // Contoh: reload halaman
                         location.reload();
                     });
-
                 } else {
                     // Handle error
                     console.error(response);
