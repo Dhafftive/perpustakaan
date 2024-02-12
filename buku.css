@@ -75,7 +75,6 @@
     object-fit: cover; /* Membuat gambar memenuhi elemen dengan mempertahankan aspek rasio */
 }
 .bookshelf{
-    height: 150vh;
     width: 94%;
     background-color: #fff;
     margin: 10vh 0 0 auto;
@@ -113,11 +112,9 @@
 }
 .bookshelf .books-collection{
     width: 100%;
-    height: 100vh;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
     gap: 50px 100px;
-    overflow-y: scroll;
 }
 .books-collection .books{
     height: 320px;

@@ -131,7 +131,7 @@
         <div class="books-collection">
         <?php
             // Buat kueri SQL untuk mengambil data dari tabel buku
-            $query_buku = "SELECT judul, penulis, foto FROM buku";
+            $query_buku = "SELECT bukuID, judul, penulis, foto FROM buku";
             $result_buku = mysqli_query($koneksi, $query_buku);
 
             // Periksa apakah ada data buku yang ditemukan
@@ -141,11 +141,14 @@
                     $judul_buku = $row["judul"];
                     $penulis_buku = $row["penulis"];
                     $foto_buku = $row["foto"];
+                    $idbuku = $row["bukuID"];
         ?>
             <div class="books">
                 <div class="books-cover">
-                    <!-- Gunakan foto dari kolom 'foto' dalam tabel buku -->
-                    <img src="cover-buku/<?php echo $foto_buku; ?>" alt="">
+                     <!-- Gunakan foto dari kolom 'foto' dalam tabel buku -->
+                    <a href="ulasan.php?id=<?php echo $idbuku; ?>"> <!-- Tambahkan link ke halaman ulasan.php dengan menyertakan bukuID sebagai parameter GET -->
+                        <img src="cover-buku/<?php echo $foto_buku; ?>" alt="">
+                    </a>
                 </div>
                 <div class="books-title">
                     <div class="judul-buku"><?php echo $judul_buku; ?></div>
