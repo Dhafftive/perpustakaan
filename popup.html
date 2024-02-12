@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
    <style>
-    #imagePreviewContainer {
+    .coverbuku-container {
         position: relative;
         width: 240px; /* Width of the preview container */
         height: 340px; /* Height of the preview container */
@@ -21,162 +21,35 @@
         background-color: #f6f6f6;
     }
 
-    #imagePreview {
+    .cover-buku {
         width: 100%; /* Make the image fill the preview container */
         height: 100%; /* Make the image fill the preview container */
         object-fit: cover; /* Ensure the image fills the container while maintaining aspect ratio */
     }
 
-    #imageInputWrapper {
-        position: absolute;
-        top: 0;
-        left: 0;
-        z-index: 1; /* Ensure the button stays above the image */
-        padding: 10px; /* Add padding to the wrapper */
-    }
-    
-    #imageInput {
-      display: none; /* Hide the default input file */
-    }
-
-    .custom-file-upload {
-        background-color: #fff; /* Background color of the button */
-        padding: 6px 10px; /* Padding of the button */
-        border: 1px solid #ccc; /* Border of the button */
-        border-radius: 5px; /* Border radius of the button */
-        cursor: pointer; /* Cursor style */
-        font-size: 10px;
-        font-family: var(--script);
-        display: flex;
-        align-items: center;
-        font-weight: 500;
-        color: #666666;
-        transition: .3s;
-    }
-
-    .custom-file-upload i{
-        font-size: 14px;
-        margin-right: 10px;
-    }
-
-    .custom-file-upload:hover {
-        background-color: #e1fce5; /* Background color of the button on hover */
-        color: #378043;
-        border-color: #289937;
-    }
-
-    /* Styles for icon and paragraph */
-    #imagePlaceholder {
-        position: absolute;
-        margin: auto;
-        font-size: 16px; /* Adjust the font size as needed */
-        color: #aaa; /* Adjust the color as needed */
-        font-family: var(--default);
-    }
-
-    #imagePlaceholder .placeholder{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        color: #ccc;
-    }
-    #imagePlaceholder .placeholder p{
-        margin-top: 20px;
-    }
-    #imagePlaceholder .placeholder i{
-        font-size: 50px;
-    }
-
-    .addbook-container{
-        width: 60vw;
-        height: 90vh;
+    .book-popup{
+        width: 84vw;
+        height: 62vh;
         background-color: #fff;
         position: absolute;
         z-index: 992;
-        margin: 5vh 20vw;
+        margin: 12vh 7vw;
         border-radius: 10px;
         padding: 30px 50px;
     }
-    .addbook-container .addbook-hdr {
+    .book-popup .sinopsis-hdr {
         display: flex;
         justify-content: space-between;
         align-items: center;
     }
-    .addbook-container .addbook-hdr i{
+    .book-popup .sinopsis-hdr i{
         font-size: 20px;
         color: #ccc;
     }
-    .addbook-container .addbook-hdr .header{
+    .book-popup .sinopsis-hdr .header{
         font-family: var(--script);
         color: #289937;
     }
-    .addbook-container .form{
-        display: flex;
-        flex-direction: row;
-        margin-top: 20px;
-    }
-    .input-form{
-        display: flex;
-        flex-direction: column;
-        flex-grow: 1;
-        padding: 0 20px;
-        margin-left: 20px;
-    }
-    .input-form label{
-        font-family: var(--default);
-        font-size: 0.9rem;
-        color: var(--dark);
-        font-weight: 600;
-        margin: 8px 0 0;
-    }
-    .input-form .input-group{
-        width: 100%;
-        height: 35px;
-        margin: 5px 0;
-        padding: 0px 10px;
-        border: 2px solid #cccccc;
-        border-radius: 7px;
-        font-family: var(--default); 
-        font-weight: 600;  
-        color: #7daa85;
-        transition: background-color 0.3s, border-color 0.3s, color 0.3s; /* Animasi transisi */
-    }
-    .input-form .input-group::placeholder{
-        color: #cccccc;
-        font-family: var(--default);
-        transition: .3s;
-    }
-    .input-form .input-group:focus::placeholder{
-        transform: translateX(10px) !important;
-    }
-    .input-form .input-group:focus{
-        border-color: #7daa85;
-    }
-    .submit-btn{
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        margin-top: 8vh;
-    }
-    .submit-btn .submit{
-        padding: 8px 20px;
-        background-color: #FFB000;
-        color: #fff;
-        font-family: var(--script);
-        font-size: 13px;
-        border-radius: 5px;
-        display: flex;
-        align-items: center;
-        transition: .3s;
-    }
-    .submit-btn .submit i{
-        margin-right: 10px;
-        font-size: 16px;
-    }
-    .submit-btn .submit:hover{
-        background-color: #ffca58;
-    }
-
     body{
         background-color: #289937;
     }
@@ -184,91 +57,15 @@
 
 </head>
 <body>
-    <div class="addbook-container">
-        <div class="addbook-hdr">
-            <h1 class="header">Tambah Buku</h1>
+    <div class="book-popup">
+        <div class="sinopsis-hdr">
+            <h1 class="header">Deskripsi</h1>
             <span class="close-popup" id="close-popup"><i class="fa-solid fa-xmark"></i></span>
         </div>
-        <div class="addbook-form">
-            <form action="">
-                <div class="form">
-                    <!-- Container for image preview and upload button -->
-                    <div id="imagePreviewContainer">
-                        <!-- Icon and paragraph -->
-                        <div id="imagePlaceholder">
-                            <div class="placeholder">
-                                <i class="fa-solid fa-mountain-sun"></i>
-                                <p>No file chosen</p>
-                            </div>
-                        </div>
-                        <!-- Upload button -->
-                        <div id="imageInputWrapper">
-                            <label for="imageInput" class="custom-file-upload">
-                                <i class="fa-solid fa-images"></i>Upload Image
-                            </label>
-                            <!-- Actual input file -->
-                            <input type="file" id="imageInput" accept="image/*" onchange="previewImage(event)" required>
-                        </div>
-                        <!-- Image preview -->
-                        <img id="imagePreview">
-                    </div>
-                    <div class="input-form">
-                        <label for="username">Judul</label>
-                        <input placeholder="Masukkan judul buku" id="username" type="text" name="username" class="input-group" required>
-                        <label for="namalengkap">Penulis</label>
-                        <input placeholder="Masukkan nama  penulis" type="text" id="namalengkap" name="namalengkap" class="input-group" required>
-                        <label for="alamat">Penerbit</label>
-                        <input placeholder="Masukkan penerbit" type="text" id="alamat" name="alamat" class="input-group" required>
-                        <label for="password">Tahun terbit</label>
-                        <input placeholder="Masukkan password" type="password" id="password" name="password" class="input-group" required>
-                        <label for="password">Kategori</label>
-                        <select id="kategori" name="kategori" class="input-group">
-                            <option value="adventure">Buku Adventure</option>
-                            <option value="sosial">Buku Sosial</option>
-                            <option value="sejarah">Buku Sejarah</option>
-                        </select>                    
-                        <input type="hidden" name="perpusID">
-                    </div>
-                </div>
-                <div class="submit-btn">
-                    <div class="submit"><i class="fa-solid fa-check"></i>Upload</div>
-                </div>                
-            </form>
+        <div class="sinposis-container">
         </div>
     </div>
 
-
-
-    <script>
-        function previewImage(event) {
-        const input = event.target;
-        const preview = document.getElementById('imagePreview');
-        const placeholder = document.getElementById('imagePlaceholder');
-        const iconImage = document.getElementById('iconImage');
-        
-        if (input.files && input.files[0]) {
-            const reader = new FileReader();
-
-            reader.onload = function(e) {
-            preview.src = e.target.result;
-            preview.style.display = 'block'; // Show the image
-            placeholder.style.display = 'none'; // Hide the placeholder
-            };
-
-            reader.readAsDataURL(input.files[0]);
-        } else {
-            preview.src = '';
-            preview.style.display = 'none'; // Hide the image
-            placeholder.style.display = 'block'; // Show the placeholder
-        }
-        }
-    </script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js"></script>
-        <script>
-            $(document).ready(function() {
-                $('select').niceSelect(); // Initialize Nice Select on all select elements
-            });
-        </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </body>
 </html>
