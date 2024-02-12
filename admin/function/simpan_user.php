@@ -1,5 +1,5 @@
 <?php
-    require "koneksi.php";
+    require "../../koneksi.php";
     // Memanggil fungsi registrasi setelah deklarasi fungsi
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
         // Panggil fungsi registrasi

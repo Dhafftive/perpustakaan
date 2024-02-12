@@ -15,8 +15,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Buat Akun Baru</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="sign-up.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/sign-up.css">
 </head>
 <body>
     <div class="bg-img"></div>
@@ -26,7 +26,7 @@
     </div>
     <div class="page-signup">
         <h1 class="hdr">Buat Akun Baru</h1>
-        <form id="signupForm" action="simpan_user.php" method="post">
+        <form id="signupForm" action="admin/function/simpan_user.php" method="post">
             <div class="input-data">
                 <div class="input-form">
                     <label for="username">Username</label>

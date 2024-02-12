@@ -1,6 +1,6 @@
 <?php
     // 1. Lakukan koneksi ke database menggunakan file "koneksi.php".
-    include "koneksi.php";
+    include "../koneksi.php";
 
     // 2. Buat kueri SQL untuk mengambil data dari tabel "kategoribuku".
     $query_kategori = "SELECT kategoriID, namakategori FROM kategoribuku";
@@ -19,10 +19,11 @@
         $kategoriID = $_POST['kategori'];
         $perpusID = $_POST['perpusID'];
         $tahun_terbit = $_POST['tahun-terbit'];
+        $sinopsis = $_POST['sinopsis'];
 
         
         // Tentukan direktori tujuan untuk menyimpan file cover
-        $targetDir = "cover-buku/";
+        $targetDir = "../images/cover-buku/";
 
         // Dapatkan nama file dan path sementara dari file yang diunggah
         $nama_file = $_FILES['cover']['name'];
@@ -33,8 +34,8 @@
 
         if (move_uploaded_file($tmp_file, $targetFile)) {
             // Query untuk memasukkan data ke dalam tabel buku
-            $query = "INSERT INTO buku (judul, penulis, penerbit, kategoriID, perpusID, tahunterbit, foto) 
-                    VALUES ('$judul', '$penulis', '$penerbit', '$kategoriID', '$perpusID', '$tahun_terbit', '$nama_file')";
+            $query = "INSERT INTO buku (judul, penulis, penerbit, kategoriID, perpusID, tahunterbit, foto, deskripsi) 
+                    VALUES ('$judul', '$penulis', '$penerbit', '$kategoriID', '$perpusID', '$tahun_terbit', '$nama_file', '$sinopsis')";
 
             if (mysqli_query($koneksi, $query)) {
                 // Tambahkan logs aktivitas
@@ -67,19 +68,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Buku - Bookshelf.Idn</title>
-    <link rel="stylesheet" href="buku.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="../css/buku.css?v=<?php echo time(); ?>">
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 
 </head>
 <body>
-    <?php require 'sidebar.php'; ?>
+    <?php require '../sidebar.php'; ?>
     <div class="famous-card">
         <h1 class="card-header">Buku Ter populer</h1>
         <div class="card-container">
             <div class="card">
                 <div class="book-cover">
-                    <img src="images/xiaoyan.jpeg" alt="">
+                    <img src="../images/xiaoyan.jpeg" alt="">
                 </div>
                 <div class="books-title">
                     <h3 class="judul-buku">Apostle : The Backstory of Celestial</h3>
@@ -94,7 +95,7 @@
             </div>
             <div class="card">
                 <div class="book-cover">
-                    <img src="images/xiaoyan.jpeg" alt="">
+                    <img src="../images/xiaoyan.jpeg" alt="">
                 </div>
                 <div class="books-title">
                     <h3 class="judul-buku">Apostle : The Backstory of Celestial</h3>
@@ -109,7 +110,7 @@
             </div>
             <div class="card">
                 <div class="book-cover">
-                    <img src="images/xiaoyan.jpeg" alt="">
+                    <img src="../images/xiaoyan.jpeg" alt="">
                 </div>
                 <div class="books-title">
                     <h3 class="judul-buku">Apostle : The Backstory of Celestial</h3>
@@ -147,7 +148,7 @@
                 <div class="books-cover">
                      <!-- Gunakan foto dari kolom 'foto' dalam tabel buku -->
                     <a href="ulasan.php?id=<?php echo $idbuku; ?>"> <!-- Tambahkan link ke halaman ulasan.php dengan menyertakan bukuID sebagai parameter GET -->
-                        <img src="cover-buku/<?php echo $foto_buku; ?>" alt="">
+                        <img src="../images/cover-buku/<?php echo $foto_buku; ?>" alt="">
                     </a>
                 </div>
                 <div class="books-title">
@@ -215,6 +216,10 @@
                         <label for="tahun-terbit">Tahun terbit</label>
                         <input placeholder="Masukkan tahun terbit" type="text" id="tahun-terbit" name="tahun-terbit" class="input-group" required>
                         <input type="hidden" name="perpusID" value="<?php echo mysqli_fetch_assoc($result_perpus)['perpusID']; ?>">
+                    </div>
+                    <div class="sinopsis-input">
+                        <label for="sinopsis">Sinopsis Buku</label>
+                        <textarea name="sinopsis" id="" cols="30" rows="10"></textarea>
                     </div>
                 </div>
                 <div class="submit-btn">

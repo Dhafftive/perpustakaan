@@ -1,5 +1,5 @@
 <?php
-require 'koneksi.php';
+require '../koneksi.php';
 
 
 $query = "SELECT u.userID, p.perpusID, u.username, p.nama_perpus, u.namalengkap, u.email, u.alamat, u.acces_level
@@ -85,11 +85,11 @@ if (!empty($_POST)) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Data User - Bookshelf.Idn</title>
-    <link rel="stylesheet" href="data_user.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="../css/data_user.css?v=<?php echo time(); ?>">
 
 </head>
 <body>
-    <?php require 'sidebar.php' ?>
+    <?php require '../sidebar.php' ?>
     <div class="card">
         <h5 class="card-header">Data User <div class="user-add" onclick="showRegistrationForm()"><i class="fa-solid fa-user-plus"></i></div></h5>
         <div class="table-responsive">
@@ -254,7 +254,7 @@ if (!empty($_POST)) {
                     };
 
                     // Mulai permintaan AJAX
-                    xhr.open("GET", "delete_user.php?userID=" + userID, true);
+                    xhr.open("GET", "function/delete_user.php?userID=" + userID, true);
                     xhr.send();
                 }
             });

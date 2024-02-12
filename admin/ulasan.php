@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ulasan - Bookshelf.Idn</title>
-    <link rel="stylesheet" href="ulasan.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="../css/ulasan.css?v=<?php echo time(); ?>">
 </head>
 <body>
-    <?php require 'sidebar.php';?>
+    <?php require '../sidebar.php';?>
     <?php
-    require 'koneksi.php';
+    require '../koneksi.php';
     // Pastikan id buku telah diterima dari parameter GET
     if(isset($_GET['id'])) {
         // Ambil id buku dari parameter GET
@@ -32,7 +32,7 @@
             <div class="book-container">
                 <div class="cover-book">
                     <div class="img-container">
-                        <img src="cover-buku/<?php echo $foto_buku; ?>" alt="Cover Buku">
+                        <img src="../images/cover-buku/<?php echo $foto_buku; ?>" alt="Cover Buku">
                     </div>
                 </div>
                 <div class="book-content">

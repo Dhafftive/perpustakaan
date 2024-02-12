@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title></title>
-    <link rel="stylesheet" href="sidebar.css?v=<?php echo time(); ?>">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../css/sidebar.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- SweetAlert2 CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.20/dist/sweetalert2.min.css">
@@ -41,7 +41,7 @@
                     </a>
                 </div>
                 <div class="ilustration">
-                    <img src="./icons/ilustration.svg" alt="">
+                    <img src="../images/icons/ilustration.svg" alt="">
                 </div>
             </div>
             <div class="main">

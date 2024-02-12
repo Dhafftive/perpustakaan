@@ -1,5 +1,5 @@
 <?php
-require 'koneksi.php';
+require '../../koneksi.php';
 
 if (isset($_GET['userID'])) {
     $userID = $_GET['userID'];

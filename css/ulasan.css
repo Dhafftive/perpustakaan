@@ -75,8 +75,9 @@
 .book-content .sinopsis{
     padding: 15px 50px 10px 0;
     font-family: var(--default);
-    color: #1a1a1a;
+    color: #505050;
     width: 55vw;
+    line-height: 20px;
 }
 .ulasan-container{
     margin-top: 10vh;
