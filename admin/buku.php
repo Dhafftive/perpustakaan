@@ -21,6 +21,7 @@
         $perpusID = $_POST['perpusID'];
         $tahun_terbit = $_POST['tahun-terbit'];
         $sinopsis = $_POST['sinopsis'];
+        $username = $_SESSION['username'];
 
         
         // Tentukan direktori tujuan untuk menyimpan file cover
@@ -40,7 +41,7 @@
 
             if (mysqli_query($koneksi, $query)) {
                 // Tambahkan logs aktivitas
-                $logs = "INSERT INTO c_logs (detail_histori) VALUES ('Buku dengan judul $judul berhasil dibuat dan dimasukkan ke database')";
+                $logs = "INSERT INTO c_logs (detail_histori) VALUES ('User $username telah menambahkan buku berjudul $judul')";
                 if (!mysqli_query($koneksi, $logs)) {
                     // Jika ada kesalahan, kirim pesan kesalahan logs
                     echo 'Error logs: ' . mysqli_error($koneksi);
@@ -224,7 +225,7 @@
                     </div>
                 </div>
                 <div class="submit-btn">
-                    <div class="submit" onclick="submitBookForm()"><i class="fa-solid fa-check"></i>Upload</div>
+                    <div class="submit" onclick="submitBookForm()"><i class="fa-solid fa-check"></i>Upload Buku</div>
                 </div>                
             </form>
         </div>
