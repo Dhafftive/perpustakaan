@@ -1,6 +1,7 @@
 <?php
     // 1. Lakukan koneksi ke database menggunakan file "koneksi.php".
     include "../koneksi.php";
+    include "function/cek_login.php";
 
     // 2. Buat kueri SQL untuk mengambil data dari tabel "kategoribuku".
     $query_kategori = "SELECT kategoriID, namakategori FROM kategoribuku";

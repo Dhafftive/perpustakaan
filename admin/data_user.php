@@ -1,6 +1,6 @@
 <?php
 require '../koneksi.php';
-
+include "function/cek_login.php";
 
 $query = "SELECT u.userID, p.perpusID, u.username, p.nama_perpus, u.namalengkap, u.email, u.alamat, u.acces_level
           FROM user u

@@ -1,3 +1,6 @@
+<?php 
+    include "function/cek_login.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
