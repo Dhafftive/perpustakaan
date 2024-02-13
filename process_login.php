@@ -30,10 +30,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     // Redirect ke halaman sesuai dengan acces_level
                     switch ($_SESSION["acces_level"]) {
                         case "admin":
-                            header("Location: admin/dashboard.php");
+                            header("Location: admin_petugas/dashboard.php");
                             exit();
                         case "petugas":
-                            header("Location: petugas.php");
+                            header("Location: admin_petugas/peminjaman.php");
                             exit();
                         case "peminjam":
                             header("Location: peminjam.php");
