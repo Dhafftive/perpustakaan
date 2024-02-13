@@ -257,222 +257,68 @@
     </div>
 
     <script>
-    // Ambil elemen-elemen yang diperlukan
-    const addbookIcon = document.querySelector('.addbook-icon');
-    const closePopup = document.getElementById('close-popup');
-    const addbookContainer = document.getElementById('addbook-container');
-    const overlay = document.getElementById('overlay');
+        // Ambil elemen-elemen yang diperlukan
+        const addbookIcon = document.querySelector('.addbook-icon');
+        const closePopup = document.getElementById('close-popup');
+        const addbookContainer = document.getElementById('addbook-container');
+        const overlay = document.getElementById('overlay');
 
-    // Fungsi untuk menampilkan popup dengan animasi bounce in
-    function showAddbookPopup() {
-        addbookContainer.style.display = 'block'; // Tampilkan popup
-        overlay.style.display = 'block'; // Tampilkan overlay
-        addbookContainer.classList.add('animate__animated', 'animate__bounceIn'); // Tambahkan animasi bounce in
-    }
-
-    // Fungsi untuk menyembunyikan popup dengan animasi bounce out
-    function hideAddbookPopup() {
-        addbookContainer.classList.remove('animate__bounceIn'); // Hapus animasi bounce in jika ada
-        addbookContainer.classList.add('animate__bounceOut'); // Tambahkan animasi bounce out
-        setTimeout(() => {
-            addbookContainer.style.display = 'none'; // Sembunyikan popup setelah animasi selesai
-            overlay.style.display = 'none'; // Sembunyikan overlay
-            addbookContainer.classList.remove('animate__bounceOut'); // Hapus kelas animasi bounce out setelah selesai
-        }, 500); // Sesuaikan dengan durasi animasi bounceOut (dalam milidetik)
-    }
-
-    // Event listener untuk menampilkan popup ketika ikon "Add Book" diklik
-    addbookIcon.onclick = showAddbookPopup;
-
-    // Event listener untuk menyembunyikan popup ketika ikon "X" diklik
-    closePopup.onclick = hideAddbookPopup;
-
-    function previewImage(event) {
-        const input = event.target;
-        const preview = document.getElementById('imagePreview');
-        const placeholder = document.getElementById('imagePlaceholder');
-        const iconImage = document.getElementById('iconImage');
-        
-        if (input.files && input.files[0]) {
-            const reader = new FileReader();
-
-            reader.onload = function(e) {
-            preview.src = e.target.result;
-            preview.style.display = 'block'; // Show the image
-            placeholder.style.display = 'none'; // Hide the placeholder
-            };
-
-            reader.readAsDataURL(input.files[0]);
-        } else {
-            preview.src = '';
-            preview.style.display = 'none'; // Hide the image
-            placeholder.style.display = 'block'; // Show the placeholder
+        // Fungsi untuk menampilkan popup dengan animasi bounce in
+        function showAddbookPopup() {
+            addbookContainer.style.display = 'block'; // Tampilkan popup
+            overlay.style.display = 'block'; // Tampilkan overlay
+            addbookContainer.classList.add('animate__animated', 'animate__bounceIn'); // Tambahkan animasi bounce in
         }
-    }
 
-    // Definisikan fungsi submitBookForm
-    function submitBookForm() {
-        var formData = new FormData($('#bookForm')[0]);
+        // Fungsi untuk menyembunyikan popup dengan animasi bounce out
+        function hideAddbookPopup() {
+            addbookContainer.classList.remove('animate__bounceIn'); // Hapus animasi bounce in jika ada
+            addbookContainer.classList.add('animate__bounceOut'); // Tambahkan animasi bounce out
+            setTimeout(() => {
+                addbookContainer.style.display = 'none'; // Sembunyikan popup setelah animasi selesai
+                overlay.style.display = 'none'; // Sembunyikan overlay
+                addbookContainer.classList.remove('animate__bounceOut'); // Hapus kelas animasi bounce out setelah selesai
+            }, 500); // Sesuaikan dengan durasi animasi bounceOut (dalam milidetik)
+        }
 
-        $.ajax({
-            type: 'POST',
-            url: 'buku.php', // Ganti 'nama_file_ini.php' dengan nama file PHP yang sesuai
-            data: formData,
-            contentType: false,
-            processData: false,
-            success: function(response) {
-                console.log(response); 
+        // Event listener untuk menampilkan popup ketika ikon "Add Book" diklik
+        addbookIcon.onclick = showAddbookPopup;
 
-                // Periksa respons dari server
-                if (response === 'success') {
-                    // Handle berhasil
-                    console.log('Buku berhasil ditambahkan.');
+        // Event listener untuk menyembunyikan popup ketika ikon "X" diklik
+        closePopup.onclick = hideAddbookPopup;
 
-                    // Tutup popup form addbook
-                    hideAddbookPopup();
+        function previewImage(event) {
+            const input = event.target;
+            const preview = document.getElementById('imagePreview');
+            const placeholder = document.getElementById('imagePlaceholder');
+            const iconImage = document.getElementById('iconImage');
+            
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
 
-                    // Tampilkan notifikasi SweetAlert untuk sukses
-                    Swal.fire({
-                        title: 'Berhasil',
-                        text: 'Buku berhasil ditambahkan!',
-                        icon: 'success',
-                        customClass: {
-                            container: 'sweetalert-font sweetalert-background',
-                            title: 'sweetalert-title',
-                            content: 'sweetalert-text'
-                        }
-                    }).then(() => {
-                        // Lakukan tindakan setelah pengguna mengklik tombol OK pada notifikasi
-                        // Contoh: reload halaman
-                        location.reload();
-                    });
-                } else {
-                    // Handle error
-                    console.error(response);
+                reader.onload = function(e) {
+                preview.src = e.target.result;
+                preview.style.display = 'block'; // Show the image
+                placeholder.style.display = 'none'; // Hide the placeholder
+                };
 
-                    // Tampilkan notifikasi SweetAlert untuk error
-                    Swal.fire({
-                        title: 'Gagal',
-                        text: response,
-                        icon: 'error',
-                        customClass: {
-                            container: 'sweetalert-font sweetalert-background',
-                            title: 'sweetalert-title',
-                            content: 'sweetalert-text'
-                        }
-                    });
-                }
-            },
-
-            error: function (xhr, status, error) {
-                // Handle error
-                console.error(xhr.responseText);
-
-                // Tampilkan notifikasi SweetAlert untuk error
-                Swal.fire({
-                    title: 'Gagal',
-                    text: 'Terjadi kesalahan saat menambahkan buku.',
-                    icon: 'error',
-                    customClass: {
-                        container: 'sweetalert-font sweetalert-background',
-                        title: 'sweetalert-title',
-                        content: 'sweetalert-text'
-                    }
-                });
+                reader.readAsDataURL(input.files[0]);
+            } else {
+                preview.src = '';
+                preview.style.display = 'none'; // Hide the image
+                placeholder.style.display = 'block'; // Show the placeholder
             }
-        });
-    }
-
-
-    // Fungsi untuk menambahkan buku ke koleksi pribadi
-    function addBookmark(bukuID) {
-        // Lakukan request Ajax
-        $.ajax({
-            type: 'POST',
-            url: 'function/addbookmark.php', // Ganti 'add_bookmark.php' dengan nama file PHP yang sesuai
-            data: { bukuID: bukuID }, // Kirim data bukuID
-            success: function(response) {
-                // Tampilkan notifikasi SweetAlert
-                Swal.fire({
-                    title: 'Berhasil',
-                    text: 'Buku berhasil ditambahkan ke koleksi pribadi!',
-                    icon: 'success',
-                    customClass: {
-                        container: 'sweetalert-font sweetalert-background',
-                        title: 'sweetalert-title',
-                        content: 'sweetalert-text'
-                    }
-                }).then(() => {
-                    // Setelah SweetAlert ditutup, ubah ikon bookmark menjadi bookmarked
-                    location.reload();
-                });
-            },
-            error: function(xhr, status, error) {
-            // Tangkap pesan kesalahan dari server
-            var errorMessage = xhr.responseText;
-            console.error(errorMessage);
-                // Tampilkan pesan kesalahan menggunakan SweetAlert
-                Swal.fire({
-                    title: 'Gagal',
-                    text: 'Terjadi kesalahan saat menambahkan buku ke koleksi pribadi: ' + errorMessage,
-                    icon: 'error',
-                    customClass: {
-                        container: 'sweetalert-font sweetalert-background',
-                        title: 'sweetalert-title',
-                        content: 'sweetalert-text'
-                    }
-                });
-            }
-
-        });
-    }
-    // Fungsi untuk menghapus buku dari koleksi pribadi
-    function removeBookmark(bukuID) {
-        // Lakukan request Ajax
-        $.ajax({
-            type: 'POST',
-            url: 'function/removebookmark.php', // Ganti 'removebookmark.php' dengan nama file PHP yang sesuai
-            data: { bukuID: bukuID }, // Kirim data bukuID
-            success: function(response) {
-                // Tampilkan notifikasi SweetAlert
-                Swal.fire({
-                    title: 'Berhasil',
-                    text: 'Buku berhasil dihapus dari koleksi pribadi!',
-                    icon: 'success',
-                    customClass: {
-                        container: 'sweetalert-font sweetalert-background',
-                        title: 'sweetalert-title',
-                        content: 'sweetalert-text'
-                    }
-                }).then(() => {
-                    // Setelah SweetAlert ditutup, muat ulang halaman untuk memperbarui tampilan buku
-                    console.log(response);
-                    location.reload();
-                });
-            },
-            error: function(xhr, status, error) {
-                // Tangkap pesan kesalahan dari server
-                var errorMessage = xhr.responseText;
-                console.error(errorMessage);
-                // Tampilkan pesan kesalahan menggunakan SweetAlert
-                Swal.fire({
-                    title: 'Gagal',
-                    text: 'Terjadi kesalahan saat menghapus buku dari koleksi pribadi: ' + errorMessage,
-                    icon: 'error',
-                    customClass: {
-                        container: 'sweetalert-font sweetalert-background',
-                        title: 'sweetalert-title',
-                        content: 'sweetalert-text'
-                    }
-                });
-            }
-        });
-    }
-
+        }
     </script>
+
+    <!-- script Library -->
+    <script src="../js/submitbook.js"></script>
+    <script src="../js/ajaxbookmark.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js"></script>
+    
+    <!-- Nice Select Init -->
     <script>
         $(document).ready(function() {
             $('select').niceSelect({
