@@ -1,0 +1,86 @@
+/* Selected Sidebar */
+.sidebar .main .list-item:nth-child(5){
+    background-color: #5c8063;
+}
+.sidebar .main .list-item:nth-child(5) .icon i,
+.sidebar .main .list-item:nth-child(5) a{
+    color: #fff;
+}
+/* == End Selected Sidebar == */
+.koleksi-header{
+    font-family: var(--script);
+    color: #5c8063;
+    text-align: center;
+    margin: 5vh 2vw 2vh;
+}
+.koleksi-container{
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 40px 80px;
+    padding: 20px 50px;
+}
+.koleksi-container .buku{
+    height: 430px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+}
+.koleksi-container .buku .cover-book{
+    height: 300px;
+    overflow: hidden;
+    border-radius: 5px;
+    background-color: aqua;
+}
+.koleksi-container .buku .cover-book img{
+    height: 100%; /* Menentukan tinggi gambar agar mengisi seluruh tinggi elemen parent */
+    width: 100%; /* Menentukan lebar gambar agar mengisi seluruh lebar elemen parent */
+    object-fit: cover;
+}
+.book-content .books-title{
+    margin-top: 10px;
+}
+.book-content .books-title .judul {
+    font-size: 15px;
+    line-height: 17px;
+    font-weight: 700;
+    font-family: var(--script);
+}
+.book-content .books-title .penulis{
+    margin-top: 5px;
+    font-family: var(--default);
+    font-weight: 600;
+    color: #aaaaaa;
+    font-size: 14px;
+}
+.buku .action-btn {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-family: var(--default);
+    color: #fff;
+}
+.buku .action-btn .pinjam{
+    padding: 7px 15px;
+    background-color: var(--secondary);
+    border-radius: 5px;
+}
+.buku .action-btn .remove{
+    padding: 7px 15px;
+    background-color: #FFB000;
+    border-radius: 5px;
+}
+.buku .action-btn .remove i{
+    margin-right: 5px;
+}
+.nothing{
+    font-family: var(--default);
+    font-weight: 600;
+    font-style: italic;
+    color: #aaaaaa;
+    position: absolute;
+    font-size: 22px;
+}

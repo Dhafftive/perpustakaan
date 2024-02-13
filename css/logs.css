@@ -1,9 +1,9 @@
 /* Selected Sidebar */
-.sidebar .main .list-item:nth-child(5){
+.sidebar .main .list-item:nth-child(6){
     background-color: #5c8063;
 }
-.sidebar .main .list-item:nth-child(5) .icon i,
-.sidebar .main .list-item:nth-child(5) a{
+.sidebar .main .list-item:nth-child(6) .icon i,
+.sidebar .main .list-item:nth-child(6) a{
     color: #fff;
 }
 /* == End Selected Sidebar == */
@@ -51,7 +51,7 @@
 .head-table th:nth-child(2){    width: 150px; text-align: center;}
 /* Table data */
 .table-body tr{
-    border-top: 1px solid #ccc;
+    border-top: 1px solid #e4e4e4;
     width: 100%;
 }
 .table-body tr:hover{

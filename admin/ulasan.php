@@ -8,6 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ulasan - Bookshelf.Idn</title>
     <link rel="stylesheet" href="../css/ulasan.css?v=<?php echo time(); ?>">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 </head>
 <body>
     <?php require '../sidebar.php';?>
@@ -46,8 +48,23 @@
                     </div>
                     <div class="books-action">
                         <div class="pinjam">Pinjam</div>
-                        <div class="bookmark"><i class="fa-regular fa-bookmark"></i>Simpan</div>
-                    </div>
+                        <?php 
+                            // Periksa apakah pengguna sudah login
+                            if(isset($_SESSION['user_id'])) {
+                            // Lakukan kueri SQL untuk memeriksa apakah buku sudah di-bookmark oleh pengguna saat ini
+                            $query_bookmarked = "SELECT bukuID FROM koleksipribadi WHERE userID = " . $_SESSION['user_id'] . " AND bukuID = $id_buku";
+                            $result_bookmarked = mysqli_query($koneksi, $query_bookmarked);
+                    
+                            // Periksa apakah buku telah di-bookmark
+                            if(mysqli_num_rows($result_bookmarked) > 0) {
+                        ?>
+                                    <!-- Tampilkan tombol 'bookmarked' -->
+                                    <div class="bookmark" onclick="removeBookmark(<?php echo $id_buku; ?>)"><i class="fa-solid fa-bookmark"></i>Disimpan</div>
+                        <?php   } else { ?>
+                                    <!-- Tampilkan tombol 'bookmark' -->
+                                    <div class="bookmark" onclick="addBookmark(<?php echo $id_buku; ?>)"><i class="fa-regular fa-bookmark"></i>Simpan</div>
+                        <?php }} ?>
+                        </div>
                     <div class="sinopsis">
                         <?php 
                             if(empty($deskripsi_buku)) {
@@ -105,5 +122,94 @@
         echo "ID buku tidak diberikan.";
     }
     ?>
+
+    <script>
+    // Fungsi untuk menambahkan buku ke koleksi pribadi
+    function addBookmark(bukuID) {
+        // Lakukan request Ajax
+        $.ajax({
+            type: 'POST',
+            url: 'function/addbookmark.php', // Ganti 'add_bookmark.php' dengan nama file PHP yang sesuai
+            data: { bukuID: bukuID }, // Kirim data bukuID
+            success: function(response) {
+                // Tampilkan notifikasi SweetAlert
+                Swal.fire({
+                    title: 'Berhasil',
+                    text: 'Buku berhasil ditambahkan ke koleksi pribadi!',
+                    icon: 'success',
+                    customClass: {
+                        container: 'sweetalert-font sweetalert-background',
+                        title: 'sweetalert-title',
+                        content: 'sweetalert-text'
+                    }
+                }).then(() => {
+                    // Setelah SweetAlert ditutup, ubah ikon bookmark menjadi bookmarked
+                    location.reload();
+                });
+            },
+            error: function(xhr, status, error) {
+            // Tangkap pesan kesalahan dari server
+            var errorMessage = xhr.responseText;
+            console.error(errorMessage);
+                // Tampilkan pesan kesalahan menggunakan SweetAlert
+                Swal.fire({
+                    title: 'Gagal',
+                    text: 'Terjadi kesalahan saat menambahkan buku ke koleksi pribadi: ' + errorMessage,
+                    icon: 'error',
+                    customClass: {
+                        container: 'sweetalert-font sweetalert-background',
+                        title: 'sweetalert-title',
+                        content: 'sweetalert-text'
+                    }
+                });
+            }
+
+        });
+    }
+
+    // Fungsi untuk menghapus buku dari koleksi pribadi
+    function removeBookmark(bukuID) {
+        // Lakukan request Ajax
+        $.ajax({
+            type: 'POST',
+            url: 'function/removebookmark.php', // Ganti 'removebookmark.php' dengan nama file PHP yang sesuai
+            data: { bukuID: bukuID }, // Kirim data bukuID
+            success: function(response) {
+                // Tampilkan notifikasi SweetAlert
+                Swal.fire({
+                    title: 'Berhasil',
+                    text: 'Buku berhasil dihapus dari koleksi pribadi!',
+                    icon: 'success',
+                    customClass: {
+                        container: 'sweetalert-font sweetalert-background',
+                        title: 'sweetalert-title',
+                        content: 'sweetalert-text'
+                    }
+                }).then(() => {
+                    // Setelah SweetAlert ditutup, muat ulang halaman untuk memperbarui tampilan buku
+                    console.log(response);
+                    location.reload();
+                });
+            },
+            error: function(xhr, status, error) {
+                // Tangkap pesan kesalahan dari server
+                var errorMessage = xhr.responseText;
+                console.error(errorMessage);
+                // Tampilkan pesan kesalahan menggunakan SweetAlert
+                Swal.fire({
+                    title: 'Gagal',
+                    text: 'Terjadi kesalahan saat menghapus buku dari koleksi pribadi: ' + errorMessage,
+                    icon: 'error',
+                    customClass: {
+                        container: 'sweetalert-font sweetalert-background',
+                        title: 'sweetalert-title',
+                        content: 'sweetalert-text'
+                    }
+                });
+            }
+        });
+    }
+
+    </script>
 </body>
 </html>

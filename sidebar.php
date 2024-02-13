@@ -70,6 +70,12 @@
                     </a>
                 </div>
                 <div class="list-item">
+                    <a href="koleksibuku.php">
+                        <div class="icon"><i class="fa-solid fa-book-bookmark"></i></div>
+                        <span class="description">Koleksi</span>
+                    </a>
+                </div>
+                <div class="list-item">
                     <a href="logs_data.php">
                         <div class="icon"><i class="fa-solid fa-circle-exclamation"></i></div>
                         <span class="description">Log Aktivitas</span>

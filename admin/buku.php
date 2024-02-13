@@ -131,6 +131,19 @@
         <div class="books-hdr">
             <div class="addbook-icon" onclick="showAddbookPopup()"><i class="fa-solid fa-plus"></i></div><h1 class="header">Daftar Buku</h1>
         </div>
+        <?php
+            // Buat kueri SQL untuk mengambil data buku yang telah di-bookmark oleh pengguna saat ini
+            $query_bookmarked = "SELECT bukuID FROM koleksipribadi WHERE userID = " . $_SESSION['user_id'];
+            $result_bookmarked = mysqli_query($koneksi, $query_bookmarked);
+
+            // Inisialisasi array untuk menyimpan ID buku yang telah di-bookmark
+            $bookmarked_books = [];
+
+            // Memasukkan ID buku yang telah di-bookmark ke dalam array
+            while ($row_bookmarked = mysqli_fetch_assoc($result_bookmarked)) {
+                $bookmarked_books[] = $row_bookmarked['bukuID'];
+            }
+        ?>
         <div class="books-collection">
         <?php
             // Buat kueri SQL untuk mengambil data dari tabel buku
@@ -145,20 +158,32 @@
                     $penulis_buku = $row["penulis"];
                     $foto_buku = $row["foto"];
                     $idbuku = $row["bukuID"];
+
+                    // Periksa apakah buku telah di-bookmark
+                    $is_bookmarked = in_array($idbuku, $bookmarked_books);
         ?>
             <div class="books">
                 <div class="books-cover">
-                     <!-- Gunakan foto dari kolom 'foto' dalam tabel buku -->
+                    <!-- Gunakan foto dari kolom 'foto' dalam tabel buku -->
                     <a href="ulasan.php?id=<?php echo $idbuku; ?>"> <!-- Tambahkan link ke halaman ulasan.php dengan menyertakan bukuID sebagai parameter GET -->
                         <img src="../images/cover-buku/<?php echo $foto_buku; ?>" alt="">
                     </a>
                 </div>
                 <div class="books-title">
                     <div class="judul-buku"><?php echo $judul_buku; ?></div>
-                    <div class="books-action">
-                        <p class="penulis"><?php echo $penulis_buku; ?></p>
-                        <div class="action-btn"><div class="bookmark"><i class="fa-regular fa-bookmark"></i></div></div>
+                    <div class="penulis">
+                        <p class="penulis-buku"><?php echo $penulis_buku; ?></p>
                     </div>
+                </div>
+                <div class="action-btn">
+                    <div class="pinjam-btn">Pinjam</div>
+                    <!-- <div class="pinjam-btn">Dipinjam</div> -->
+                    <!-- Tampilkan kelas 'bookmarked' jika buku telah di-bookmark, dan 'bookmark' jika belum -->
+                    <?php if ($is_bookmarked) : ?>
+                        <div class="bookmarked" onclick="removeBookmark(<?php echo $idbuku; ?>)"><i class="fa-solid fa-bookmark"></i></div>
+                    <?php else : ?>
+                        <div class="bookmark" onclick="addBookmark(<?php echo $idbuku; ?>)"><i class="fa-regular fa-bookmark"></i></div>
+                    <?php endif; ?>
                 </div>
             </div>
         <?php
@@ -295,10 +320,10 @@
             data: formData,
             contentType: false,
             processData: false,
-            success: function (response) {
+            success: function(response) {
                 console.log(response); 
 
-                // Jika berhasil disimpan, kirim respons 'success'
+                // Periksa respons dari server
                 if (response === 'success') {
                     // Handle berhasil
                     console.log('Buku berhasil ditambahkan.');
@@ -328,7 +353,7 @@
                     // Tampilkan notifikasi SweetAlert untuk error
                     Swal.fire({
                         title: 'Gagal',
-                        text: 'Terjadi kesalahan saat menambahkan buku.',
+                        text: response,
                         icon: 'error',
                         customClass: {
                             container: 'sweetalert-font sweetalert-background',
@@ -338,6 +363,7 @@
                     });
                 }
             },
+
             error: function (xhr, status, error) {
                 // Handle error
                 console.error(xhr.responseText);
@@ -356,6 +382,93 @@
             }
         });
     }
+
+
+    // Fungsi untuk menambahkan buku ke koleksi pribadi
+    function addBookmark(bukuID) {
+        // Lakukan request Ajax
+        $.ajax({
+            type: 'POST',
+            url: 'function/addbookmark.php', // Ganti 'add_bookmark.php' dengan nama file PHP yang sesuai
+            data: { bukuID: bukuID }, // Kirim data bukuID
+            success: function(response) {
+                // Tampilkan notifikasi SweetAlert
+                Swal.fire({
+                    title: 'Berhasil',
+                    text: 'Buku berhasil ditambahkan ke koleksi pribadi!',
+                    icon: 'success',
+                    customClass: {
+                        container: 'sweetalert-font sweetalert-background',
+                        title: 'sweetalert-title',
+                        content: 'sweetalert-text'
+                    }
+                }).then(() => {
+                    // Setelah SweetAlert ditutup, ubah ikon bookmark menjadi bookmarked
+                    location.reload();
+                });
+            },
+            error: function(xhr, status, error) {
+            // Tangkap pesan kesalahan dari server
+            var errorMessage = xhr.responseText;
+            console.error(errorMessage);
+                // Tampilkan pesan kesalahan menggunakan SweetAlert
+                Swal.fire({
+                    title: 'Gagal',
+                    text: 'Terjadi kesalahan saat menambahkan buku ke koleksi pribadi: ' + errorMessage,
+                    icon: 'error',
+                    customClass: {
+                        container: 'sweetalert-font sweetalert-background',
+                        title: 'sweetalert-title',
+                        content: 'sweetalert-text'
+                    }
+                });
+            }
+
+        });
+    }
+    // Fungsi untuk menghapus buku dari koleksi pribadi
+    function removeBookmark(bukuID) {
+        // Lakukan request Ajax
+        $.ajax({
+            type: 'POST',
+            url: 'function/removebookmark.php', // Ganti 'removebookmark.php' dengan nama file PHP yang sesuai
+            data: { bukuID: bukuID }, // Kirim data bukuID
+            success: function(response) {
+                // Tampilkan notifikasi SweetAlert
+                Swal.fire({
+                    title: 'Berhasil',
+                    text: 'Buku berhasil dihapus dari koleksi pribadi!',
+                    icon: 'success',
+                    customClass: {
+                        container: 'sweetalert-font sweetalert-background',
+                        title: 'sweetalert-title',
+                        content: 'sweetalert-text'
+                    }
+                }).then(() => {
+                    // Setelah SweetAlert ditutup, muat ulang halaman untuk memperbarui tampilan buku
+                    console.log(response);
+                    location.reload();
+                });
+            },
+            error: function(xhr, status, error) {
+                // Tangkap pesan kesalahan dari server
+                var errorMessage = xhr.responseText;
+                console.error(errorMessage);
+                // Tampilkan pesan kesalahan menggunakan SweetAlert
+                Swal.fire({
+                    title: 'Gagal',
+                    text: 'Terjadi kesalahan saat menghapus buku dari koleksi pribadi: ' + errorMessage,
+                    icon: 'error',
+                    customClass: {
+                        container: 'sweetalert-font sweetalert-background',
+                        title: 'sweetalert-title',
+                        content: 'sweetalert-text'
+                    }
+                });
+            }
+        });
+    }
+
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>

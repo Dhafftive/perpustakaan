@@ -114,14 +114,17 @@
     width: 100%;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-    gap: 50px 100px;
+    gap: 40px 100px;
 }
 .books-collection .books{
-    height: 320px;
+    height: 390px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 .books-collection .books .books-cover{
     width: 100%;
-    height: 240px;
+    height: 280px;
     overflow: hidden;
     border-radius: 10px;
 }
@@ -138,7 +141,7 @@
     font-size: 14px;
     font-weight: 600;
 }
-.books .books-title .books-action{
+.books .books-title .penulis{
     font-family: var(--default);
     font-size: 14px;
     font-weight: 500;
@@ -146,11 +149,25 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    margin-top: 5px;
+    margin: 5px 0;
     color: #666666;
 }
-.books .books-title .books-action i{
-    font-size: 22px;
+.books .action-btn{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 5px 0;
+    position: relative;
+}
+.books .action-btn .pinjam-btn{
+    font-family: var(--default);
+    color: #fff;
+    background-color: var(--secondary);
+    padding: 7px 20px;
+    border-radius: 5px;
+}
+.books .action-btn i{
+    font-size: 28px;
     color: #FFB000;
 }
 #imagePreviewContainer {
