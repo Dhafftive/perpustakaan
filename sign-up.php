@@ -22,11 +22,11 @@
     <div class="bg-img"></div>
     <div class="head-page">
         <p class="logo">Bookshelf.<span>Idn</span></p>
-        <div class="account-confirm"><p>Sudah punya akun?</p><button class="sign-up"><a href="">Login</a></button></div>
+        <div class="account-confirm"><p>Sudah punya akun?</p><button class="sign-up"><a href="index.php">Login</a></button></div>
     </div>
     <div class="page-signup">
         <h1 class="hdr">Buat Akun Baru</h1>
-        <form id="signupForm" action="admin/function/simpan_user.php" method="post">
+        <form id="signupForm" action="admin_petugas/function/simpan_user.php" method="post">
             <div class="input-data">
                 <div class="input-form">
                     <label for="username">Username</label>

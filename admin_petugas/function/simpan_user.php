@@ -5,7 +5,7 @@
         // Panggil fungsi registrasi
         $result = registrasi($koneksi, $_POST);
         if ($result) {
-            header("Location: login.php");
+            header("Location: ../../index.php");
             echo "<script>
                 alert('Registrasi berhasil!');
             </script>";

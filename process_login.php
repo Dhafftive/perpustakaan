@@ -40,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             exit();
                         default:
                             // Jika acces_level tidak valid, arahkan ke halaman login
-                            header("Location: login.php");
+                            header("Location: index.php");
                             exit();
                         }
                 } else {
