@@ -41,7 +41,8 @@
 .main-content{
     background-color: #e0e0e0;
     flex-grow: 1;
-    overflow-y: scroll;
+    overflow: hidden;
+    position: relative;
     height: 100vh;
 }
 .sidebar .logo{
@@ -125,4 +126,15 @@
     border-radius: 5px;
     position: fixed;
     z-index: 990;
+}
+
+/* Perfect Scrollbar */
+.mainScrollbar__rail-x{
+    position: absolute; /* Persyaratan 2 */
+    background-color: transparent; /* Hapus background agar tidak terlihat */
+    opacity: 0.5; /* Opacity scrollbar */
+    z-index: 1000; /* Pastikan lebih tinggi dari konten */
+    width: 10px; /* Atur lebar scrollbar-y */
+    top: 0; /* Atur posisi scrollbar-y */
+    right: 0; /* Atur posisi scrollbar-y */
 }

@@ -14,7 +14,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <!-- Add this in the head section of your HTML  (Toastr.JS Library)-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+    <!-- Perfect Scrollbar -->
+    <link rel="stylesheet" href="../libs/perfect-scrollbar/css/perfect-scrollbar.css">
 
+    <!-- JQuery Library -->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <style>
     /* Tambahkan gaya untuk overlay */
@@ -84,5 +87,11 @@
             </div>
         </div>
         <div class="main-content">
-    
+    <script src="../libs/perfect-scrollbar/dist/perfect-scrollbar.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const container = document.querySelector('.main-content');
+            const mainScrollbar = new PerfectScrollbar(container);
+        });
+    </script>
 </html>
