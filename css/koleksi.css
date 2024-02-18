@@ -1,9 +1,9 @@
 /* Selected Sidebar */
-.sidebar .main .list-item:nth-child(5){
+.sidebar .main .list-item.koleksibuku-page{
     background-color: #5c8063;
 }
-.sidebar .main .list-item:nth-child(5) .icon i,
-.sidebar .main .list-item:nth-child(5) a{
+.sidebar .main .list-item.koleksibuku-page .icon i,
+.sidebar .main .list-item.koleksibuku-page a{
     color: #fff;
 }
 /* == End Selected Sidebar == */

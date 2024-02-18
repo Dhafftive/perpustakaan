@@ -1,12 +1,9 @@
 /* Selected Sidebar */
-.sidebar .main .list-item:nth-child(3){
+.sidebar .main .list-item.buku-page{
     background-color: #5c8063;
 }
-.sidebar .main .list-item:nth-child(3) .icon i,
-.sidebar .main .list-item:nth-child(3) a{
-    color: #fff;
-}
-.sidebar.hide .main .list-item:nth-child(3) .icon i{
+.sidebar .main .list-item.buku-page .icon i,
+.sidebar .main .list-item.buku-page a{
     color: #fff;
 }
 /* == End Selected Sidebar == */

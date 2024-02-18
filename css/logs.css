@@ -1,9 +1,9 @@
 /* Selected Sidebar */
-.sidebar .main .list-item:nth-child(6){
+.sidebar .main .list-item.logs-page{
     background-color: #5c8063;
 }
-.sidebar .main .list-item:nth-child(6) .icon i,
-.sidebar .main .list-item:nth-child(6) a{
+.sidebar .main .list-item.logs-page .icon i,
+.sidebar .main .list-item.logs-page a{
     color: #fff;
 }
 /* == End Selected Sidebar == */

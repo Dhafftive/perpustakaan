@@ -48,40 +48,46 @@
                 </div>
             </div>
             <div class="main">
-                <div class="list-item">
+                <div class="list-item dashboard-page">
                     <a href="dashboard.php">
                         <div class="icon"><i class="fa-solid fa-chart-simple"></i></div>
                         <span class="description">Dashboard</span>
                     </a>
                 </div>
-                <div class="list-item">
+                <div class="list-item datauser-page">
                     <a href="data_user.php">
                         <div class="icon"><i class="fa-regular fa-address-book"></i></div>
                         <span class="description">Anggota</span>
                     </a>
                 </div>
-                <div class="list-item">
+                <div class="list-item buku-page">
                     <a href="buku.php">
                         <div class="icon"><i class="fa-solid fa-book"></i></div>
                         <span class="description">Buku</span>
                     </a>
                 </div>
-                <div class="list-item">
+                <div class="list-item peminjaman-page">
                     <a href="peminjaman.php">
                         <div class="icon"><i class="fa-solid fa-book-open-reader"></i></div>
                         <span class="description">Peminjaman</span>
                     </a>
                 </div>
-                <div class="list-item">
+                <div class="list-item koleksibuku-page">
                     <a href="koleksibuku.php">
                         <div class="icon"><i class="fa-solid fa-book-bookmark"></i></div>
                         <span class="description">Koleksi</span>
                     </a>
                 </div>
-                <div class="list-item">
+                <div class="list-item bukuanda-page">
+                    <a href="bukuanda.php">
+                        <div class="icon"><i class="fa-solid fa-book-open"></i></div>
+                        <span class="description">Buku anda</span>
+                    </a>
+                </div>
+                <div class="list-item logs-page">
                     <a href="logs_data.php">
                         <div class="icon"><i class="fa-solid fa-circle-exclamation"></i></div>
-                        <span class="description">Log Aktivitas</span>
+                        <span class="description">Log aktivitas</span>
                     </a>
                 </div>
             </div>

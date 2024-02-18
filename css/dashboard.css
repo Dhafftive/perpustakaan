@@ -1,12 +1,12 @@
 /* Selected Sidebar */
-.sidebar .main .list-item:nth-child(1){
+.sidebar .main .list-item.dashboard-page{
     background-color: #5c8065;
 }
-.sidebar .main .list-item:nth-child(1) .icon i,
-.sidebar .main .list-item:nth-child(1) a{
+.sidebar .main .list-item.dashboard-page .icon i,
+.sidebar .main .list-item.dashboard-page a{
     color: #fff;
 }
-.sidebar.hide .main .list-item:nth-child(1) .icon i{
+.sidebar.hide .main .list-item.dashboard-page .icon i{
     color: #fff;
 }
 /* == End Selected Sidebar == */

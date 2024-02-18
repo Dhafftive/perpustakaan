@@ -1,14 +1,12 @@
 /* Selected Sidebar */
-.sidebar .main .list-item:nth-child(4){
+.sidebar .main .list-item.peminjaman-page{
     background-color: #5c8065;
 }
-.sidebar .main .list-item:nth-child(4) .icon i,
-.sidebar .main .list-item:nth-child(4) a{
+.sidebar .main .list-item.peminjaman-page .icon i,
+.sidebar .main .list-item.peminjaman-page a{
     color: #fff;
 }
-.sidebar.hide .main .list-item:nth-child(4) .icon i{
-    color: #fff;
-}
+
 /* == End Selected Sidebar == */
 .data-konfirmasi{
     display: flex;
@@ -199,19 +197,19 @@ td .delete i{
     color: #ff0909;
     font-size: 14px;
 }
-.dipinjam-label{
+.dikembalikan-label{
     width: 100px;
     height: 30px;
-    background-color: #caf3d1;
+    background-color: #cdfff0;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 13px;
-    color: #3bbd51;
+    color: #07bb85;
     font-weight: 700;
     border-radius: 5px;
 }
-.dikembalikan-label{
+.dipinjam-label{
     width: 100px;
     height: 30px;
     background-color: #e2e3fa;
