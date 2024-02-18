@@ -61,7 +61,8 @@ mysqli_close($koneksi);
                                 <div class="peminjam"><?php echo $rowpengajuan['namalengkap']; ?></div>
                             </div>
                         </div>
-                        <div class="konfirmasi-btn">Konfirmasi</div>
+                        <div class="konfirmasi-btn" onclick="konfirmasiPeminjaman(<?php echo $rowpengajuan['peminjamanID']; ?>)">Konfirmasi</div>
+
                     </div>
                     <?php endwhile; ?>
             <?php else : ?>
@@ -153,7 +154,7 @@ mysqli_close($koneksi);
                                 </td>
                                 <td>
                                     <div class="delete">
-                                        <button type="button">
+                                        <button type="button" class="delete-btn" data-peminjamanid="<?= $row['peminjamanID'] ?>">
                                             <i class="fa-regular fa-trash-can"></i>
                                         </button>
                                     </div>
@@ -170,7 +171,121 @@ mysqli_close($koneksi);
             </div>
         </div>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script>
+        function konfirmasiPeminjaman(peminjamanID) {
+            Swal.fire({
+                title: "Konfirmasi Peminjaman",
+                text: "Apakah Anda yakin ingin mengkonfirmasi peminjaman?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Ya",
+                cancelButtonText: "Batal",
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Kirim permintaan AJAX
+                    $.ajax({
+                        type: "POST",
+                        url: "function/proses_konfirmasi.php",
+                        data: {
+                            peminjamanID: peminjamanID
+                        },
+                        success: function(response) {
+                            if (response === "success") {
+                                Swal.fire({
+                                    icon: "success",
+                                    title: "Peminjaman berhasil dikonfirmasi.",
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                }).then(() => {
+                                    // Refresh halaman
+                                    location.reload();
+                                });
+                            } else {
+                                Swal.fire({
+                                    icon: "error",
+                                    title: "Oops...",
+                                    text: "Ada kesalahan saat memproses permintaan."
+                                });
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            console.error(xhr.responseText);
+                            Swal.fire({
+                                icon: "error",
+                                title: "Oops...",
+                                text: "Terjadi kesalahan saat mengirim permintaan."
+                            });
+                        }
+                    });
+                }
+            });
+        }
+
+        $(document).ready(function() {
+            $('.delete-btn').on('click', function() {
+                var peminjamanID = $(this).data('peminjamanid');
+                deletePeminjaman(peminjamanID);
+            });
+        });
+
+        function deletePeminjaman(peminjamanID) {
+            Swal.fire({
+                title: "Konfirmasi Penghapusan",
+                text: "Apakah Anda yakin ingin menghapus peminjaman ini?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Ya",
+                cancelButtonText: "Batal",
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Kirim permintaan AJAX
+                    $.ajax({
+                        type: "POST",
+                        url: "function/hapus_peminjaman.php",
+                        data: {
+                            peminjamanID: peminjamanID
+                        },
+                        success: function(response) {
+                            if (response === "success") {
+                                Swal.fire({
+                                    icon: "success",
+                                    title: "Peminjaman berhasil dihapus.",
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                }).then(() => {
+                                    // Refresh halaman
+                                    location.reload();
+                                });
+                            } else {
+                                Swal.fire({
+                                    icon: "error",
+                                    title: "Oops...",
+                                    text: "Ada kesalahan saat memproses permintaan."
+                                });
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            console.error(xhr.responseText);
+                            Swal.fire({
+                                icon: "error",
+                                title: "Oops...",
+                                text: "Terjadi kesalahan saat mengirim permintaan."
+                            });
+                        }
+                    });
+                }
+            });
+        }
+
+
+
         document.addEventListener('DOMContentLoaded', function() {
             const container = document.querySelector('.pinjam-confirm');
             const pinjamScrollbar = new PerfectScrollbar(container);
@@ -186,5 +301,8 @@ mysqli_close($koneksi);
         });
     </script>
     <script src="../libs/perfect-scrollbar/dist/perfect-scrollbar.js"></script>
+    <!-- SweetAlert2 JS -->
+
+
 </body>
 </html>
