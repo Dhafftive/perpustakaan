@@ -232,7 +232,6 @@
 
         </div>
     </div>
-</div>
 
     <div class="addbook-container" id="addbook-container">
         <div class="addbook-hdr">
