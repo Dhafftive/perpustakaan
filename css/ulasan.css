@@ -58,12 +58,22 @@
     margin-top: 20px;
     padding: 5px 0;
 }
+.books-action .dipinjam,
+.books-action .diajukan,
 .books-action .pinjam,
 .books-action .bookmark{
     padding: 8px 20px;
-    background-color: #FFB000;
     border-radius: 7px;
     transition: .3s;
+}
+.books-action .dipinjam{
+    background-color: #afafaf;
+    color: #505050;
+}
+.books-action .pinjam,
+.books-action .diajukan,
+.books-action .bookmark{
+    background-color: #FFB000;
 }
 .books-action .pinjam:hover,
 .books-action .bookmark:hover{
@@ -93,7 +103,7 @@
     padding: 15px 20px 30px;
     margin: 10px auto;
     border-radius: 12px;
-    border: 1px solid #777;
+    border: 2px solid #69b879;
 }
 .ulasan .username{
     color: #1a1a1a;
@@ -107,7 +117,7 @@
 .ulasan .username .times{
     font-weight: 500;
     font-size: 12px;
-    color: #d1d1d1;
+    color: #ffb000;
     font-style: italic;
 }
 .ulasan .ulasan-text p{

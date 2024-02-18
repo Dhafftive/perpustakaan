@@ -159,6 +159,15 @@
     margin: 5px 0;
     position: relative;
 }
+.books .action-btn .dipinjam-btn,
+.books .action-btn .dikembalikan-btn{
+    font-family: var(--default);
+    color: #999999;
+    background-color: #ebebeb;
+    padding: 7px 15px;
+    border-radius: 5px;
+}
+.books .action-btn .diajukan-btn,
 .books .action-btn .pinjam-btn{
     font-family: var(--default);
     color: #fff;

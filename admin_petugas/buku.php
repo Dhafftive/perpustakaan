@@ -131,6 +131,7 @@
         <div class="books-hdr">
             <div class="addbook-icon" onclick="showAddbookPopup()"><i class="fa-solid fa-plus"></i></div><h1 class="header">Daftar Buku</h1>
         </div>
+
         <?php
             // Buat kueri SQL untuk mengambil data buku yang telah di-bookmark oleh pengguna saat ini
             $query_bookmarked = "SELECT bukuID FROM koleksipribadi WHERE userID = " . $_SESSION['user_id'];
@@ -144,54 +145,91 @@
                 $bookmarked_books[] = $row_bookmarked['bukuID'];
             }
         ?>
+
         <div class="books-collection">
-        <?php
-            // Buat kueri SQL untuk mengambil data dari tabel buku
-            $query_buku = "SELECT bukuID, judul, penulis, foto FROM buku";
-            $result_buku = mysqli_query($koneksi, $query_buku);
+            <?php
+                // Buat kueri SQL untuk mengambil data dari tabel buku
+                $query_buku = "SELECT bukuID, judul, penulis, foto, perpusID FROM buku";
+                $result_buku = mysqli_query($koneksi, $query_buku);
 
-            // Periksa apakah ada data buku yang ditemukan
-            if (mysqli_num_rows($result_buku) > 0) {
-                // Loop melalui setiap baris hasil query dan tampilkan informasi buku
-                while($row = mysqli_fetch_assoc($result_buku)) {
-                    $judul_buku = $row["judul"];
-                    $penulis_buku = $row["penulis"];
-                    $foto_buku = $row["foto"];
-                    $idbuku = $row["bukuID"];
+                // Periksa apakah ada data buku yang ditemukan
+                if (mysqli_num_rows($result_buku) > 0) {
+                    // Loop melalui setiap baris hasil query dan tampilkan informasi buku
+                    while($row = mysqli_fetch_assoc($result_buku)) {
+                        $judul_buku = $row["judul"];
+                        $penulis_buku = $row["penulis"];
+                        $foto_buku = $row["foto"];
+                        $idbuku = $row["bukuID"];
+                        $idperpus = $row["perpusID"];
 
-                    // Periksa apakah buku telah di-bookmark
-                    $is_bookmarked = in_array($idbuku, $bookmarked_books);
-        ?>
-            <div class="books">
-                <div class="books-cover">
-                    <!-- Gunakan foto dari kolom 'foto' dalam tabel buku -->
-                    <a href="ulasan.php?id=<?php echo $idbuku; ?>"> <!-- Tambahkan link ke halaman ulasan.php dengan menyertakan bukuID sebagai parameter GET -->
-                        <img src="../images/cover-buku/<?php echo $foto_buku; ?>" alt="">
-                    </a>
-                </div>
-                <div class="books-title">
-                    <div class="judul-buku"><?php echo $judul_buku; ?></div>
-                    <div class="penulis">
-                        <p class="penulis-buku"><?php echo $penulis_buku; ?></p>
+                        // Periksa status peminjaman buku
+                        $status_pinjam = '';
+                        $btnClass = 'pinjam-btn'; // Default button class
+
+                        $peminjamanQuery = "SELECT status_pinjam, userID FROM peminjaman WHERE bukuID = $idbuku";
+                        $peminjamanResult = mysqli_query($koneksi, $peminjamanQuery);
+
+                        if (mysqli_num_rows($peminjamanResult) > 0) {
+                            while ($peminjamanData = mysqli_fetch_assoc($peminjamanResult)) {
+                                if ($peminjamanData['status_pinjam'] == 'dipinjam' || $peminjamanData['status_pinjam'] == 'tertunda') {
+                                    $btnClass = 'dipinjam-btn';
+                                } elseif ($peminjamanData['status_pinjam'] == 'diajukan') {
+                                    if ($peminjamanData['userID'] == $_SESSION['user_id']) {
+                                        $btnClass = 'diajukan-btn';
+                                    } else {
+                                        $btnClass = 'pinjam-btn';
+                                    }
+                                } elseif ($peminjamanData['status_pinjam'] == 'dikembalikan') {
+                                    $btnClass = 'pinjam-btn';
+                                }
+                            }
+                        }
+
+                        // Jika tombol kelas adalah diajukan-btn, tentukan juga onclick function
+                        $onclickFunction = '';
+                        if ($btnClass == 'diajukan-btn') {
+                            $onclickFunction = "batalkanPeminjaman($idbuku, {$_SESSION['user_id']})";
+                        }
+            ?>
+                <div class="books">
+                    <div class="books-cover">
+                        <!-- Gunakan foto dari kolom 'foto' dalam tabel buku -->
+                        <a href="ulasan.php?id=<?php echo $idbuku; ?>"> <!-- Tambahkan link ke halaman ulasan.php dengan menyertakan bukuID sebagai parameter GET -->
+                            <img src="../images/cover-buku/<?php echo $foto_buku; ?>" alt="">
+                        </a>
+                    </div>
+                    <div class="books-title">
+                        <div class="judul-buku"><?php echo $judul_buku; ?></div>
+                        <div class="penulis">
+                            <p class="penulis-buku"><?php echo $penulis_buku; ?></p>
+                        </div>
+                    </div>
+                    <div class="action-btn">
+                        <!-- Tampilkan tombol sesuai dengan kelas yang ditentukan -->
+                        <?php if ($btnClass === 'diajukan-btn') : ?>
+                            <div class="<?php echo $btnClass; ?>" onclick="<?php echo $onclickFunction; ?>">Diajukan</div>
+                        <?php elseif ($btnClass === 'dipinjam-btn') : ?>
+                            <div class="<?php echo $btnClass; ?>">Dipinjam</div>
+                        <?php else : ?>
+                            <div class="<?php echo $btnClass; ?>" onclick="pinjamBuku(<?php echo $idbuku; ?>, <?php echo $idperpus; ?>, <?php echo $_SESSION['user_id']; ?>)">Pinjam</div>
+                        <?php endif; ?>
+                        <!-- Tampilkan tombol 'bookmark' atau 'remove bookmark' sesuai keadaan -->
+                        <?php if (in_array($idbuku, $bookmarked_books)) : ?>
+                            <div class="bookmarked" onclick="removeBookmark(<?php echo $idbuku; ?>)"><i class="fa-solid fa-bookmark"></i></div>
+                        <?php else : ?>
+                            <div class="bookmark" onclick="addBookmark(<?php echo $idbuku; ?>)"><i class="fa-regular fa-bookmark"></i></div>
+                        <?php endif; ?>
                     </div>
                 </div>
-                <div class="action-btn">
-                    <div class="pinjam-btn">Pinjam</div>
-                    <!-- <div class="pinjam-btn">Dipinjam</div> -->
-                    <!-- Tampilkan kelas 'bookmarked' jika buku telah di-bookmark, dan 'bookmark' jika belum -->
-                    <?php if ($is_bookmarked) : ?>
-                        <div class="bookmarked" onclick="removeBookmark(<?php echo $idbuku; ?>)"><i class="fa-solid fa-bookmark"></i></div>
-                    <?php else : ?>
-                        <div class="bookmark" onclick="addBookmark(<?php echo $idbuku; ?>)"><i class="fa-regular fa-bookmark"></i></div>
-                    <?php endif; ?>
-                </div>
-            </div>
-        <?php
+            <?php
+                    }
+                } else {
+                    echo "Tidak ada data buku yang ditemukan.";
                 }
-            } else {
-                echo "Tidak ada data buku yang ditemukan.";
-            }
-        ?>        
+            ?>
+        </div>
+
+
         </div>
     </div>
 </div>
@@ -309,10 +347,13 @@
                 placeholder.style.display = 'block'; // Show the placeholder
             }
         }
+        
     </script>
 
     <!-- script Library -->
     <script src="../js/submitbook.js"></script>
+    <script src="../js/pinjambuku.js"></script>
+    <script src="../js/batalpinjam.js"></script>
     <script src="../js/ajaxbookmark.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>

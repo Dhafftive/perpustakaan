@@ -63,6 +63,14 @@
     font-family: var(--default);
     color: #fff;
 }
+.buku .action-btn .dikembalikan,
+.buku .action-btn .dipinjam{
+    padding: 7px 15px;
+    background-color: #eee;
+    color: #bbbb;
+    border-radius: 5px;
+}
+.buku .action-btn .diajukan,
 .buku .action-btn .pinjam{
     padding: 7px 15px;
     background-color: var(--secondary);
