@@ -89,7 +89,7 @@ mysqli_close($koneksi);
                             <div class="peminjam"><?php echo $rowtertunda['namalengkap']; ?></div>
                         </div>
                     </div>
-                    <div class="konfirmasi-btn">Konfirmasi</div>
+                    <div class="konfirmasi-btn" onclick="konfirmasiPengembalian(<?php echo $rowtertunda['peminjamanID']; ?>)">Konfirmasi</div>
                 </div>
                 <?php endwhile; ?>
             <?php else : ?>
@@ -300,6 +300,7 @@ mysqli_close($koneksi);
             const tableScrollbar = new PerfectScrollbar(container);
         });
     </script>
+    <script src="../js/konfirmasipengembalian.js"></script>
     <script src="../libs/perfect-scrollbar/dist/perfect-scrollbar.js"></script>
     <!-- SweetAlert2 JS -->
 
