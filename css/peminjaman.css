@@ -180,6 +180,7 @@
 .table-responsive {
     overflow: hidden;
     max-height: 70vh; /* Atur tinggi maksimum */
+    position: relative;
 }
 .head-table th {
     position: sticky;
