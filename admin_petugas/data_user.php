@@ -10,6 +10,8 @@ if (!$result) {
     die('Error in SQL query: ' . mysqli_error($koneksi));
 }
 
+$admin = $_SESSION['username'];
+
 
 // Check if the form is submitted
 if (!empty($_POST)) {
@@ -21,7 +23,7 @@ if (!empty($_POST)) {
     $email = $_POST['email'];
     $telepon = $_POST['telepon'];
     $alamat = $_POST['alamat'];
-    $acces_level = isset($_POST['acces_level']) ? $_POST['acces_level'] : 'peminjam';  // Tambahkan ini
+    $acces_level = isset($_POST['level-akses']) ? $_POST['level-akses'] : 'peminjam';  // Tambahkan ini
     $perpusID = $_POST['idperpus'];
 
     // Pengecekan apakah password dan konfirmasi password sama
@@ -31,7 +33,7 @@ if (!empty($_POST)) {
         exit;
     }
     // Check if username, nama lengkap, and email already exist
-    $checkQuery = "SELECT * FROM user WHERE username = '$username' OR LOWER(TRIM(namalengkap)) = LOWER(TRIM('$namalengkap')) OR email = '$email'";
+    $checkQuery = "SELECT * FROM user WHERE username = '$username' OR namalengkap = '$namalengkap' OR email = '$email'";
     $checkResult = mysqli_query($koneksi, $checkQuery);
 
     if (mysqli_num_rows($checkResult) > 0) {
@@ -50,6 +52,7 @@ if (!empty($_POST)) {
         exit;
     } else {
         // Setelah validasi berhasil, lanjutkan dengan proses penyimpanan data
+        $confirm = password_hash($password, PASSWORD_DEFAULT);
     
         // Query untuk memasukkan data ke dalam tabel user
         $query = "INSERT INTO user (username, namalengkap, password, email, no_hp, alamat, acces_level, perpusID) 
@@ -86,7 +89,7 @@ if (!empty($_POST)) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Data User - Bookshelf.Idn</title>
     <link rel="stylesheet" href="../css/data_user.css?v=<?php echo time(); ?>">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css">
 </head>
 <body>
     <?php require '../sidebar.php' ?>
@@ -177,7 +180,11 @@ if (!empty($_POST)) {
                         <label for="telepon">No. Telepon</label>
                         <input placeholder="Masukkan nomor telepon" type="text" id="telepon" name="telepon" class="input-group" required>
                         <label for="perpustakaan">Perpustakaan</label>
-                        <input type="text" name="perpustakaan" id="" value="<?= $namaperpus ?>" readonly>
+                        <select name="level-akses" id="acces_level" class="input-group">
+                            <option value="peminjam">Peminjam</option>
+                            <option value="petugas">Petugas</option>
+                            <option value="admin">Admin</option>
+                        </select>
                         <input type="hidden" name="idperpus" value="<?= $perpusID ?>">
                         <label for="confirm">Konfirmasi</label>
                         <input placeholder="Masukkan password sekali lagi" type="password" id="confirm" name="confirm" class="input-group" required>
@@ -393,5 +400,12 @@ if (!empty($_POST)) {
     </script>
     <!-- Include toastr library at the end of your body section -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Inisialisasi Nice Select pada dropdown kategori
+            $('#acces_level').niceSelect();
+        });
+    </script>
 </body>
 </html>

@@ -240,3 +240,7 @@ td .delete i{
     color: grey;
     font-style: italic;
 }
+.download-btn{
+    font-size: 34px;
+    color: #FFB000;
+}

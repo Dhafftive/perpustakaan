@@ -18,7 +18,7 @@ if (isset($_SESSION['acces_level'])) {
             break;
         case 'petugas':
             $sidebar_items = array(
-                array("selected-menu" => "", "page" => "peminjaman.php", "icon" => "fa-solid fa-book-open-reader", "description" => "Peminjaman")
+                array("selected-menu" => "peminjaman-page", "page" => "peminjaman.php", "icon" => "fa-solid fa-book-open-reader", "description" => "Peminjaman")
             );
             break;
         case 'admin':
