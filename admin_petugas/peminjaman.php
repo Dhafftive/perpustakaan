@@ -102,7 +102,7 @@ mysqli_close($koneksi);
 
     <div class="data-peminjaman">
         <div class="card">
-            <h5 class="card-header">Data Peminjaman Buku</h5>
+            <h5 class="card-header">Data Peminjaman Buku  <div class="download-btn"><i class="fa-solid fa-file-arrow-down"></i></div></h5>
             <div class="table-responsive">
                 <table class="table-hover">
                     <thead class="head-table">
@@ -300,6 +300,106 @@ mysqli_close($koneksi);
             const container = document.querySelector('.table-responsive');
             const tableScrollbar = new PerfectScrollbar(container);
         });
+
+
+        $(document).ready(function() {
+            $('.download-btn').on('click', function() {
+                // Mendapatkan data dari tabel
+                var data = [];
+                $('.table-body tr').each(function() {
+                    var judul = $(this).find('td:eq(0)').text();
+                    var namalengkap = $(this).find('td:eq(1)').text();
+                    var tanggalPinjam = $(this).find('td:eq(2)').text();
+                    var status = $(this).find('td:eq(3)').text();
+                    var tanggalKembali = $(this).find('td:eq(4)').text();
+                    data.push({
+                        judul: judul,
+                        namalengkap: namalengkap,
+                        tanggal_pinjam: tanggalPinjam,
+                        status_pinjam: status,
+                        tanggal_kembali: tanggalKembali
+                    });
+                });
+
+                // Panggil fungsi downloadExcel dengan data yang diperoleh
+                downloadExcel(data);
+                console.log("Downloading Excel...");
+    console.log(data); // You can use this data to generate Excel
+                <?php
+// Fungsi untuk mengunduh data sebagai file Excel
+function downloadExcel($data) {
+    // Mengimpor autoload.php dari vendor
+    require_once '../vendor/autoload.php';
+
+    // Membuat objek Spreadsheet baru
+    $spreadsheet = new \PhpOffice\PhpSpreadsheet\Spreadsheet();
+    $sheet = $spreadsheet->getActiveSheet();
+
+    // Menulis header
+    $sheet->setCellValue('A1', 'Judul Buku');
+    $sheet->setCellValue('B1', 'Nama Lengkap');
+    $sheet->setCellValue('C1', 'Tanggal Pinjam');
+    $sheet->setCellValue('D1', 'Status');
+    $sheet->setCellValue('E1', 'Tanggal Kembali');
+
+    // Mengisi data
+    $row = 2;
+    foreach ($data as $item) {
+        $sheet->setCellValue('A' . $row, $item['judul']);
+        $sheet->setCellValue('B' . $row, $item['namalengkap']);
+        $sheet->setCellValue('C' . $row, date('d F Y', strtotime($item['tanggal_pinjam'])));
+        $sheet->setCellValue('D' . $row, $item['status_pinjam']);
+        $sheet->setCellValue('E' . $row, date('d F Y', strtotime($item['tanggal_kembali'])));
+        $row++;
+    }
+
+    // Mengatur header untuk file Excel
+    header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+    header('Content-Disposition: attachment;filename="data_peminjaman.xlsx"');
+    header('Cache-Control: max-age=0');
+
+    // Membuat writer dan menulis file Excel
+    $writer = new \PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);
+    $writer->save('php://output');
+    exit;
+}
+
+// Koneksi ke database
+include '../koneksi.php';
+
+// Kueri SQL untuk mengambil data
+$ajukansql = "SELECT peminjaman.peminjamanID, peminjaman.userID, peminjaman.bukuID, buku.judul, buku.foto, user.namalengkap
+        FROM peminjaman
+        INNER JOIN buku ON peminjaman.bukuID = buku.bukuID
+        INNER JOIN user ON peminjaman.userID = user.userID
+        WHERE peminjaman.status_pinjam = 'diajukan'";
+// Eksekusi kueri
+$ajukanresult = mysqli_query($koneksi, $ajukansql);
+// Kueri SQL untuk mengambil data
+$sqltertunda = "SELECT peminjaman.peminjamanID, peminjaman.userID, peminjaman.bukuID, buku.judul, buku.foto, user.namalengkap
+        FROM peminjaman
+        INNER JOIN buku ON peminjaman.bukuID = buku.bukuID
+        INNER JOIN user ON peminjaman.userID = user.userID
+        WHERE peminjaman.status_pinjam = 'tertunda'";
+// Eksekusi kueri
+$tertundaresult = mysqli_query($koneksi, $sqltertunda);
+// Kueri SQL untuk mengambil data
+$peminjamansql = "SELECT peminjaman.peminjamanID, peminjaman.userID, peminjaman.tanggal_pinjam, peminjaman.tanggal_kembali, peminjaman.status_pinjam, peminjaman.bukuID, buku.judul, buku.foto, user.namalengkap
+        FROM peminjaman
+        INNER JOIN buku ON peminjaman.bukuID = buku.bukuID
+        INNER JOIN user ON peminjaman.userID = user.userID
+        WHERE peminjaman.status_pinjam != 'diajukan'";
+// Eksekusi kueri
+$resultPeminjaman = mysqli_query($koneksi, $peminjamansql);
+
+
+// Menutup koneksi database
+mysqli_close($koneksi);
+?>
+
+            });
+        });
+
     </script>
     <script src="../js/konfirmasipengembalian.js"></script>
     <script src="../libs/perfect-scrollbar/dist/perfect-scrollbar.js"></script>
