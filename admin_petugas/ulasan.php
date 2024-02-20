@@ -111,15 +111,15 @@
             </div>
     <?php
             // Lakukan kueri SQL untuk mengambil ulasan buku berdasarkan id buku
-            $query_ulasan = "SELECT * FROM ulasanbuku WHERE bukuID = $id_buku";
+            $query_ulasan = "SELECT * FROM ulasanbuku WHERE bukuID = $id_buku AND ulasan <> ''";
             $result_ulasan = mysqli_query($koneksi, $query_ulasan);
+            // Periksa apakah ada ulasan yang ditemukan
+            if(mysqli_num_rows($result_ulasan) > 0) {
     ?>
             <div class="ulasan-container">
                 <h2 class="ulasan-header">Ulasan Buku</h2>
                 <div class="ulasan-buku">
                     <?php
-                    // Periksa apakah ada ulasan yang ditemukan
-                    if(mysqli_num_rows($result_ulasan) > 0) {
                         // Mulai iterasi ulasan
                         while($row_ulasan = mysqli_fetch_assoc($result_ulasan)) {
                             $userID = $row_ulasan["userID"];

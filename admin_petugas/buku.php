@@ -3,6 +3,22 @@
     include "../koneksi.php";
     include "function/cek_login.php";
 
+    // Buat kueri SQL untuk mengambil data rating dari ulasan buku untuk setiap buku dan menghitung rata-rata rating
+    $query_rating = "SELECT bukuID, AVG(rating) AS avg_rating FROM ulasanbuku GROUP BY bukuID";
+    // Eksekusi kueri
+    $result_rating = mysqli_query($koneksi, $query_rating);
+    // Inisialisasi array untuk menyimpan rata-rata rating setiap buku
+    $ratings = [];
+    // Memasukkan rata-rata rating ke dalam array
+    while ($row = mysqli_fetch_assoc($result_rating)) {
+        $ratings[$row['bukuID']] = $row['avg_rating'];
+    }
+    // Urutkan buku berdasarkan rating secara turun
+    arsort($ratings);
+    // Ambil tiga buku dengan rating tertinggi
+    $top_three_books = array_slice($ratings, 0, 3, true);
+
+
     // 2. Buat kueri SQL untuk mengambil data dari tabel "kategoribuku".
     $query_kategori = "SELECT kategoriID, namakategori FROM kategoribuku";
     $result_kategori = mysqli_query($koneksi, $query_kategori);
@@ -77,54 +93,48 @@
 </head>
 <body>
     <?php require '../sidebar.php'; ?>
+    <!-- Bagian HTML untuk menampilkan 3 buku dengan rating tertinggi -->
     <div class="famous-card">
-        <h1 class="card-header">Buku Ter populer</h1>
+        <h1 class="card-header">Buku Terpopuler</h1>
         <div class="card-container">
-            <div class="card">
-                <div class="book-cover">
-                    <img src="../images/xiaoyan.jpeg" alt="">
-                </div>
-                <div class="books-title">
-                    <h3 class="judul-buku">Apostle : The Backstory of Celestial</h3>
-                    <div class="title">
-                        <p>Jeremy Lincoln</p>
-                        <p>-</p>
-                        <p>Books Studio</p>
-                        <p>-</p>
-                        <p>2022</p>
+            <?php
+            // Loop melalui tiga buku dengan rating tertinggi
+            foreach ($top_three_books as $bukuID => $rating) {
+                // Buat kueri SQL untuk mengambil data buku berdasarkan bukuID
+                $query_buku = "SELECT judul, penulis, penerbit, tahunterbit, foto FROM buku WHERE bukuID = $bukuID";
+                $result_buku = mysqli_query($koneksi, $query_buku);
+
+                // Periksa apakah data buku ditemukan
+                if (mysqli_num_rows($result_buku) > 0) {
+                    // Ambil data buku
+                    $row_buku = mysqli_fetch_assoc($result_buku);
+                    $judul_buku = $row_buku['judul'];
+                    $penulis_buku = $row_buku['penulis'];
+                    $penerbit_buku = $row_buku['penerbit'];
+                    $tahun_terbit = $row_buku['tahunterbit'];
+                    $foto_buku = $row_buku['foto'];
+
+                    // Tampilkan data buku dalam elemen card
+                    ?>
+                    <div class="card">
+                        <div class="book-cover">
+                            <img src="../images/cover-buku/<?php echo $foto_buku; ?>" alt="">
+                        </div>
+                        <div class="books-title">
+                            <h3 class="judul-buku"><?php echo $judul_buku; ?></h3>
+                            <div class="title">
+                                <p class="penulis"><?php echo $penulis_buku; ?></p>
+                                <p>-</p>
+                                <p class="penerbit"><?php echo $penerbit_buku; ?></p>
+                                <p>-</p>
+                                <p class="tahunterbit"><?php echo $tahun_terbit; ?></p>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="book-cover">
-                    <img src="../images/xiaoyan.jpeg" alt="">
-                </div>
-                <div class="books-title">
-                    <h3 class="judul-buku">Apostle : The Backstory of Celestial</h3>
-                    <div class="title">
-                        <p>Jeremy Lincoln</p>
-                        <p>-</p>
-                        <p>Books Studio</p>
-                        <p>-</p>
-                        <p>2022</p>
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="book-cover">
-                    <img src="../images/xiaoyan.jpeg" alt="">
-                </div>
-                <div class="books-title">
-                    <h3 class="judul-buku">Apostle : The Backstory of Celestial</h3>
-                    <div class="title">
-                        <p>Jeremy Lincoln</p>
-                        <p>-</p>
-                        <p>Books Studio</p>
-                        <p>-</p>
-                        <p>2022</p>
-                    </div>
-                </div>
-            </div>
+                    <?php
+                }
+            }
+            ?>
         </div>
     </div>
     <div class="bookshelf">

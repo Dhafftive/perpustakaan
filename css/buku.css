@@ -8,8 +8,8 @@
 }
 /* == End Selected Sidebar == */
 .famous-card{
-    margin-top: 15vh;
-    width: 100%;
+    margin: 15vh auto 0;
+    width: 90%;
     display: flex;
     flex-direction: column;
     padding-left: 30px;
@@ -17,13 +17,11 @@
 .famous-card .card-header{
     font-family: var(--script);
     color: #289937;
-    margin-left: 50px;
 }
 .famous-card .card-container{
     display: flex;
     flex-direction: row;
     gap: 25px;
-    justify-content: space-evenly;
     margin-top: 20px;
 }
 .famous-card .card-container .card{
