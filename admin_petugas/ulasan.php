@@ -29,28 +29,22 @@
         $result_peminjaman = mysqli_query($koneksi, $query_peminjaman);
 
         // Default class
-        $action_class = "pinjam";
+        $btnClass = '';
+        $btnClass = "pinjam";
 
-        // Periksa apakah ada hasil peminjaman yang ditemukan
-        if(mysqli_num_rows($result_peminjaman) > 0) {
-            // Ambil data status_pinjam dan userID
-            $row_peminjaman = mysqli_fetch_assoc($result_peminjaman);
-            $status_pinjam = $row_peminjaman["status_pinjam"];
-            $userID_peminjaman = $row_peminjaman["userID"];
-            
-
-            // Periksa status_pinjam untuk menentukan class yang sesuai
-            if ($status_pinjam == "dipinjam" || $status_pinjam == "tertunda") {
-                $action_class = "dipinjam";
-            } elseif ($status_pinjam == "diajukan") {
-                // Jika userID peminjaman sama dengan user yang sedang login, tampilkan class diajukan, jika tidak, tampilkan class pinjam
-                if(isset($_SESSION['user_id']) && $_SESSION['user_id'] == $userID_peminjaman) {
-                    $action_class = "diajukan";
-                } else {
-                    $action_class = "pinjam";
+        if (mysqli_num_rows($result_peminjaman) > 0) {
+            while ($peminjamanData = mysqli_fetch_assoc($result_peminjaman)) {
+                if ($peminjamanData['status_pinjam'] == 'dipinjam' || $peminjamanData['status_pinjam'] == 'tertunda') {
+                    $btnClass = 'dipinjam';
+                } elseif ($peminjamanData['status_pinjam'] == 'diajukan') {
+                    if ($peminjamanData['userID'] == $_SESSION['user_id']) {
+                        $btnClass = 'diajukan';
+                    } else {
+                        $btnClass = 'pinjam';
+                    }
+                } elseif ($peminjamanData['status_pinjam'] == 'dikembalikan') {
+                    $btnClass = 'pinjam';
                 }
-            } elseif ($status_pinjam == "dikembalikan") {
-                $action_class = "pinjam";
             }
         }
 
@@ -79,12 +73,13 @@
                     </div>
                     <div class="books-action">
                          <!-- Tampilkan tombol sesuai dengan kelas yang ditentukan -->
-                         <?php if ($action_class === 'diajukan') : ?>
-                            <div class="<?php echo $action_class; ?>" onclick="batalkanPeminjaman(<?php echo $id_buku; ?>, <?php echo $_SESSION['user_id']; ?>)">Diajukan</div>
-                        <?php elseif ($action_class === 'dipinjam') : ?>
-                            <div class="<?php echo $action_class; ?>">Dipinjam</div>
+                        <!-- Tampilkan tombol sesuai dengan kelas yang ditentukan -->
+                        <?php if ($btnClass === 'diajukan') : ?>
+                            <div class="<?php echo $btnClass; ?>" onclick="batalkanPeminjaman(<?php echo $id_buku; ?>, <?php echo $_SESSION['user_id']; ?>)">Diajukan</div>
+                        <?php elseif ($btnClass === 'dipinjam') : ?>
+                            <div class="<?php echo $btnClass; ?>">Dipinjam</div>
                         <?php else : ?>
-                            <div class="<?php echo $action_class; ?>" onclick="pinjamBuku(<?php echo $id_buku; ?>, <?php echo $idperpus; ?>, <?php echo $_SESSION['user_id']; ?>)">Pinjam</div>
+                            <div class="<?php echo $btnClass; ?>" onclick="pinjamBuku(<?php echo $id_buku; ?>, <?php echo $idperpus; ?>, <?php echo $_SESSION['user_id']; ?>)">Pinjam</div>
                         <?php endif; ?>
                         <?php 
                             // Periksa apakah pengguna sudah login

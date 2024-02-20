@@ -163,7 +163,7 @@
                         $idperpus = $row["perpusID"];
 
                         // Periksa status peminjaman buku
-                        $status_pinjam = '';
+                        $btnClass = '';
                         $btnClass = 'pinjam-btn'; // Default button class
 
                         $peminjamanQuery = "SELECT status_pinjam, userID FROM peminjaman WHERE bukuID = $idbuku";

@@ -10,7 +10,7 @@
         $userID = $_POST['userID'];
 
         // Buat kueri SQL untuk menghapus data peminjaman dari tabel peminjaman
-        $query = "DELETE FROM peminjaman WHERE bukuID = $bukuID AND userID = $userID";
+        $query = "DELETE FROM peminjaman WHERE bukuID = $bukuID AND userID = $userID AND status_pinjam='diajukan'";
 
         if (mysqli_query($koneksi, $query)) {
             echo 'success'; // Kirim pesan kesuksesan
