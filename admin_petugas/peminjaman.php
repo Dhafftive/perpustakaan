@@ -1,6 +1,7 @@
 <?php
 // Koneksi ke database
 include '../koneksi.php';
+require 'function/cek_login.php';
 
 // Kueri SQL untuk mengambil data
 $ajukansql = "SELECT peminjaman.peminjamanID, peminjaman.userID, peminjaman.bukuID, buku.judul, buku.foto, user.namalengkap

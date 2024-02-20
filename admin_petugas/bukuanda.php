@@ -1,6 +1,7 @@
 <?php
 session_start();
 include '../koneksi.php';
+require 'function/cek_login.php';
 
 // Query untuk mendapatkan semua peminjaman user berdasarkan userID dari session
 $userID = $_SESSION['user_id'];
