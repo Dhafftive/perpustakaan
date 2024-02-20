@@ -1,5 +1,4 @@
 <?php
-session_start();
 include '../koneksi.php';
 require 'function/cek_login.php';
 
