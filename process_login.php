@@ -30,13 +30,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     // Redirect ke halaman sesuai dengan acces_level
                     switch ($_SESSION["acces_level"]) {
                         case "admin":
-                            header("Location: admin_petugas/dashboard.php");
+                            header("Location: admin_petugas/buku.php");
                             exit();
                         case "petugas":
                             header("Location: admin_petugas/peminjaman.php");
                             exit();
                         case "peminjam":
-                            header("Location: peminjam.php");
+                            header("Location: admin_petugas/buku.php");
                             exit();
                         default:
                             // Jika acces_level tidak valid, arahkan ke halaman login

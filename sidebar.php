@@ -1,3 +1,44 @@
+<?php
+
+// Inisialisasi variabel sidebar_items
+$sidebar_items = array();
+
+// Periksa apakah pengguna telah login dan memiliki tingkat akses
+if (isset($_SESSION['acces_level'])) {
+    $access_level = $_SESSION['acces_level'];
+
+    // Tentukan tampilan sidebar berdasarkan tingkat akses
+    switch ($access_level) {
+        case 'peminjam':
+            $sidebar_items = array(
+                array("selected-menu" => "buku-page", "page" => "buku.php", "icon" => "fa-solid fa-book", "description" => "Buku"),
+                array("selected-menu" => "koleksibuku-page", "page" => "koleksibuku.php", "icon" => "fa-solid fa-book-bookmark", "description" => "Koleksi"),
+                array("selected-menu" => "bukuanda-page", "page" => "bukuanda.php", "icon" => "fa-solid fa-book-open", "description" => "Buku Anda")
+            );
+            break;
+        case 'petugas':
+            $sidebar_items = array(
+                array("selected-menu" => "", "page" => "peminjaman.php", "icon" => "fa-solid fa-book-open-reader", "description" => "Peminjaman")
+            );
+            break;
+        case 'admin':
+            $sidebar_items = array(
+                array("selected-menu" => "datauser-page", "page" => "data_user.php", "icon" => "fa-regular fa-address-book", "description" => "Anggota"),
+                array("selected-menu" => "buku-page", "page" => "buku.php", "icon" => "fa-solid fa-book", "description" => "Buku"),
+                array("selected-menu" => "peminjaman-page", "page" => "peminjaman.php", "icon" => "fa-solid fa-book-open-reader", "description" => "Peminjaman"),
+                array("selected-menu" => "koleksibuku-page", "page" => "koleksibuku.php", "icon" => "fa-solid fa-book-bookmark", "description" => "Koleksi"),
+                array("selected-menu" => "bukuanda-page", "page" => "bukuanda.php", "icon" => "fa-solid fa-book-open", "description" => "Buku Anda"),
+                array("selected-menu" => "logs-page", "page" => "logs_data.php", "icon" => "fa-solid fa-circle-exclamation", "description" => "Log Aktivitas")
+            );
+            break;
+        default:
+            // Tambahkan penanganan default jika diperlukan
+            break;
+    }
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -48,48 +89,23 @@
                 </div>
             </div>
             <div class="main">
-                <div class="list-item dashboard-page">
+                <!-- <div class="list-item dashboard-page">
                     <a href="dashboard.php">
                         <div class="icon"><i class="fa-solid fa-chart-simple"></i></div>
                         <span class="description">Dashboard</span>
                     </a>
-                </div>
-                <div class="list-item datauser-page">
-                    <a href="data_user.php">
-                        <div class="icon"><i class="fa-regular fa-address-book"></i></div>
-                        <span class="description">Anggota</span>
-                    </a>
-                </div>
-                <div class="list-item buku-page">
-                    <a href="buku.php">
-                        <div class="icon"><i class="fa-solid fa-book"></i></div>
-                        <span class="description">Buku</span>
-                    </a>
-                </div>
-                <div class="list-item peminjaman-page">
-                    <a href="peminjaman.php">
-                        <div class="icon"><i class="fa-solid fa-book-open-reader"></i></div>
-                        <span class="description">Peminjaman</span>
-                    </a>
-                </div>
-                <div class="list-item koleksibuku-page">
-                    <a href="koleksibuku.php">
-                        <div class="icon"><i class="fa-solid fa-book-bookmark"></i></div>
-                        <span class="description">Koleksi</span>
-                    </a>
-                </div>
-                <div class="list-item bukuanda-page">
-                    <a href="bukuanda.php">
-                        <div class="icon"><i class="fa-solid fa-book-open"></i></div>
-                        <span class="description">Buku anda</span>
-                    </a>
-                </div>
-                <div class="list-item logs-page">
-                    <a href="logs_data.php">
-                        <div class="icon"><i class="fa-solid fa-circle-exclamation"></i></div>
-                        <span class="description">Log aktivitas</span>
-                    </a>
-                </div>
+                </div> -->
+                <?php
+                // Tampilkan item sidebar sesuai dengan tingkat akses
+                foreach ($sidebar_items as $item) {
+                    echo '<div class="list-item ' . $item["selected-menu"] . '">';
+                    echo '<a href="' . $item["page"] . '">';
+                    echo '<div class="icon"><i class="fa-solid ' . $item["icon"] . '"></i></div>';
+                    echo '<span class="description">' . $item["description"] . '</span>';
+                    echo '</a>';
+                    echo '</div>';
+                }
+                ?>
             </div>
         </div>
         <div class="main-content">

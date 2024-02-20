@@ -3,6 +3,9 @@
     include "../koneksi.php";
     include "function/cek_login.php";
 
+     // Tambahkan pengecekan tingkat akses pengguna di sini
+     $access_level = $_SESSION['acces_level'];
+
     // Buat kueri SQL untuk mengambil data rating dari ulasan buku untuk setiap buku dan menghitung rata-rata rating
     $query_rating = "SELECT bukuID, AVG(rating) AS avg_rating FROM ulasanbuku GROUP BY bukuID";
     // Eksekusi kueri
@@ -152,7 +155,10 @@
 
         <!-- Kategori -->
         <div class="books-hdr">
-            <div class="addcontent-icon" id="addkategori-icon" onclick="tambahKategoriSwal()"><i class="fa-solid fa-plus"></i></div><h1 class="header"> Kategori</h1>
+        <?php if ($access_level !== 'peminjam') : ?>
+            <div class="addcontent-icon" id="addkategori-icon" onclick="tambahKategoriSwal()"><i class="fa-solid fa-plus"></i></div>
+        <?php endif; ?>
+            <h1 class="header"> Kategori</h1>
             <div class="action-btn">
                 <button type="button" class="kategori" onclick="filterBooks(null)">All</button>
                 <?php
@@ -223,33 +229,39 @@
             ?>
                 <div class="books-content searchable" style="height: 320px; display: flex; flex-direction: column; justify-content: space-between; width: 140px" data-category-id="<?php echo $kategoriID; ?>">
                     <div class="books" style="witdh: 150px">
+                    <?php if ($access_level !== 'petugas') : ?>
                         <a href="ulasan.php?id=<?php echo $idbuku; ?>">
+                    <?php endif; ?>
                             <div class="cover-kategori" style="width: 140px; height: 200px; background-color: #ffb000; border-radius: 5px; overflow: hidden">
                                 <img src="../images/cover-buku/<?php echo $foto_buku; ?>" alt="" style="width: 100%; height: 100%; object-fit: cover">
                             </div>
+                    <?php if ($access_level !== 'petugas') : ?>
                         </a>
+                    <?php endif; ?>
                         <div class="books-title">
                             <p class="judul-buku" style="font-size: 13px"><?php echo $judul_buku; ?></p>
                             <p class="penulis" style="font-size: 12px"><?php echo $penulis_buku; ?></p>
                             <p class="penerbit" style="font-size: 12px; color: #aaa; font-family: var(--default)"><?php echo $penerbit_buku; ?></p>
                         </div>
                     </div>
-                    <div class="action-btn" style="display: flex; justify-content: space-between">
-                        <!-- Tampilkan tombol sesuai dengan kelas yang ditentukan -->
-                        <?php if ($btnClass === 'diajukan-btn') : ?>
-                                <div class="<?php echo $btnClass; ?>" onclick="<?php echo $onclickFunction; ?>">Diajukan</div>
-                            <?php elseif ($btnClass === 'dipinjam-btn') : ?>
-                                <div class="<?php echo $btnClass; ?>">Dipinjam</div>
-                            <?php else : ?>
-                                <div class="<?php echo $btnClass; ?>" onclick="pinjamBuku(<?php echo $idbuku; ?>, <?php echo $idperpus; ?>, <?php echo $_SESSION['user_id']; ?>)">Pinjam</div>
-                            <?php endif; ?>
-                            <!-- Tampilkan tombol 'bookmark' atau 'remove bookmark' sesuai keadaan -->
-                            <?php if (in_array($idbuku, $bookmarked_books)) : ?>
-                                <div class="bookmarked" onclick="removeBookmark(<?php echo $idbuku; ?>)"><i class="fa-solid fa-bookmark"></i></div>
-                            <?php else : ?>
-                                <div class="bookmark" onclick="addBookmark(<?php echo $idbuku; ?>)"><i class="fa-regular fa-bookmark"></i></div>
-                            <?php endif; ?>
-                    </div>
+                    <?php if ($access_level !== 'petugas') : ?>
+                        <div class="action-btn" style="display: flex; justify-content: space-between">
+                            <!-- Tampilkan tombol sesuai dengan kelas yang ditentukan -->
+                            <?php if ($btnClass === 'diajukan-btn') : ?>
+                                    <div class="<?php echo $btnClass; ?>" onclick="<?php echo $onclickFunction; ?>">Diajukan</div>
+                                <?php elseif ($btnClass === 'dipinjam-btn') : ?>
+                                    <div class="<?php echo $btnClass; ?>">Dipinjam</div>
+                                <?php else : ?>
+                                    <div class="<?php echo $btnClass; ?>" onclick="pinjamBuku(<?php echo $idbuku; ?>, <?php echo $idperpus; ?>, <?php echo $_SESSION['user_id']; ?>)">Pinjam</div>
+                                <?php endif; ?>
+                                <!-- Tampilkan tombol 'bookmark' atau 'remove bookmark' sesuai keadaan -->
+                                <?php if (in_array($idbuku, $bookmarked_books)) : ?>
+                                    <div class="bookmarked" onclick="removeBookmark(<?php echo $idbuku; ?>)"><i class="fa-solid fa-bookmark"></i></div>
+                                <?php else : ?>
+                                    <div class="bookmark" onclick="addBookmark(<?php echo $idbuku; ?>)"><i class="fa-regular fa-bookmark"></i></div>
+                                <?php endif; ?>
+                        </div>
+                    <?php endif; ?>
                 </div>
         <?php
                 }
@@ -262,7 +274,10 @@
 
         <!-- Daftar Buku -->
         <div class="books-hdr">
-            <div class="addcontent-icon" onclick="showAddbookPopup()" id="addbook-icon"><i class="fa-solid fa-plus"></i></div><h1 class="header">Daftar Buku</h1>
+        <?php if ($access_level !== 'peminjam') : ?>
+            <div class="addcontent-icon" onclick="showAddbookPopup()" id="addbook-icon"><i class="fa-solid fa-plus"></i></div>
+        <?php endif; ?>
+            <h1 class="header">Daftar Buku</h1>
         </div>
         <?php
             // Memasukkan ID buku yang telah di-bookmark ke dalam array
@@ -318,9 +333,13 @@
                 <div class="books">
                     <div class="books-cover">
                         <!-- Gunakan foto dari kolom 'foto' dalam tabel buku -->
-                        <a href="ulasan.php?id=<?php echo $idbuku; ?>"> <!-- Tambahkan link ke halaman ulasan.php dengan menyertakan bukuID sebagai parameter GET -->
-                            <img src="../images/cover-buku/<?php echo $foto_buku; ?>" alt="">
-                        </a>
+                        <?php if ($access_level !== 'petugas') : ?>
+                            <a href="ulasan.php?id=<?php echo $idbuku; ?>">
+                        <?php endif; ?> <!-- Tambahkan link ke halaman ulasan.php dengan menyertakan bukuID sebagai parameter GET -->
+                                <img src="../images/cover-buku/<?php echo $foto_buku; ?>" alt="">
+                        <?php if ($access_level !== 'petugas') : ?>
+                            </a>
+                        <?php endif; ?>
                     </div>
                     <div class="books-title">
                         <div class="judul-buku"><?php echo $judul_buku; ?></div>
@@ -328,22 +347,24 @@
                             <p class="penulis-buku"><?php echo $penulis_buku; ?></p>
                         </div>
                     </div>
-                    <div class="action-btn">
-                        <!-- Tampilkan tombol sesuai dengan kelas yang ditentukan -->
-                        <?php if ($btnClass === 'diajukan-btn') : ?>
-                            <div class="<?php echo $btnClass; ?>" onclick="<?php echo $onclickFunction; ?>">Diajukan</div>
-                        <?php elseif ($btnClass === 'dipinjam-btn') : ?>
-                            <div class="<?php echo $btnClass; ?>">Dipinjam</div>
-                        <?php else : ?>
-                            <div class="<?php echo $btnClass; ?>" onclick="pinjamBuku(<?php echo $idbuku; ?>, <?php echo $idperpus; ?>, <?php echo $_SESSION['user_id']; ?>)">Pinjam</div>
-                        <?php endif; ?>
-                        <!-- Tampilkan tombol 'bookmark' atau 'remove bookmark' sesuai keadaan -->
-                        <?php if (in_array($idbuku, $bookmarked_books)) : ?>
-                            <div class="bookmarked" onclick="removeBookmark(<?php echo $idbuku; ?>)"><i class="fa-solid fa-bookmark"></i></div>
-                        <?php else : ?>
-                            <div class="bookmark" onclick="addBookmark(<?php echo $idbuku; ?>)"><i class="fa-regular fa-bookmark"></i></div>
-                        <?php endif; ?>
-                    </div>
+                    <?php if ($access_level !== 'petugas') : ?>
+                        <div class="action-btn">
+                            <!-- Tampilkan tombol sesuai dengan kelas yang ditentukan -->
+                            <?php if ($btnClass === 'diajukan-btn') : ?>
+                                <div class="<?php echo $btnClass; ?>" onclick="<?php echo $onclickFunction; ?>">Diajukan</div>
+                            <?php elseif ($btnClass === 'dipinjam-btn') : ?>
+                                <div class="<?php echo $btnClass; ?>">Dipinjam</div>
+                            <?php else : ?>
+                                <div class="<?php echo $btnClass; ?>" onclick="pinjamBuku(<?php echo $idbuku; ?>, <?php echo $idperpus; ?>, <?php echo $_SESSION['user_id']; ?>)">Pinjam</div>
+                            <?php endif; ?>
+                            <!-- Tampilkan tombol 'bookmark' atau 'remove bookmark' sesuai keadaan -->
+                            <?php if (in_array($idbuku, $bookmarked_books)) : ?>
+                                <div class="bookmarked" onclick="removeBookmark(<?php echo $idbuku; ?>)"><i class="fa-solid fa-bookmark"></i></div>
+                            <?php else : ?>
+                                <div class="bookmark" onclick="addBookmark(<?php echo $idbuku; ?>)"><i class="fa-regular fa-bookmark"></i></div>
+                            <?php endif; ?>
+                        </div>
+                    <?php endif; ?>
                 </div>
             <?php
                     }
@@ -356,7 +377,7 @@
 
         </div>
     </div>
-
+<?php if ($access_level !== 'peminjam') : ?>
     <!-- Addbook Form (hidden) -->
     <div class="addbook-container" id="addbook-container">
         <div class="addbook-hdr">
@@ -431,7 +452,6 @@
             </div>
         </form>
     </div>
-
     <script>
         // Ambil elemen-elemen yang diperlukan
         const addbookIcon = document.getElementById('addbook-icon');
@@ -505,29 +525,7 @@
             }
         }
 
-        document.addEventListener('DOMContentLoaded', function() {
-            const container = document.querySelector('.books-kategori');
-            const kategoriScrollbar = new PerfectScrollbar(container);
-        });
         
-        function filterBooks(categoryId) {
-            // Menghapus kelas selected-category dari semua tombol kategori
-            $(".kategori").removeClass("selected-category");
-            
-
-            $(".searchable").each(function() {
-                if (categoryId === null || $(this).data('category-id') == categoryId) {
-                    $(this).show();
-                } else {
-                    $(this).hide();
-                }
-            });
-            
-            
-            // Menambahkan kelas selected-category ke tombol kategori yang dipilih
-            $("#kategori" + categoryId).addClass("selected-category");
-        }
-
     </script>
 
     <!-- script Library -->
@@ -536,15 +534,39 @@
     <script src="../js/pinjambuku.js"></script>
     <script src="../js/batalpinjam.js"></script>
     <script src="../js/ajaxbookmark.js"></script>
-    <script src="../libs/perfect-scrollbar/dist/perfect-scrollbar.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script>
         $(document).ready(function() {
             // Inisialisasi Nice Select pada dropdown kategori
             $('#kategori').niceSelect();
         });
     </script>
+<?php endif; ?>
+
+
+    <script>
+        function filterBooks(categoryId) {
+            // Menghapus kelas selected-category dari semua tombol kategori
+            $(".kategori").removeClass("selected-category");
+            $(".searchable").each(function() {
+                if (categoryId === null || $(this).data('category-id') == categoryId) {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
+            // Menambahkan kelas selected-category ke tombol kategori yang dipilih
+            $("#kategori" + categoryId).addClass("selected-category");
+        }
+
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const container = document.querySelector('.books-kategori');
+            const kategoriScrollbar = new PerfectScrollbar(container);
+        });
+    </script>
+    <script src="../libs/perfect-scrollbar/dist/perfect-scrollbar.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </body>
 </html>
