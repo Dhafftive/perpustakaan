@@ -135,7 +135,7 @@ if (!empty($_POST)) {
                                     </button>
                                     <div class="dropdown-menu">
                                         <div class="dropdown-option">
-                                            <a class="dropdown-item" href="javascript:void(0);">
+                                            <a class="dropdown-item" href="edit_user.php?userID=<?php echo $row['userID']?>">
                                                 <i class="fa-solid fa-wand-magic-sparkles"></i> Edit
                                             </a>
                                             <a class="dropdown-item" href="javascript:void(0);" onclick="deleteUser(<?php echo $row['userID']; ?>)">
