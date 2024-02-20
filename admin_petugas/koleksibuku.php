@@ -29,27 +29,28 @@ $result = mysqli_query($koneksi, $query);
                 // Query untuk memeriksa status pinjam buku berdasarkan bukuID dan userID
                 $peminjamanQuery = "SELECT * FROM peminjaman WHERE bukuID = {$row['bukuID']} AND userID = {$_SESSION['user_id']}";
                 $peminjamanResult = mysqli_query($koneksi, $peminjamanQuery);
+                $idbuku = $row['bukuID'];
 
-                // Inisialisasi tombol aksi sebagai "pinjam" secara default
-                $btnClass = 'pinjam';
+                // Periksa status peminjaman buku
+                $btnClass = '';
+                $btnClass = 'pinjam'; // Default button class
 
-                // Jika ditemukan peminjaman dengan bukuID tersebut
+                $peminjamanQuery = "SELECT status_pinjam, userID FROM peminjaman WHERE bukuID = $idbuku";
+                $peminjamanResult = mysqli_query($koneksi, $peminjamanQuery);
+
                 if (mysqli_num_rows($peminjamanResult) > 0) {
-                    $peminjamanData = mysqli_fetch_assoc($peminjamanResult);
-                    $status_pinjam = $peminjamanData['status_pinjam'];
-
-                    // Jika status pinjam adalah "diajukan" dan user yang login sesuai dengan userID pada peminjaman
-                    if ($status_pinjam === 'diajukan' && $_SESSION['user_id'] == $peminjamanData['userID']) {
-                        $btnClass = 'diajukan';
-                    }
-                } else {
-                    // Jika tidak ditemukan peminjaman, cek apakah ada buku dengan status "tertunda" atau "dipinjam"
-                    $cekPeminjamanQuery = "SELECT * FROM peminjaman WHERE bukuID = {$row['bukuID']} AND (status_pinjam = 'tertunda' OR status_pinjam = 'dipinjam')";
-                    $cekPeminjamanResult = mysqli_query($koneksi, $cekPeminjamanQuery);
-                    
-                    // Jika ditemukan peminjaman dengan status "tertunda" atau "dipinjam"
-                    if (mysqli_num_rows($cekPeminjamanResult) > 0) {
-                        $btnClass = 'dipinjam';
+                    while ($peminjamanData = mysqli_fetch_assoc($peminjamanResult)) {
+                        if ($peminjamanData['status_pinjam'] == 'dipinjam' || $peminjamanData['status_pinjam'] == 'tertunda') {
+                            $btnClass = 'dipinjam';
+                        } elseif ($peminjamanData['status_pinjam'] == 'diajukan') {
+                            if ($peminjamanData['userID'] == $_SESSION['user_id']) {
+                                $btnClass = 'diajukan';
+                            } else {
+                                $btnClass = 'pinjam';
+                            }
+                        } elseif ($peminjamanData['status_pinjam'] == 'dikembalikan') {
+                            $btnClass = 'pinjam';
+                        }
                     }
                 }
                 ?>
