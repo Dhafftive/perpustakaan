@@ -24,10 +24,11 @@ Proyek ini adalah sebuah aplikasi perpustakaan online yang memungkinkan pengguna
 - Toastr
 
 ## Instalasi
-1. Siapkan folder perpustakaan kosong lalu buka melalui VSCode (Jika menggunakan VSCode)
-2. Buka terminal pada VSCode atau buka git bash
+1. Siapkan folder perpustakaan kosong
+2. Buka terminal pada VSCode atau buka git bash lalu masuk ke folder
 3. Clone repositori ini ke perangkat lokal anda
    ```
    git clone https://github.com/Dhafftive/perpustakaan.git
    ```
-4. 
+4. Setelah ter-Install lalu impor db perpustakaan
+5. Masuk ke Index.php lalu login sebagai admin, user atau petugas
