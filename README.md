@@ -1,5 +1,5 @@
 # Website Bookshelf.Idn
-Proyek ini adalah sebuah aplikasi perpustakaan online yang memungkinkan pengguna untuk melakukan peminjaman buku secara online dan juga peminjaman buku secara offline di perpustakaan fisik.
+Proyek ini adalah sebuah aplikasi perpustakaan online yang memungkinkan pengguna untuk melakukan peminjaman buku secara online dan juga peminjaman buku secara offline di perpustakaan fisik. Aplikasi ini memungkinkan admin atau petugas untuk mendata dan memeriksa pengajuan peminjaman atau pengembalian buku, dan memeriksa status peminjaman buku. Setiap peminjaman memiliki label berdasarkan satusnya untuk memudahkan petugas memeriksa data peminjaman.
 
 ## Fitur Aplikasi
 - Pendaftaran pengguna baru dan login.
