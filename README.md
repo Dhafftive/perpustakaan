@@ -22,6 +22,7 @@ Proyek ini adalah sebuah aplikasi perpustakaan online yang memungkinkan pengguna
 - Nice-Select.js
 - Sweetalert2.css
 - Toastr
+- Perfect-scrollbar
 
 ## Instalasi
 1. Siapkan folder perpustakaan kosong
