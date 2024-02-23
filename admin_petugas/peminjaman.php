@@ -43,6 +43,7 @@ mysqli_close($koneksi);
 </head>
 <body>
     <?php require '../sidebar.php'?>
+    <?php require 'navbar.php'?>
     <div class="data-konfirmasi">
         <!-- Peminjaman -->
         <div class="peminjaman-container">

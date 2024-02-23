@@ -19,6 +19,7 @@ $result = mysqli_query($koneksi, $query);
 </head>
 <body>
     <?php require '../sidebar.php'; ?>
+    <?php require 'navbar.php'?>
     <h1 class="koleksi-header">Buku yang Disimpan</h1>
     <div class="koleksi-container">
         <?php if(mysqli_num_rows($result) == 0) : ?>

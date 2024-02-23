@@ -31,6 +31,7 @@
 </head>
 <body>
     <?php require '../sidebar.php'?>
+    <?php require 'navbar.php'?>
     <div class="card">
         <h5 class="card-header">Data Aktivitas</h5>
         <div class="table-responsive">

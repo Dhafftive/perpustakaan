@@ -11,5 +11,6 @@
 </head>
 <body>
     <?php require '../sidebar.php'?>
+    <?php require 'navbar.php'?>
 </body>
 </html>

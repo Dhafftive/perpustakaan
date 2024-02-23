@@ -93,6 +93,7 @@ if (!empty($_POST)) {
 </head>
 <body>
     <?php require '../sidebar.php' ?>
+    <?php require 'navbar.php'?>
     <div class="card">
         <h5 class="card-header">Data User <div class="user-add" onclick="showRegistrationForm()"><i class="fa-solid fa-user-plus"></i></div></h5>
         <div class="table-responsive">

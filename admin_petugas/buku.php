@@ -105,6 +105,7 @@
 </head>
 <body>
     <?php require '../sidebar.php'; ?>
+    <?php require 'navbar.php'?>
     <!-- Bagian HTML untuk menampilkan 3 buku dengan rating tertinggi -->
     <div class="famous-card">
         <h1 class="card-header">Buku Terpopuler</h1>
