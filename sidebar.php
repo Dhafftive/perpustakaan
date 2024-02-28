@@ -6,6 +6,7 @@ $sidebar_items = array();
 // Periksa apakah pengguna telah login dan memiliki tingkat akses
 if (isset($_SESSION['acces_level'])) {
     $access_level = $_SESSION['acces_level'];
+    $namalengkap = $_SESSION['namalengkap'];
 
     // Tentukan tampilan sidebar berdasarkan tingkat akses
     switch ($access_level) {
