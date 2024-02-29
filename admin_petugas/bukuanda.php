@@ -50,7 +50,7 @@ $peminjamanResult = mysqli_query($koneksi, $peminjamanQuery);
                                 <div class="books-content">
                                     <div class="books">
                                         <div class="books-cover">
-                                            <a href="ulasanbuku.php?bukuID=<?= $rowBuku['bukuID'] ?>">
+                                            <a href="ulasan.php?id=<?php echo $rowBuku['bukuID'] ?>">
                                                 <img src="../images/cover-buku/<?= $rowBuku['foto'] ?>" alt="">
                                             </a>
                                         </div>
@@ -88,7 +88,7 @@ $peminjamanResult = mysqli_query($koneksi, $peminjamanQuery);
                             <div class="books-content">
                                 <div class="books">
                                     <div class="books-cover">
-                                        <a href="ulasanbuku.php?bukuID=<?= $rowBuku['bukuID'] ?>">
+                                        <a href="ulasan.php?id=<?php echo $rowBuku['bukuID'] ?>">
                                             <img src="../images/cover-buku/<?= $rowBuku['foto'] ?>" alt="">
                                         </a>
                                     </div>
