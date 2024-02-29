@@ -4,7 +4,15 @@ include "function/cek_login.php";
 
 $query = "SELECT u.userID, p.perpusID, u.username, p.nama_perpus, u.namalengkap, u.email, u.alamat, u.acces_level
           FROM user u
-          INNER JOIN perpus p ON p.perpusID = u.perpusID";
+          INNER JOIN perpus p ON p.perpusID = u.perpusID
+          ORDER BY 
+            CASE 
+                WHEN u.acces_level = 'super_admin' THEN 1
+                WHEN u.acces_level = 'admin' THEN 2
+                WHEN u.acces_level = 'petugas' THEN 3
+                WHEN u.acces_level = 'peminjam' THEN 4
+                ELSE 5
+            END";
 $result = mysqli_query($koneksi, $query);
 if (!$result) {
     die('Error in SQL query: ' . mysqli_error($koneksi));
@@ -118,9 +126,13 @@ if (!empty($_POST)) {
                             <td><?php echo $row['email']; ?></td>
                             <td><?php echo $row['alamat']; ?></td>
                             <td>
-                                <?php if ($row['acces_level'] == 'admin') { ?>
+                                <?php if ($row['acces_level'] == 'admin' OR $row['acces_level'] == 'super_admin') { ?>
                                     <div class="admin-label">
+                                    <?php if ($row['acces_level'] == 'super_admin') { ?>
+                                        <p class="role-admin">Master</p>
+                                    <?php } elseif  ($row['acces_level'] == 'admin') { ?>
                                         <p class="role-admin">Admin</p>
+                                    <?php } ?>
                                     </div>
                                 <?php } elseif ($row['acces_level'] == 'petugas') { ?>
                                     <div class="petugas-label">
@@ -133,6 +145,7 @@ if (!empty($_POST)) {
                                 <?php } ?>
                             </td>
                             <td>
+                            <?php if($row['acces_level'] != 'super_admin') : ?>
                                <div class="dropdown">
                                     <button type="button">
                                         <i class="fa-solid fa-ellipsis"></i>
@@ -148,6 +161,7 @@ if (!empty($_POST)) {
                                         </div>
                                     </div>
                                 </div>
+                            <?php endif; ?>
                             </td>
                         </tr>
                     <?php

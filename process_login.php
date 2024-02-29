@@ -32,6 +32,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         case "admin":
                             header("Location: admin_petugas/buku.php");
                             exit();
+                        case "super_admin":
+                            header("Location: admin_petugas/buku.php");
+                            exit();
                         case "petugas":
                             header("Location: admin_petugas/peminjaman.php");
                             exit();

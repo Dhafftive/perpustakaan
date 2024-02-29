@@ -22,7 +22,7 @@ if (isset($_SESSION['acces_level'])) {
                 array("selected-menu" => "peminjaman-page", "page" => "peminjaman.php", "icon" => "fa-solid fa-book-open-reader", "description" => "Peminjaman")
             );
             break;
-        case 'admin':
+        case 'admin' OR 'super_admin':
             $sidebar_items = array(
                 array("selected-menu" => "datauser-page", "page" => "data_user.php", "icon" => "fa-regular fa-address-book", "description" => "Anggota"),
                 array("selected-menu" => "buku-page", "page" => "buku.php", "icon" => "fa-solid fa-book", "description" => "Buku"),

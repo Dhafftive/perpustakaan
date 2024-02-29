@@ -8,7 +8,7 @@
                 </div>
                 <div class="label">
                     <?php echo $namalengkap; ?>
-                    <?php if ($access_level == 'admin') : ?>
+                    <?php if ($access_level == 'admin' OR $access_level == 'super_admin') : ?>
                         <i class="fa-solid fa-crown"></i>
                     <?php elseif ($access_level == 'petugas') : ?>
                         <i class="fa-solid fa-user-tie"></i>
