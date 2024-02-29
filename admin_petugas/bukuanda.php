@@ -4,10 +4,6 @@ require 'function/cek_login.php';
 
 // Query untuk mendapatkan semua peminjaman user berdasarkan userID dari session
 $userID = $_SESSION['user_id'];
-$pengajuanQuery = "SELECT * FROM peminjaman WHERE userID = $userID";
-$pengajuanResult = mysqli_query($koneksi, $pengajuanQuery);
-// Query untuk mendapatkan semua peminjaman user berdasarkan userID dari session
-$userID = $_SESSION['user_id'];
 $pinjamQuery = "SELECT * FROM peminjaman WHERE userID = $userID";
 $pinjamResult = mysqli_query($koneksi, $pinjamQuery);
 // Query untuk mendapatkan semua peminjaman yang telah dikembalikan oleh user
@@ -29,47 +25,9 @@ $peminjamanResult = mysqli_query($koneksi, $peminjamanQuery);
 </head>
 <body>
     <?php include '../sidebar.php'; ?>
+    <?php include 'navbar.php'; ?>
 
     <div class="data-buku">
-        <!-- Buku yang sedang diajukan -->
-        <div class="pengajuan-cont">
-            <div class="pengajuan-hdr">
-                <h1 class="header">Buku yang Diajukan</h1>
-            </div>
-            <div class="pengajuan">
-                <?php while ($rowPengajuan = mysqli_fetch_assoc($pengajuanResult)): ?>
-                    <?php if ($rowPengajuan['status_pinjam'] === 'diajukan'): ?>
-                        <?php
-                        // Ambil informasi buku dari tabel buku berdasarkan bukuID
-                        $bukuID = $rowPengajuan['bukuID'];
-                        $bukuQuery = "SELECT * FROM buku WHERE bukuID = $bukuID";
-                        $bukuResult = mysqli_query($koneksi, $bukuQuery);
-                        ?>
-                        <?php if (mysqli_num_rows($bukuResult) > 0): ?>
-                            <?php while ($rowBuku = mysqli_fetch_assoc($bukuResult)): ?>
-                                <div class="books-content">
-                                    <div class="books">
-                                        <div class="books-cover">
-                                            <a href="ulasan.php?id=<?php echo $rowBuku['bukuID'] ?>">
-                                                <img src="../images/cover-buku/<?= $rowBuku['foto'] ?>" alt="">
-                                            </a>
-                                        </div>
-                                        <div class="books-title">
-                                            <div class="judul"><?= $rowBuku['judul'] ?></div>
-                                            <div class="penulis"><?= $rowBuku['penulis'] ?></div>
-                                        </div>
-                                    </div>
-                                    <div class="action-btn">
-                                        <div class="batalkan-btn" onclick="batalkanPeminjaman(<?php echo $rowBuku['bukuID']; ?>, <?php echo $_SESSION['user_id']; ?>)">Batalkan</div>
-                                    </div>
-                                </div>
-                            <?php endwhile; ?>
-                        <?php endif; ?>
-                    <?php endif; ?>
-                <?php endwhile; ?>
-            </div>
-        </div>
-    
         <!-- Buku yang sedang dipinjam -->
         <div class="yourbook-cont">
             <div class="yourbook-hdr">
