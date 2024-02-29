@@ -35,7 +35,7 @@
 }
 .pengajuan{
     width: 75vw;
-    height: 37vh;
+    height: 38vh;
     
 }
 .yourbook{
@@ -52,13 +52,13 @@
 }
 .pengajuan .books-content{
     border-radius: 5px;
-    height: 34vh;
+    height: 37vh;
     padding: 5px;
     width: 130px;
 }
 .yourbook .books-content{
     border-radius: 7px;
-    height: 49vh;
+    height: 52vh;
     padding: 5px;
     width: 175px;   
 }
@@ -93,10 +93,10 @@
     color: #1a1a1a;
 }
 .pengajuan .books-content .books .books-title .judul{
-    font-size: 11px;
+    font-size: 10px;
 }
 .yourbook .books-content .books .books-title .judul{
-    font-size: 13px;
+    font-size: 12px;
 }
 .pengajuan .books-content .books .books-title .penulis,
 .yourbook .books-content .books .books-title .penulis{

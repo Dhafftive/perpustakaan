@@ -30,7 +30,7 @@
     /* flex-direction: row; */
     align-items: center;
     padding: auto;
-    height: 40px;
+    height: 35px;
 }
 .sidebar .header .list-item a{
     display: flex;
@@ -48,7 +48,7 @@
     padding: 10px;
 }
 .sidebar .main .list-item .description{
-    font-size: 16px;
+    font-size: 14px;
     text-align: center;
     margin: auto 0 auto 15px;
 }
@@ -57,7 +57,7 @@
 }
 .sidebar .main .list-item .icon i{
     color: #FFB000;
-    font-size: 22px;
+    font-size: 18px;
 }
 .sidebar .main .list-item a{
     display: flex;

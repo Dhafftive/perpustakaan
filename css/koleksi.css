@@ -16,12 +16,12 @@
 .koleksi-container{
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 40px 70px;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 40px 20px;
     padding: 20px 50px;
 }
 .koleksi-container .buku{
-    height: 430px;
+    height: 320px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -30,7 +30,7 @@
     border-radius: 10px;
 }
 .koleksi-container .buku .cover-book{
-    height: 300px;
+    height: 200px;
     overflow: hidden;
     border-radius: 5px;
     background-color: aqua;
@@ -44,8 +44,8 @@
     margin-top: 10px;
 }
 .book-content .books-title .judul {
-    font-size: 15px;
-    line-height: 17px;
+    font-size: 12px;
+    line-height: 14px;
     font-weight: 700;
     font-family: var(--script);
 }
@@ -54,7 +54,7 @@
     font-family: var(--default);
     font-weight: 600;
     color: #aaaaaa;
-    font-size: 14px;
+    font-size: 12px;
 }
 .buku .action-btn {
     display: flex;
@@ -62,17 +62,18 @@
     justify-content: space-between;
     font-family: var(--default);
     color: #fff;
+    font-size: 12px;
 }
 .buku .action-btn .dikembalikan,
 .buku .action-btn .dipinjam{
-    padding: 7px 15px;
+    padding: 7px 10px;
     background-color: #eee;
     color: #bbbb;
     border-radius: 5px;
 }
 .buku .action-btn .diajukan,
 .buku .action-btn .pinjam{
-    padding: 7px 15px;
+    padding: 7px 10px;
     background-color: var(--secondary);
     border-radius: 5px;
 }
