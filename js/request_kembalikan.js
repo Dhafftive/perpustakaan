@@ -12,7 +12,7 @@ function kembalikanPeminjaman(peminjamanID) {
         if (result.isConfirmed) {
             // Kirim permintaan Ajax untuk memperbarui status peminjaman
             var xhr = new XMLHttpRequest();
-            xhr.open("POST", "../admin_petugas/function/request_kembalikan.php", true);
+            xhr.open("POST", "../admin_petugas/function/prosespengembalian_manual.php", true);
             xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
             xhr.onreadystatechange = function () {
                 if (xhr.readyState === 4 && xhr.status === 200) {

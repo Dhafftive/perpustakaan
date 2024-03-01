@@ -1,12 +1,3 @@
-/* Selected Sidebar */
-.sidebar .main .list-item:nth-child(3){
-    background-color: #5c8063;
-}
-.sidebar .main .list-item:nth-child(3) .icon i,
-.sidebar .main .list-item:nth-child(3) a{
-    color: #fff;
-}
-/* == End Selected Sidebar == */
 .main-content{
     background-color: #f9f9f9!important;
     border-left: 2px solid #e4e4e4;
@@ -17,11 +8,11 @@
     flex-direction: row;
 }
 .cover-book{
-    padding: 0 4vw 0 3vw;
+    padding: 0 3vw 0 3vw;
 }
 .img-container{
-    width: 280px;
-    height: 400px;
+    width: 220px;
+    height: 340px;
     border: 2px solid #FFB000;
     border-radius: 10px;
     overflow: hidden;
@@ -35,18 +26,18 @@
     font-family: var(--script);
 }
 .book-content .books-desc .judul{
-    margin-top: 10px;
-    font-size: 34px;
+    font-size: 30px;
     color: #1a1a1a;
 }
 .book-content .books-desc .penulis{
     color: #1a1a1a;
     font-weight: 600;
+    font-size: 16px;
 }
 .book-content .books-desc .penerbit{
     font-weight: 400;
     color: #afafaf;
-    font-size: 14px;
+    font-size: 12px;
     line-height: 19px;
 }
 .book-content .books-action{
@@ -58,20 +49,20 @@
     margin-top: 20px;
     padding: 5px 0;
 }
+.books-action .habis,
 .books-action .dipinjam,
-.books-action .diajukan,
 .books-action .pinjam,
 .books-action .bookmark{
     padding: 8px 20px;
     border-radius: 7px;
     transition: .3s;
 }
+.books-action .habis,
 .books-action .dipinjam{
     background-color: #afafaf;
     color: #505050;
 }
 .books-action .pinjam,
-.books-action .diajukan,
 .books-action .bookmark{
     background-color: #FFB000;
 }
@@ -88,6 +79,7 @@
     color: #505050;
     width: 55vw;
     line-height: 20px;
+    font-size: 14px;
 }
 .ulasan-container{
     margin-top: 10vh;
@@ -136,6 +128,6 @@
     font-style: italic;
     font-weight: 400;
     color: #777;
-    font-size: 14px;
+    font-size: 12px;
     margin: 20px 10px;
 }

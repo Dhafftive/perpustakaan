@@ -16,12 +16,12 @@
 .koleksi-container{
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
     gap: 40px 20px;
     padding: 20px 50px;
 }
 .koleksi-container .buku{
-    height: 320px;
+    height: 340px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -62,16 +62,15 @@
     justify-content: space-between;
     font-family: var(--default);
     color: #fff;
-    font-size: 12px;
+    font-size: 14px;
 }
-.buku .action-btn .dikembalikan,
+.buku .action-btn .habis,
 .buku .action-btn .dipinjam{
     padding: 7px 10px;
     background-color: #eee;
-    color: #bbbb;
+    color: #a1a1a1;
     border-radius: 5px;
 }
-.buku .action-btn .diajukan,
 .buku .action-btn .pinjam{
     padding: 7px 10px;
     background-color: var(--secondary);

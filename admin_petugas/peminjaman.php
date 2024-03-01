@@ -8,23 +8,15 @@ $ajukansql = "SELECT peminjaman.peminjamanID, peminjaman.userID, peminjaman.buku
         FROM peminjaman
         INNER JOIN buku ON peminjaman.bukuID = buku.bukuID
         INNER JOIN user ON peminjaman.userID = user.userID
-        WHERE peminjaman.status_pinjam = 'diajukan'";
+        WHERE peminjaman.status_pinjam = 'dipinjam'";
 // Eksekusi kueri
 $ajukanresult = mysqli_query($koneksi, $ajukansql);
-// Kueri SQL untuk mengambil data
-$sqltertunda = "SELECT peminjaman.peminjamanID, peminjaman.userID, peminjaman.bukuID, buku.judul, buku.foto, user.namalengkap
-        FROM peminjaman
-        INNER JOIN buku ON peminjaman.bukuID = buku.bukuID
-        INNER JOIN user ON peminjaman.userID = user.userID
-        WHERE peminjaman.status_pinjam = 'tertunda'";
-// Eksekusi kueri
-$tertundaresult = mysqli_query($koneksi, $sqltertunda);
 // Kueri SQL untuk mengambil data
 $peminjamansql = "SELECT peminjaman.peminjamanID, peminjaman.userID, peminjaman.tanggal_pinjam, peminjaman.tanggal_kembali, peminjaman.status_pinjam, peminjaman.bukuID, buku.judul, buku.foto, user.namalengkap
         FROM peminjaman
         INNER JOIN buku ON peminjaman.bukuID = buku.bukuID
         INNER JOIN user ON peminjaman.userID = user.userID
-        WHERE peminjaman.status_pinjam != 'diajukan'";
+        WHERE peminjaman.status_pinjam = 'dipinjam' OR peminjaman.status_pinjam = 'dikembalikan'";
 // Eksekusi kueri
 $resultPeminjaman = mysqli_query($koneksi, $peminjamansql);
 
@@ -63,39 +55,11 @@ mysqli_close($koneksi);
                                 <div class="peminjam"><?php echo $rowpengajuan['namalengkap']; ?></div>
                             </div>
                         </div>
-                        <div class="konfirmasi-btn" onclick="konfirmasiPeminjaman(<?php echo $rowpengajuan['peminjamanID']; ?>)">Konfirmasi</div>
 
                     </div>
-                    <?php endwhile; ?>
-            <?php else : ?>
-                <div class="diajukan-nothing">Tidak ada peminjaman diajukan</div>
-            <?php endif; ?>
-            </div>
-        </div>
-
-        <!-- Pengembalian -->
-        <div class="pengembalian-container">
-            <div class="kembalikan-hdr">
-                <h1 class="header">Pengembalian</h1>
-            </div>
-            <div class="kembalikan-confirm">
-            <?php if (mysqli_num_rows($tertundaresult) > 0) : ?>
-                <?php while ($rowtertunda = mysqli_fetch_assoc($tertundaresult)) : ?>
-                <div class="buku-content">
-                    <div class="buku">
-                        <div class="cover-img">
-                            <img src="../images/cover-buku/<?php echo $rowtertunda['foto']; ?>" alt="">
-                        </div>
-                        <div class="book-title">
-                            <div class="judul"><?php echo $rowtertunda['judul']; ?></div>
-                            <div class="peminjam"><?php echo $rowtertunda['namalengkap']; ?></div>
-                        </div>
-                    </div>
-                    <div class="konfirmasi-btn" onclick="konfirmasiPengembalian(<?php echo $rowtertunda['peminjamanID']; ?>)">Konfirmasi</div>
-                </div>
                 <?php endwhile; ?>
             <?php else : ?>
-                <div class="tertunda-nothing">Belum ada buku dikembalikan</div>
+                <div class="diajukan-nothing">Tidak ada peminjaman diajukan</div>
             <?php endif; ?>
             </div>
         </div>
@@ -122,9 +86,7 @@ mysqli_close($koneksi);
                             <?php
                                 // Determine status label based on status_pinjam
                                 $statusLabel = '';
-                                if ($row['status_pinjam'] === 'tertunda') {
-                                    $statusLabel = '<div class="tertunda-label">Tertunda</div>';
-                                } elseif ($row['status_pinjam'] === 'dikembalikan') {
+                                if ($row['status_pinjam'] === 'dikembalikan') {
                                     $statusLabel = '<div class="dikembalikan-label">Dikembalikan</div>';
                                 } elseif ($row['status_pinjam'] === 'dipinjam') {
                                     $statusLabel = '<div class="dipinjam-label">Dipinjam</div>';
@@ -294,16 +256,11 @@ mysqli_close($koneksi);
         });
 
         document.addEventListener('DOMContentLoaded', function() {
-            const container = document.querySelector('.kembalikan-confirm');
-            const kembalikanScrollbar = new PerfectScrollbar(container);
-        });
-        document.addEventListener('DOMContentLoaded', function() {
             const container = document.querySelector('.table-responsive');
             const tableScrollbar = new PerfectScrollbar(container);
         });
 
     </script>
-    <script src="../js/konfirmasipengembalian.js"></script>
     <!-- SweetAlert2 JS -->
     <script src="../libs/perfect-scrollbar/dist/perfect-scrollbar.js"></script>
     <script>

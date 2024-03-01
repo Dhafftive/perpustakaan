@@ -171,6 +171,7 @@
     margin: 5px 0;
     position: relative;
 }
+.action-btn .habis-btn,
 .action-btn .dipinjam-btn{
     font-family: var(--default);
     color: #999999;
@@ -178,7 +179,6 @@
     padding: 7px 15px;
     border-radius: 5px;
 }
-.action-btn .diajukan-btn,
 .action-btn .pinjam-btn{
     font-family: var(--default);
     color: #fff;
@@ -272,12 +272,12 @@
 
 .addbook-container{
     display: none;
-    width: 92vw;
+    width: 96vw;
     height: 90vh;
     background-color: #fff;
     position: absolute;
     z-index: 992;
-    margin: 4vh 4vw;
+    margin: 4vh 2vw;
     border-radius: 10px;
     padding: 30px 50px;
 }

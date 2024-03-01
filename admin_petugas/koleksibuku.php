@@ -34,25 +34,35 @@ $result = mysqli_query($koneksi, $query);
 
                 // Periksa status peminjaman buku
                 $btnClass = '';
-                $btnClass = 'pinjam'; // Default button class
 
-                $peminjamanQuery = "SELECT status_pinjam, userID FROM peminjaman WHERE bukuID = $idbuku";
+                // Periksa status peminjaman buku dan stok buku
+                $btnClass = 'pinjam'; // Default button class
+                $stokQuery = "SELECT stok FROM buku WHERE bukuID = $idbuku";
+                $stokResult = mysqli_query($koneksi, $stokQuery);
+
+                if (mysqli_num_rows($stokResult) > 0) {
+                    $stokData = mysqli_fetch_assoc($stokResult);
+                    $stok = $stokData['stok'];
+                }
+
+                $peminjamanQuery = "SELECT status_pinjam, userID FROM peminjaman WHERE bukuID = $idbuku  AND userID = $user_id";
                 $peminjamanResult = mysqli_query($koneksi, $peminjamanQuery);
 
                 if (mysqli_num_rows($peminjamanResult) > 0) {
+                    $btnClass = 'pinjam'; // Set default button class
                     while ($peminjamanData = mysqli_fetch_assoc($peminjamanResult)) {
-                        if ($peminjamanData['status_pinjam'] == 'dipinjam' || $peminjamanData['status_pinjam'] == 'tertunda') {
+                        if ($peminjamanData['status_pinjam'] == 'dipinjam') {
                             $btnClass = 'dipinjam';
-                        } elseif ($peminjamanData['status_pinjam'] == 'diajukan') {
-                            if ($peminjamanData['userID'] == $_SESSION['user_id']) {
-                                $btnClass = 'diajukan';
-                            } else {
-                                $btnClass = 'pinjam';
-                            }
+                            // Jika status dipinjam ditemukan, keluar dari loop
+                            break;
                         } elseif ($peminjamanData['status_pinjam'] == 'dikembalikan') {
                             $btnClass = 'pinjam';
                         }
                     }
+                }
+
+                if ($btnClass == 'pinjam' && $stok == 0) {
+                    $btnClass = 'habis';
                 }
                 ?>
                 <script>
@@ -71,10 +81,10 @@ $result = mysqli_query($koneksi, $query);
                         </div>
                     </div>
                     <div class="action-btn">
-                        <?php if ($btnClass === 'diajukan') : ?>
-                            <div class="<?php echo $btnClass; ?>" onclick="batalkanPeminjaman(<?php echo $row['bukuID']; ?>, <?php echo $_SESSION['user_id']; ?>)">Diajukan</div>
-                        <?php elseif ($btnClass === 'dipinjam') : ?>
+                        <?php if ($btnClass === 'dipinjam') : ?>
                             <div class="<?php echo $btnClass; ?>">Dipinjam</div>
+                        <?php elseif ($btnClass === 'habis') : ?>
+                            <div class="<?php echo $btnClass; ?>">Stok Habis</div>
                         <?php else : ?>
                             <div class="<?php echo $btnClass; ?>" onclick="pinjamBuku(<?php echo $row['bukuID']; ?>, <?php echo $row['perpusID']; ?>, <?php echo $_SESSION['user_id']; ?>)">Pinjam</div>
                         <?php endif; ?>
@@ -86,8 +96,7 @@ $result = mysqli_query($koneksi, $query);
     </div>
 
     <!-- Peminjaman JS -->
-    <script src="../js/batalpinjam.js"></script>
-    <script src="../js/pinjambuku.js"></script>
+    <script src="../js/pinjam-buku.js"></script>
     <!-- Bookmark JS -->
     <script src="../js/ajaxbookmark.js"></script>
 </body>
