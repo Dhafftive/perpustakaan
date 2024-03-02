@@ -8,7 +8,7 @@
 }
 /* == End Selected Sidebar == */
 .famous-card{
-    margin: 15vh auto 0;
+    margin: 10vh auto 0;
     width: 90%;
     display: flex;
     flex-direction: column;
@@ -372,8 +372,9 @@
 .sinopsis-input textarea {
     margin-top: 10px;
     margin-left: 10px;
+    margin-bottom: 5px;
     width: 100%;
-    height: 90%;
+    height: 70%;
     padding: 15px;
     font-family: var(--default);
     font-size: 14px;
@@ -460,4 +461,38 @@
 .batalkan{
     background-color: #505050;
     color: #fff;
+}
+.buku-file{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 15px;
+    justify-content: space-between;
+}
+.custom-file-input {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    padding: 7px 12px;
+    border-radius: 5px;
+}
+
+.custom-file-input input[type="file"] {
+    position: absolute;
+    font-size: 20px;
+    right: 0;
+    top: 0;
+    opacity: 0;
+}
+
+.file-name {
+    width: 220px;
+    margin-left: 10px;
+    font-family: var(--default);
+    font-size: 14px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }

@@ -3,8 +3,8 @@
     include "../koneksi.php";
     include "function/cek_login.php";
 
-     // Tambahkan pengecekan tingkat akses pengguna di sini
-     $access_level = $_SESSION['acces_level'];
+    // Tambahkan pengecekan tingkat akses pengguna di sini
+    $access_level = $_SESSION['acces_level'];
 
     // Buat kueri SQL untuk mengambil data rating dari ulasan buku untuk setiap buku dan menghitung rata-rata rating
     $query_rating = "SELECT bukuID, AVG(rating) AS avg_rating FROM ulasanbuku GROUP BY bukuID";
@@ -30,7 +30,7 @@
     $query_perpus = "SELECT perpusID FROM perpus"; // Anda bisa menyesuaikan kueri ini sesuai dengan kebutuhan.
     $result_perpus = mysqli_query($koneksi, $query_perpus);
 
-    // Memeriksa apakah form telah disubmit
+    // Periksa apakah ada form yang di-submit
     if (!empty($_POST)) {
         // Tangkap data dari AJAX
         $judul = $_POST['judul'];
@@ -42,46 +42,64 @@
         $sinopsis = $_POST['sinopsis'];
         $username = $_SESSION['username'];
         $stok = $_POST['stok-buku'];
-
-        
-        // Tentukan direktori tujuan untuk menyimpan file cover
+    
+        // Tentukan direktori tujuan untuk menyimpan file
         $targetDir = "../images/cover-buku/";
-
+    
         // Dapatkan nama file dan path sementara dari file yang diunggah
-        $nama_file = $_FILES['cover']['name'];
-        $tmp_file = $_FILES['cover']['tmp_name'];
-
+        $nama_file_cover = $_FILES['cover']['name'];
+        $tmp_file_cover = $_FILES['cover']['tmp_name'];
+    
         // Gabungkan nama file dengan direktori tujuan untuk membentuk path file yang lengkap
-        $targetFile = $targetDir . basename($nama_file);
-
-        if (move_uploaded_file($tmp_file, $targetFile)) {
-            // Query untuk memasukkan data ke dalam tabel buku
-            $query = "INSERT INTO buku (judul, penulis, penerbit, kategoriID, perpusID, tahunterbit, foto, deskripsi, stok) 
-                    VALUES ('$judul', '$penulis', '$penerbit', '$kategoriID', '$perpusID', '$tahun_terbit', '$nama_file', '$sinopsis', '$stok')";
-
-            if (mysqli_query($koneksi, $query)) {
-                // Tambahkan logs aktivitas
-                $logs = "INSERT INTO c_logs (detail_histori) VALUES ('User $username telah menambahkan buku berjudul $judul')";
-                if (!mysqli_query($koneksi, $logs)) {
-                    // Jika ada kesalahan, kirim pesan kesalahan logs
-                    echo 'Error logs: ' . mysqli_error($koneksi);
-                    exit;
+        $targetFileCover = $targetDir . basename($nama_file_cover);
+    
+        // Tentukan direktori tujuan untuk menyimpan file buku
+        $targetDirBuku = "../books-library/";
+    
+        // Dapatkan nama file dan path sementara dari file buku yang diunggah
+        $nama_file_buku = $_FILES['bukuFile']['name'];
+        $tmp_file_buku = $_FILES['bukuFile']['tmp_name'];
+    
+        // Gabungkan nama file dengan direktori tujuan untuk membentuk path file yang lengkap
+        $targetFileBuku = $targetDirBuku . basename($nama_file_buku);
+    
+        // Periksa dan pindahkan file cover buku ke direktori tujuan
+        if (move_uploaded_file($tmp_file_cover, $targetFileCover)) {
+            // Pindahkan file buku ke direktori tujuan
+            if (move_uploaded_file($tmp_file_buku, $targetFileBuku)) {
+                // Query untuk memasukkan data ke dalam tabel buku
+                $query = "INSERT INTO buku (judul, penulis, penerbit, kategoriID, perpusID, tahunterbit, foto, deskripsi, stok, isibuku) 
+                        VALUES ('$judul', '$penulis', '$penerbit', '$kategoriID', '$perpusID', '$tahun_terbit', '$nama_file_cover', '$sinopsis', '$stok', '$nama_file_buku')";
+    
+                if (mysqli_query($koneksi, $query)) {
+                    // Tambahkan logs aktivitas
+                    $logs = "INSERT INTO c_logs (detail_histori) VALUES ('User $username telah menambahkan buku berjudul $judul')";
+                    if (!mysqli_query($koneksi, $logs)) {
+                        // Jika ada kesalahan, kirim pesan kesalahan logs
+                        echo 'Error logs: ' . mysqli_error($koneksi);
+                        exit;
+                    }
+    
+                    // Jika berhasil disimpan, kirim respons 'success'
+                    echo 'success';
+                    exit; // Berhenti di sini untuk menghindari eksekusi kode berikutnya
+                } else {
+                    // Jika ada kesalahan, kirim pesan kesalahan
+                    echo 'Error buku: ' . mysqli_error($koneksi);
+                    exit; // Berhenti di sini untuk menghindari eksekusi kode berikutnya
                 }
-
-                // Jika berhasil disimpan, kirim respons 'success'
-                echo 'success';
-                exit; // Berhenti di sini untuk menghindari eksekusi kode berikutnya
             } else {
-                // Jika ada kesalahan, kirim pesan kesalahan
-                echo 'Error buku: ' . mysqli_error($koneksi);
+                // Jika terjadi kesalahan saat mengunggah file buku, tampilkan pesan kesalahan
+                echo 'Error uploading buku';
                 exit; // Berhenti di sini untuk menghindari eksekusi kode berikutnya
             }
         } else {
-            // Jika terjadi kesalahan saat mengunggah gambar, tampilkan pesan kesalahan
-            echo 'Error uploading foto';
+            // Jika terjadi kesalahan saat mengunggah file cover buku, tampilkan pesan kesalahan
+            echo 'Error uploading cover';
             exit; // Berhenti di sini untuk menghindari eksekusi kode berikutnya
         }
     }
+    
 
     // Buat kueri SQL untuk mengambil data buku yang telah di-bookmark oleh pengguna saat ini
     $query_bookmarked = "SELECT bukuID FROM koleksipribadi WHERE userID = " . $_SESSION['user_id'];
@@ -478,6 +496,13 @@ if ($btnClass == 'habis-btn' && isset($_SESSION['user_id'])) {
                     <div class="sinopsis-input">
                         <label for="sinopsis">Sinopsis Buku</label>
                         <textarea name="sinopsis" id="" cols="30" rows="10"></textarea>
+                        <div class="buku-file">
+                            <label for="bukuFile" class="custom-file-input" style="color: #777;">
+                                <i class="fas fa-file-pdf"></i> Pilih file
+                                <input type="file" id="bukuFile" name="bukuFile" onchange="showFileName(this)">
+                            </label>
+                            <span id="fileName" class="file-name"></span>
+                        </div>
                     </div>
                 </div>
                 <div class="submit-btn">
@@ -549,6 +574,15 @@ if ($btnClass == 'habis-btn' && isset($_SESSION['user_id'])) {
         // Event listener untuk menyembunyikan popup ketika ikon "X" diklik
         closePopupAddbook.onclick = hideAddbookPopup;
         closePopupKategori.onclick = hideAddkategoriPopup;
+
+        function showFileName(input) {
+            const fileNameElement = document.getElementById('fileName');
+            if (input.files.length > 0) {
+                fileNameElement.textContent = input.files[0].name;
+            } else {
+                fileNameElement.textContent = '';
+            }
+        }
 
         function previewImage(event) {
             const input = event.target;
