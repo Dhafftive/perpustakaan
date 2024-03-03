@@ -66,7 +66,7 @@ $peminjamanResult = mysqli_query($koneksi, $peminjamanQuery);
                                     </div>
                                 </div>
                                 <div class="action-btn">
-                                    <a href="funtion/baca_buku.php?id=<?= $rowBuku['bukuID']; ?>" target="_blank">
+                                    <a href="pdf_viewer.php?id=<?= $rowBuku['bukuID']; ?>" target="_blank">
                                         <div class="baca-btn">Baca</div>
                                     </a>
                                     <div class="kembalikan-btn" onclick="kembalikanPeminjaman(<?php echo $rowpinjam['peminjamanID']; ?>)">Kembalikan</div>
