@@ -116,9 +116,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Buku - Bookshelf.Idn</title>
+    <title>Etalase - Bookshelf.Idn</title>
     <link rel="stylesheet" href="../css/buku.css?v=<?php echo time(); ?>">
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 
 </head>
@@ -176,7 +176,7 @@
         <!-- Kategori -->
         <div class="books-hdr">
         <?php if ($access_level !== 'peminjam') : ?>
-            <div class="addcontent-icon" id="addkategori-icon" onclick="tambahKategoriSwal()"><i class="fa-solid fa-plus"></i></div>
+            <div class="addcontent-icon" id="addkategori-icon" onclick="showAddkategoriPopup()"><i class="fa-solid fa-plus"></i></div>
         <?php endif; ?>
             <h1 class="header"> Kategori</h1>
             <div class="action-btn">

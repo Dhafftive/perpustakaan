@@ -16,7 +16,9 @@ $peminjamansql = "SELECT peminjaman.peminjamanID, peminjaman.userID, peminjaman.
         FROM peminjaman
         INNER JOIN buku ON peminjaman.bukuID = buku.bukuID
         INNER JOIN user ON peminjaman.userID = user.userID
-        WHERE peminjaman.status_pinjam = 'dipinjam' OR peminjaman.status_pinjam = 'dikembalikan'";
+        WHERE peminjaman.status_pinjam = 'dipinjam' OR peminjaman.status_pinjam = 'dikembalikan'
+        ORDER BY peminjaman.tanggal_pinjam DESC";
+
 // Eksekusi kueri
 $resultPeminjaman = mysqli_query($koneksi, $peminjamansql);
 
@@ -55,7 +57,7 @@ mysqli_close($koneksi);
                                 <div class="peminjam"><?php echo $rowpengajuan['namalengkap']; ?></div>
                             </div>
                         </div>
-
+                        <div class="kembalikan-btn" onclick="konfirmasiPengembalian(<?= $rowpengajuan['peminjamanID']?>)">Kembalikan</div>
                     </div>
                 <?php endwhile; ?>
             <?php else : ?>
@@ -141,55 +143,6 @@ mysqli_close($koneksi);
     <!-- SweetAlert2 JS -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script>
-        function konfirmasiPeminjaman(peminjamanID) {
-            Swal.fire({
-                title: "Konfirmasi Peminjaman",
-                text: "Apakah Anda yakin ingin mengkonfirmasi peminjaman?",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonText: "Ya",
-                cancelButtonText: "Batal",
-                reverseButtons: true
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // Kirim permintaan AJAX
-                    $.ajax({
-                        type: "POST",
-                        url: "function/proses_konfirmasi.php",
-                        data: {
-                            peminjamanID: peminjamanID
-                        },
-                        success: function(response) {
-                            if (response === "success") {
-                                Swal.fire({
-                                    icon: "success",
-                                    title: "Peminjaman berhasil dikonfirmasi.",
-                                    showConfirmButton: false,
-                                    timer: 1500
-                                }).then(() => {
-                                    // Refresh halaman
-                                    location.reload();
-                                });
-                            } else {
-                                Swal.fire({
-                                    icon: "error",
-                                    title: "Oops...",
-                                    text: "Ada kesalahan saat memproses permintaan."
-                                });
-                            }
-                        },
-                        error: function(xhr, status, error) {
-                            console.error(xhr.responseText);
-                            Swal.fire({
-                                icon: "error",
-                                title: "Oops...",
-                                text: "Terjadi kesalahan saat mengirim permintaan."
-                            });
-                        }
-                    });
-                }
-            });
-        }
 
         $(document).ready(function() {
             $('.delete-btn').on('click', function() {
@@ -268,6 +221,7 @@ mysqli_close($koneksi);
             window.location.href = 'download_excel.php';
         }
     </script>
+    <script src="../js/pengembalian.js"></script>
 
 
 </body>

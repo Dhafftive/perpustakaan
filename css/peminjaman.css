@@ -33,7 +33,7 @@
 .pinjam-confirm{
     position: relative;
     width: 75vw;
-    height: 39vh;
+    height: 43vh;
     margin: 0 auto;
     display: flex;
     flex-wrap: nowrap;
@@ -47,7 +47,7 @@
     justify-content: space-between;
     background-color: #fff;
     border-radius: 5px;
-    height: 38vh;
+    height: 41vh;
     padding: 5px;
     width: 130px;
 }
@@ -78,7 +78,7 @@
     font-size: 11px;
     color: #777;
 }
-.buku-content .konfirmasi-btn{
+.buku-content .kembalikan-btn{
     background-color: var(--secondary);
     border-radius: 3px;
     height: 25px;
