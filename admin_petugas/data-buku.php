@@ -150,11 +150,12 @@
         <table class="table-hover" style="max-height: 40vh; overflow: scroll;">
             <thead class="head-table">
                 <tr>
-                    <th>Judul Buku</th>
-                    <th>Penulis</th>
-                    <th style="width: 140px;">Penerbit</th>
-                    <th style="width: 140px;">Kategori</th>
-                    <th style="width: 100px; text-align: center;">Tahun</th>
+                    <th style="padding-right: 5px;">Judul Buku</th>
+                    <th style="padding-left: 5px; padding-right: 5px;">Penulis</th>
+                    <th style="width: 140px; padding-left: 5px; padding-right: 5px;">Penerbit</th>
+                    <th style="width: 100px; padding-left: 5px; padding-right: 5px;">Kategori</th>
+                    <th style="width: 70px; text-align: center; padding-left: 5px; padding-right: 5px;">Tahun</th>
+                    <th style="width: 100px; padding-left: 5px; padding-right: 5px; text-align: center;">Ulasan</th>
                     <th style="width: 120px; text-align: center;">Aksi</th>
                 </tr>
             </thead>
@@ -165,18 +166,33 @@
                           LEFT JOIN kategoribuku ON buku.kategoriID = kategoribuku.kategoriID";
                 $result = mysqli_query($koneksi, $query);
             ?>
-                <?php while ($row = mysqli_fetch_assoc($result)) : ?>
+                <?php while ($row = mysqli_fetch_assoc($result)) : 
+                    $bukuID = $row['bukuID'];
+                    $sql_jumlah_ulasan = "SELECT COUNT(*) AS jumlah FROM ulasanbuku WHERE bukuID = $bukuID";
+                    $result_jumlah_ulasan = $koneksi->query($sql_jumlah_ulasan);
+                    $row_jumlah_ulasan = $result_jumlah_ulasan->fetch_assoc();
+                    $jumlah_ulasan = $row_jumlah_ulasan['jumlah'];
+                ?>
                     <tr>
-                        <td><?php echo $row['judul']; ?></td>
-                        <td><?php echo $row['penulis']; ?></td>
-                        <td style="width: 140px;"><?php echo $row['penerbit']; ?></td>
-                        <td style="width: 140px;"><?php echo $row['namakategori']; ?></td>
-                        <td style="width: 100px; text-align: center;"><?php echo $row['tahunterbit']; ?></td>
+                        <td style="padding-right: 5px;"><?php echo $row['judul']; ?></td>
+                        <td styk="padding-left: 5px; padding-right: 5px;"><?php echo $row['penulis']; ?></td>
+                        <td style="width: 140px; padding-left: 5px; padding-right: 5px;"><?php echo $row['penerbit']; ?></td>
+                        <td style="width: 100px; padding-left: 5px; padding-right: 5px;"><?php echo $row['namakategori']; ?></td>
+                        <td style="width: 70px; text-align: center; padding-left: 5px; padding-right: 5px;"><?php echo $row['tahunterbit']; ?></td>
+                        <td style="width: 70px; text-align: center; padding-left: 5px; padding-right: 5px; text-align: center;">
+                            <?php if ($jumlah_ulasan > 0) : ?>
+                                <a href="ulasan-buku.php?id=<?= $bukuID; ?>" class="ulsasan-link">
+                                    <?php echo $jumlah_ulasan . " Ulasan"; ?>
+                                </a>
+                            <?php else : ?>
+                                <?php echo "Belum ada"; ?>
+                            <?php endif; ?>
+                        </td>
                         <td style="width: 125px; display: flex; gap: 5px; justify-content: space-between; align-items: center; flex-direction: row;">
-                            <a href="editbuku.php?id=<?= $row['bukuID']; ?>">
+                            <a href="editbuku.php?id=<?= $bukuID; ?>">
                                 <button class="edit-btn"><i class="fa-solid fa-wand-magic-sparkles"></i></button>
                             </a>
-                            <button class="delete-btn" data-id="<?php echo $row['bukuID']; ?>"><i class="fa-regular fa-trash-can"></i></button>
+                            <button class="delete-btn" data-id="<?php echo $bukuID; ?>"><i class="fa-regular fa-trash-can"></i></button>
                         </td>
                     </tr>
                 <?php endwhile; ?>

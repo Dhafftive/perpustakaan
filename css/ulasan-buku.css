@@ -1,0 +1,24 @@
+/* Selected Sidebar */
+.sidebar .main .list-item.buku-page{
+    background-color: #5c8063;
+}
+.sidebar .main .list-item.buku-page .icon i,
+.sidebar .main .list-item.buku-page a{
+    color: #fff;
+}
+/* == End Selected Sidebar == */
+.data-ulasan{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.ulasan-header{
+    width: 95%;
+    margin: 2vh auto;
+    text-align: center;
+    font-family: var(--script);
+    color: #FFB000;
+    padding: 15px;
+    background-color: #5c8063;
+    border-radius: 15px;
+}

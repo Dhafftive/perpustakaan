@@ -6,7 +6,6 @@
     // Cek apakah parameter 'id' sudah ada dalam URL
     if(isset($_GET['id'])) {
         $book_id = $_GET['id'];
-        echo "Nilai 'id' dari URL adalah: " . $book_id;
     } else {
         echo "Parameter 'id' tidak ditemukan dalam URL.";
     }
