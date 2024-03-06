@@ -3,10 +3,7 @@
     background-color: #5c8063;
 }
 .sidebar .main .list-item.datauser-page .icon i,
-.sidebar .main .list-item.datauser-page a{
-    color: #fff;
-}
-.sidebar.hide .main .list-item.datauser-page .icon i{
+.sidebar .main .list-item.datauser-page{
     color: #fff;
 }
 /* == End Selected Sidebar == */

@@ -180,7 +180,7 @@ if ($btnClass == 'habis' && isset($_SESSION['user_id'])) {
         echo "ID buku tidak diberikan.";
     }
     ?>
-    <script src="../js/pinjam-buku.js"></script>
+    <script src="../js/konfirmpinjam.js"></script>
     <script src="../js/ajaxbookmark.js"></script>
 </body>
 </html>

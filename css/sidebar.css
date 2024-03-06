@@ -75,12 +75,13 @@
     padding: 12px 10px;
     border-radius: 8px;
     font-family: var(--default);
-    transition: all ease-in .2s;
+    transition: all ease-in .1s;
+    color: #1a1a1a;
 }
 .sidebar .main .list-item:hover{
     background-color: #9ec5a5;
 }
-.sidebar .main .list-item:hover a{
+.sidebar .main a .list-item:hover{
     color: #fff;
 }
 /* Toggle Menu */

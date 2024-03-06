@@ -219,50 +219,49 @@
                         $kategoriID = $row["kategoriID"];
 
                         // Periksa status peminjaman buku
-// Periksa status peminjaman buku
-$btnClass = '';
+                        // Periksa status peminjaman buku
+                        $btnClass = '';
 
-// Periksa status peminjaman buku dan stok buku
-$btnClass = 'pinjam-btn'; // Default button class
-$stokQuery = "SELECT stok FROM buku WHERE bukuID = $idbuku";
-$stokResult = mysqli_query($koneksi, $stokQuery);
+                        // Periksa status peminjaman buku dan stok buku
+                        $btnClass = 'pinjam-btn'; // Default button class
+                        $stokQuery = "SELECT stok FROM buku WHERE bukuID = $idbuku";
+                        $stokResult = mysqli_query($koneksi, $stokQuery);
 
-if (mysqli_num_rows($stokResult) > 0) {
-    $stokData = mysqli_fetch_assoc($stokResult);
-    $stok = $stokData['stok'];
-}
+                        if (mysqli_num_rows($stokResult) > 0) {
+                            $stokData = mysqli_fetch_assoc($stokResult);
+                            $stok = $stokData['stok'];
+                        }
 
-$peminjamanQuery = "SELECT status_pinjam, userID FROM peminjaman WHERE bukuID = $idbuku";
-$peminjamanResult = mysqli_query($koneksi, $peminjamanQuery);
+                        $peminjamanQuery = "SELECT status_pinjam, userID FROM peminjaman WHERE bukuID = $idbuku";
+                        $peminjamanResult = mysqli_query($koneksi, $peminjamanQuery);
 
-if (mysqli_num_rows($peminjamanResult) > 0) {
-    while ($peminjamanData = mysqli_fetch_assoc($peminjamanResult)) {                        
-        if ($peminjamanData['status_pinjam'] == 'dipinjam') {
-            if ($peminjamanData['userID'] == $_SESSION['user_id']) {
-                $btnClass = 'dipinjam-btn';
-            } else {
-                if ($stok == 0) {
-                    $btnClass = 'habis-btn'; // Ubah kelas tombol menjadi 'habis-btn' jika stok habis
-                } else {
-                    $btnClass = 'pinjam-btn';
-                }
-            }
-        } elseif ($peminjamanData['status_pinjam'] == 'dikembalikan') {
-            $btnClass = 'pinjam-btn';
-        }
-    }
-}
+                        if (mysqli_num_rows($peminjamanResult) > 0) {
+                            while ($peminjamanData = mysqli_fetch_assoc($peminjamanResult)) {                        
+                                if ($peminjamanData['status_pinjam'] == 'dipinjam') {
+                                    if ($peminjamanData['userID'] == $_SESSION['user_id']) {
+                                        $btnClass = 'dipinjam-btn';
+                                    } else {
+                                        if ($stok == 0) {
+                                            $btnClass = 'habis-btn'; // Ubah kelas tombol menjadi 'habis-btn' jika stok habis
+                                        } else {
+                                            $btnClass = 'pinjam-btn';
+                                        }
+                                    }
+                                } elseif ($peminjamanData['status_pinjam'] == 'dikembalikan') {
+                                    $btnClass = 'pinjam-btn';
+                                }
+                            }
+                        }
 
-// Tambahkan kondisi tambahan untuk memeriksa apakah pengguna yang masuk adalah pengguna yang meminjam buku tersebut
-if ($btnClass == 'habis-btn' && isset($_SESSION['user_id'])) {
-    $peminjamQuery = "SELECT status_pinjam FROM peminjaman WHERE bukuID = $idbuku AND userID = {$_SESSION['user_id']}";
-    $peminjamResult = mysqli_query($koneksi, $peminjamQuery);
-    if (mysqli_num_rows($peminjamResult) > 0) {
-        $btnClass = 'dipinjam-btn'; // Jika pengguna yang masuk adalah pengguna yang meminjam buku tersebut, tampilkan tombol 'dipinjam-btn'
-    }
-}
-
-            ?>
+                        // Tambahkan kondisi tambahan untuk memeriksa apakah pengguna yang masuk adalah pengguna yang meminjam buku tersebut
+                        if ($btnClass == 'habis-btn' && isset($_SESSION['user_id'])) {
+                            $peminjamQuery = "SELECT status_pinjam FROM peminjaman WHERE bukuID = $idbuku AND userID = {$_SESSION['user_id']}";
+                            $peminjamResult = mysqli_query($koneksi, $peminjamQuery);
+                            if (mysqli_num_rows($peminjamResult) > 0) {
+                                $btnClass = 'dipinjam-btn'; // Jika pengguna yang masuk adalah pengguna yang meminjam buku tersebut, tampilkan tombol 'dipinjam-btn'
+                            }
+                        }
+                ?>
                 <div class="books-content searchable" style="height: 320px; display: flex; flex-direction: column; justify-content: space-between; width: 140px" data-category-id="<?php echo $kategoriID; ?>">
                     <div class="books" style="witdh: 150px">
                         <a href="ulasan.php?id=<?php echo $idbuku; ?>">
@@ -295,12 +294,12 @@ if ($btnClass == 'habis-btn' && isset($_SESSION['user_id'])) {
                         </div>
                     <?php endif; ?>
                 </div>
-        <?php
+            <?php
+                    }
+                } else {
+                    echo "Tidak ada data buku yang ditemukan.";
                 }
-            } else {
-                echo "Tidak ada data buku yang ditemukan.";
-            }
-        ?>
+            ?>
         </div>
 
 

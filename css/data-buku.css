@@ -3,7 +3,7 @@
     background-color: #5c8063;
 }
 .sidebar .main .list-item.buku-page .icon i,
-.sidebar .main .list-item.buku-page a{
+.sidebar .main .list-item.buku-page{
     color: #fff;
 }
 /* == End Selected Sidebar == */

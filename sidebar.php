@@ -102,13 +102,13 @@ if (isset($_SESSION['acces_level'])) {
                 <?php
                 // Tampilkan item sidebar sesuai dengan tingkat akses
                 foreach ($sidebar_items as $item) {
-                    echo '<div class="list-item ' . $item["selected-menu"] . '">';
                     echo '<a href="' . $item["page"] . '">';
+                    echo '<div class="list-item ' . $item["selected-menu"] . '">';
                     echo '<div class="icon"><i class="fa-solid ' . $item["icon"] . '"></i></div>';
                     echo '<span class="description">' . $item["description"] . '</span>';
-                    echo '</a>';
                     echo '</div>';
                 }
+                echo '</a>';
                 ?>
             </div>
         </div>

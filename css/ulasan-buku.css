@@ -3,7 +3,7 @@
     background-color: #5c8063;
 }
 .sidebar .main .list-item.buku-page .icon i,
-.sidebar .main .list-item.buku-page a{
+.sidebar .main .list-item.buku-page{
     color: #fff;
 }
 /* == End Selected Sidebar == */
@@ -34,10 +34,10 @@
     gap: 10px 80px;
 }
 .ulasan-card{
-}
-.ulasan-desc{
     background-color: #fff;
     border-radius: 15px;
+}
+.ulasan-desc{
     padding: 20px;
 }
 .ulasan-desc .username{

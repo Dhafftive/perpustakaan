@@ -3,7 +3,7 @@
     background-color: #5c8063;
 }
 .sidebar .main .list-item.logs-page .icon i,
-.sidebar .main .list-item.logs-page a{
+.sidebar .main .list-item.logs-page{
     color: #fff;
 }
 /* == End Selected Sidebar == */

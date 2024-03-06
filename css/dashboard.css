@@ -3,10 +3,7 @@
     background-color: #5c8065;
 }
 .sidebar .main .list-item.dashboard-page .icon i,
-.sidebar .main .list-item.dashboard-page a{
-    color: #fff;
-}
-.sidebar.hide .main .list-item.dashboard-page .icon i{
+.sidebar .main .list-item.dashboard-page{
     color: #fff;
 }
 /* == End Selected Sidebar == */
