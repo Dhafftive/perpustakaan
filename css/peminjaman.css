@@ -242,3 +242,35 @@ td .delete i{
     font-size: 34px;
     color: #FFB000;
 }
+.deadline-cont{
+    margin-top: 3vh;
+    margin-left: 6%;
+    padding: 20px;
+    background-color: #fff;
+    max-width: 40vw;
+    border-radius: 10px;
+    border-left: 5px solid #5c8065;
+}
+.deadline-hdr{
+    font-family: var(--script);
+    font-size: 16px;
+    color: #445D48;
+    font-weight: 500;
+}
+.deadline-hdr .total-buku{
+    margin-left: 10px;
+    color: #FFB000;
+    font-weight: 600;
+}
+.deadline-btn{
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: var(--default);
+    color: #fff;
+    background-color: #5c8065;
+    border-radius: 5px;
+    margin-top: 20px;
+}

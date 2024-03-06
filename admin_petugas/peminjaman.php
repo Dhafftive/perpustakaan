@@ -3,6 +3,13 @@
 include '../koneksi.php';
 require 'function/cek_login.php';
 
+// Kueri SQL untuk menghitung jumlah peminjaman yang harus dikembalikan hari ini
+$today = date("Y-m-d");
+$jumlahPeminjamanHariIniSQL = "SELECT COUNT(*) AS total FROM peminjaman WHERE status_pinjam = 'dipinjam' AND tanggal_kembali = '$today'";
+$resultJumlahPeminjamanHariIni = mysqli_query($koneksi, $jumlahPeminjamanHariIniSQL);
+$totalPeminjamanHariIni = mysqli_fetch_assoc($resultJumlahPeminjamanHariIni)['total'];
+
+
 // Kueri SQL untuk mengambil data
 $ajukansql = "SELECT peminjaman.peminjamanID, peminjaman.userID, peminjaman.bukuID, buku.judul, buku.foto, user.namalengkap
         FROM peminjaman
@@ -63,6 +70,12 @@ mysqli_close($koneksi);
             <?php else : ?>
                 <div class="diajukan-nothing">Tidak ada peminjaman diajukan</div>
             <?php endif; ?>
+            </div>
+            <div class="deadline-cont">
+                <div class="deadline-data">
+                    <div class="deadline-hdr">Buku yang harus dikembalikan hari ini : <span class="total-buku"><?php echo $totalPeminjamanHariIni > 0 ? $totalPeminjamanHariIni : 'Belum ada'; ?> Buku</span></div>
+                </div>
+                <div class="deadline-btn" onclick="kembalikanBuku()">Kembalikan</div>
             </div>
         </div>
     </div>
@@ -142,6 +155,55 @@ mysqli_close($koneksi);
 
     <!-- SweetAlert2 JS -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script>
+        function kembalikanBuku() {
+            // Kirim permintaan AJAX
+            $.ajax({
+                type: "POST",
+                url: "function/update_peminjaman.php",
+                data: {
+                    tanggal_sekarang: '<?php echo date("Y-m-d"); ?>'
+                },
+                success: function(response) {
+                    // Tampilkan pesan sukses atau error dengan SweetAlert
+                    if (response === "success") {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Peminjaman berhasil diperbarui.',
+                            showConfirmButton: false,
+                            timer: 1500
+                        }).then(() => {
+                            // Refresh halaman
+                            location.reload();
+                        });
+                    } else if (response === "no_book") {
+                        Swal.fire({
+                            icon: 'info',
+                            title: 'Belum ada buku yang harus dikembalikan.',
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Gagal memperbarui peminjaman.',
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Terjadi kesalahan saat mengirim permintaan.',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            });
+        }
+    </script>
     <script>
 
         $(document).ready(function() {
