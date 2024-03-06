@@ -399,7 +399,8 @@
     text-overflow: ellipsis;
 }
 .edit-btn,
-.delete-btn{
+.deletebook-btn,
+.deletecategory-btn{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -413,7 +414,8 @@
     background-color: #fff6e3;
     border: 2px solid #FFB000;
 }
-.delete-btn{
+.deletecategory-btn,
+.deletebook-btn{
     color: #ec0000;
     background-color: #faeeee;
     border: 2px solid #ec0000;

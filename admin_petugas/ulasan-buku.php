@@ -47,7 +47,7 @@
     } else {
         echo "ID buku tidak ditemukan.";
     }
-?>        
+?>      
         </div>
     </div>
 </body>

@@ -131,7 +131,7 @@
                             <td><?php echo $jumlah_buku; ?> Buku</td>
                             <td style="width: 125px; display: flex; gap: 5px; justify-content: space-between; align-items: center; flex-direction: row;">
                                 <button class="edit-btn" onclick="showEditForm(<?php echo $row_kategori['kategoriID']; ?>, '<?php echo $row_kategori['namakategori']; ?>')"><i class="fa-solid fa-wand-magic-sparkles"></i></button>
-                                <button class="delete-btn" onclick="deleteCategory(<?php echo $row_kategori['kategoriID']; ?>)"><i class="fa-regular fa-trash-can"></i></button>
+                                <button class="deletecategory-btn" onclick="deleteCategory(<?php echo $row_kategori['kategoriID']; ?>)"><i class="fa-regular fa-trash-can"></i></button>
                             </td>
                         </tr>
                     <?php endwhile; ?>
@@ -192,7 +192,7 @@
                             <a href="editbuku.php?id=<?= $bukuID; ?>">
                                 <button class="edit-btn"><i class="fa-solid fa-wand-magic-sparkles"></i></button>
                             </a>
-                            <button class="delete-btn" data-id="<?php echo $bukuID; ?>"><i class="fa-regular fa-trash-can"></i></button>
+                            <button class="deletebook-btn" data-id="<?php echo $bukuID; ?>"><i class="fa-regular fa-trash-can"></i></button>
                         </td>
                     </tr>
                 <?php endwhile; ?>
@@ -406,7 +406,7 @@
         }
 
             // Event listener untuk tombol delete
-    $('.delete-btn').on('click', function() {
+    $('.deletebook-btn').on('click', function() {
         // Ambil ID buku dari atribut data-id pada tombol delete
         var bukuID = $(this).data('id');
 
