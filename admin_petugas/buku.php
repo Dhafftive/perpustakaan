@@ -456,7 +456,7 @@
                         <!-- Upload button -->
                         <div id="imageInputWrapper">
                             <label for="imageInput" class="custom-file-upload">
-                                <i class="fa-solid fa-images"></i>Upload Image
+                                <i class="fa-solid fa-images"></i>Upload Cover
                             </label>
                             <!-- Actual input file -->
                             <input type="file" id="imageInput" name="cover" accept="image/*" onchange="previewImage(event)" required>
@@ -485,10 +485,10 @@
                                 <label for="tahun-terbit">Tahun terbit</label>
                                 <input placeholder="Masukkan tahun terbit" type="text" id="tahun-terbit" name="tahun-terbit" class="input-group" required>
                             </div>
-                            <div class="input-data">
+                            <!-- <div class="input-data">
                                 <label for="tahun-terbit">Stok buku</label>
                                 <input placeholder="Masukkan stok buku" type="text" id="tahun-terbit" name="stok-buku" class="input-group" required>
-                            </div>
+                            </div> -->
                         </div>
                         <input type="hidden" name="perpusID" value="<?php echo mysqli_fetch_assoc($result_perpus)['perpusID']; ?>">
                     </div>
@@ -519,8 +519,8 @@
         <form method="post" id="kategoriForm">
             <input type="text" class="kategori-name" name="nama-kategori" placeholder="Masukkan kategori">
             <div class="action-btn">
-                <button type="button" class="batalkan" id="close-popup-addkategori" onclick="hideAddkategoriPopup()">Batalkan</button>
-                <button type="button" class="submit" onclick="submitKategoriForm()">Submit</button>
+                <button type="button" class="batalkan" id="close-popup-addkategori" onclick="hideAddkategoriPopup()">Batal</button>
+                <button type="button" class="submit" onclick="submitKategoriForm()">Simpan</button>
             </div>
         </form>
     </div>
@@ -614,7 +614,6 @@
     <script src="../js/submitkategori.js"></script>
 <?php endif; ?>
     <script src="../js/konfirmpinjam.js"></script>
-    <script src="../js/batalpinjam.js"></script>
     <script src="../js/ajaxbookmark.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js"></script>

@@ -20,14 +20,20 @@ if (isset($_SESSION['acces_level'])) {
         case 'petugas':
             $sidebar_items = array(
                 array("selected-menu" => "etalase-page", "page" => "buku.php", "icon" => "fa-solid fa-book", "description" => "Etalase"),
+                array("selected-menu" => "list-kategori", "page" => "list-kategori.php", "icon" => "fa-solid fa-book", "description" => "List Kategori"),
+                array("selected-menu" => "list-kategori", "page" => "list-kategori.php", "icon" => "fa-solid fa-book", "description" => "List Kategori"),
+                array("selected-menu" => "rekap-page", "page" => "rekap-page.php", "icon" => "fa-solid fa-book", "description" => "Rekap Peminjaman"),
                 array("selected-menu" => "buku-page", "page" => "data-buku.php", "icon" => "fa-solid fa-book", "description" => "Data Buku"),
+                array("selected-menu" => "rekap-page", "page" => "rekap-page.php", "icon" => "fa-solid fa-book", "description" => "Rekap Peminjaman"),
                 array("selected-menu" => "peminjaman-page", "page" => "peminjaman.php", "icon" => "fa-solid fa-book-open-reader", "description" => "Peminjaman")
             );
             break;
         case 'admin' OR 'super_admin':
             $sidebar_items = array(
-                array("selected-menu" => "datauser-page", "page" => "data_user.php", "icon" => "fa-regular fa-address-book", "description" => "Anggota"),
                 array("selected-menu" => "etalase-page", "page" => "buku.php", "icon" => "fa-solid fa-book", "description" => "Etalase"),
+                array("selected-menu" => "list-kategori", "page" => "list-kategori.php", "icon" => "fa-solid fa-book", "description" => "List Kategori"),
+                array("selected-menu" => "rekap-page", "page" => "rekap-page.php", "icon" => "fa-solid fa-book", "description" => "Rekap Peminjaman"),
+                array("selected-menu" => "datauser-page", "page" => "data_user.php", "icon" => "fa-regular fa-address-book", "description" => "Anggota"),
                 array("selected-menu" => "buku-page", "page" => "data-buku.php", "icon" => "fa-solid fa-book", "description" => "Data Buku"),
                 array("selected-menu" => "peminjaman-page", "page" => "peminjaman.php", "icon" => "fa-solid fa-book-open-reader", "description" => "Peminjaman"),
                 array("selected-menu" => "koleksibuku-page", "page" => "koleksibuku.php", "icon" => "fa-solid fa-book-bookmark", "description" => "Koleksi"),

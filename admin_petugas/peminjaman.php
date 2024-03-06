@@ -91,81 +91,12 @@ mysqli_close($koneksi);
         </div>
     </div>
 
-    <div class="data-peminjaman">
-        <div class="card">
-            <h5 class="card-header">Data Peminjaman Buku  <div class="download-btn" onclick="downloadExcel()"><i class="fa-solid fa-file-arrow-down"></i></div></h5>
-            <div class="table-responsive">
-                <table class="table-hover">
-                    <thead class="head-table">
-                        <tr>
-                            <th>Judul Buku</th>
-                            <th>Nama Lengkap</th>
-                            <th>Tanggal Pinjam</th>
-                            <th>Status</th>
-                            <th>Tanggal Kembali</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody class="table-body">
-                    <?php if (mysqli_num_rows($resultPeminjaman) > 0) : ?>
-                        <?php while ($row = mysqli_fetch_assoc($resultPeminjaman)) : ?>
-                            <?php
-                                // Determine status label based on status_pinjam
-                                $statusLabel = '';
-                                if ($row['status_pinjam'] === 'dikembalikan') {
-                                    $statusLabel = '<div class="dikembalikan-label">Dikembalikan</div>';
-                                } elseif ($row['status_pinjam'] === 'dipinjam') {
-                                    $statusLabel = '<div class="dipinjam-label">Dipinjam</div>';
-                                }
-                            ?>
-                            <tr>
-                                <td><?= $row['judul'] ?></td>
-                                <td><?= $row['namalengkap'] ?></td>
-                                <td>
-                                <?php
-                                    // Ubah format tanggal pinjam jika tidak kosong
-                                    if ($row['tanggal_pinjam'] != '0000-00-00') {
-                                        echo date('d F Y', strtotime($row['tanggal_pinjam']));
-                                    } else {
-                                        echo '-';
-                                    }
-                                ?>
-                                </td>
-                                <td><?= $statusLabel ?></td>
-                                <td>
-                                <?php
-                                    // Ubah format tanggal kembali jika tidak kosong
-                                    if ($row['tanggal_kembali'] != '0000-00-00') {
-                                        echo date('d F Y', strtotime($row['tanggal_kembali']));
-                                    } else {
-                                        echo '-';
-                                    }
-                                ?>
-                                </td>
-                                <td>
-                                    <div class="delete-btn" data-peminjamanid="<?= $row['peminjamanID'] ?>">
-                                        <button type="button" class="delete">
-                                            <i class="fa-regular fa-trash-can"></i>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-                        <?php endwhile; ?>
-                    <?php else : ?>
-                            <tr>
-                                <td colspan="6" class="data-nothing" style="text-align: center; color: grey; font-style: italic;">Tidak ada data peminjaman apapun</td>
-                            </tr>
-                    <?php endif; ?>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
     <!-- SweetAlert2 JS -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <!-- Script Peminjaman -->
     <script>
         function kembalikanBuku() {
             // Kirim permintaan AJAX
@@ -215,8 +146,8 @@ mysqli_close($koneksi);
             });
         }
     </script>
+    <!-- Script Rekap data peminjaman -->
     <script>
-
         $(document).ready(function() {
             $('.delete-btn').on('click', function() {
                 var peminjamanID = $(this).data('peminjamanid');
@@ -293,8 +224,6 @@ mysqli_close($koneksi);
             window.location.href = 'download_excel.php';
         }
     </script>
-    <script src="../js/pengembalian.js"></script>
-
 
 </body>
 </html>

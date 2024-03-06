@@ -72,8 +72,8 @@ require '../sidebar.php';
                 </div>
             </div>
             <div class="button-form">
-                <input type="submit" value="Submit" name="Submit">
-                <a href="data_user.php"><div class="cancel-button"><p class="cancel-label">Cancel</p></div></a>
+                <input type="submit" value="Kirim" name="Submit">
+                <a href="data_user.php"><div class="cancel-button"><p class="cancel-label">Batal</p></div></a>
             </div>
         </form>
     </div>

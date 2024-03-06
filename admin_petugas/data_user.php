@@ -206,8 +206,8 @@ if (!empty($_POST)) {
                     </div>
                 </div>
                 <div class="button-form">
-                    <input type="submit" value="Submit" name="Submit">
-                    <div class="cancel-button" onclick="hideRegistrationForm()"><p class="cancel-label">Cancel</p></div>
+                    <input type="submit" value="Kirim" name="Submit">
+                    <div class="cancel-button" onclick="hideRegistrationForm()"><p class="cancel-label">Batal</p></div>
                 </div>
             </form>
         </div>

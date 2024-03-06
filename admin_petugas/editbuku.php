@@ -97,7 +97,7 @@
                         <!-- Upload button -->
                         <div id="imageInputWrapper">
                             <label for="imageInput" class="custom-file-upload">
-                                <i class="fa-solid fa-images"></i>Upload Image
+                                <i class="fa-solid fa-images"></i>Upload Cover
                             </label>
                             <!-- Actual input file -->
                             <input type="file" id="imageInput" name="cover" accept="image/*" onchange="previewImage(event)">
@@ -125,10 +125,10 @@
                                 <label for="tahun-terbit">Tahun terbit</label>
                                 <input placeholder="Masukkan tahun terbit" type="text" id="tahun-terbit" name="tahun-terbit" class="input-group" value="<?php echo $gettahun_terbit;?>" required>
                             </div>
-                            <div class="input-data">
+                            <!-- <div class="input-data">
                                 <label for="stok-buku">Stok buku</label>
                                 <input placeholder="Masukkan stok buku" type="text" id="stok-buku" name="stok-buku" class="input-group" value="<?php echo $getstok;?>" required>
-                            </div>
+                            </div> -->
                         </div>
                         <input type="hidden" name="perpusID" value="<?php echo mysqli_fetch_assoc($result_perpus)['perpusID']; ?>">
                         <input type="hidden" name="bukuID" value="<?php echo $book_id; ?>" id="bukuID">

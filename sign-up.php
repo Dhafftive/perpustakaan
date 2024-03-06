@@ -35,17 +35,17 @@
                     <input placeholder="Masukkan nama  lengkapmu" type="text" id="namalengkap" name="namalengkap" required>
                     <label for="alamat">Alamat</label>
                     <input placeholder="Masukkan alamat rumahmu" type="text" id="alamat" name="alamat" required>
-                    <label for="password">Password</label>
-                    <input placeholder="Masukkan password" type="password" id="password" name="password" required>
-                </div>
-                <div class="input-form">
                     <label for="email">Email</label>
                     <input placeholder="Masukkan email" id="email" type="text" name="email" required>
+                </div>
+                <div class="input-form">
                     <label for="telepon">No. Telepon</label>
                     <input placeholder="Masukkan nomor telepon" type="text" id="telepon" name="telepon" required>
                     <label for="perpustakaan">Perpustakaan</label>
                     <input type="text" name="perpustakaan" id="" value="<?= $namaperpus ?>" readonly>
                     <input type="hidden" name="idperpus" value="<?= $perpusID ?>">
+                    <label for="password">Password</label>
+                    <input placeholder="Masukkan password" type="password" id="password" name="password" required>
                     <label for="confirm">Konfirmasi</label>
                     <input placeholder="Masukkan password sekali lagi" type="password" id="confirm" name="confirm" required>
                 </div>
