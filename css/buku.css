@@ -337,11 +337,11 @@
 .input-form .input-group:focus{
     border-color: #7daa85;
 }
-/* .input{
+.input{
     display: flex;
     flex-direction: row;
     gap: 30px;
-} */
+}
 .submit-btn{
     width: 100%;
     display: flex;

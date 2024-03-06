@@ -485,10 +485,10 @@
                                 <label for="tahun-terbit">Tahun terbit</label>
                                 <input placeholder="Masukkan tahun terbit" type="text" id="tahun-terbit" name="tahun-terbit" class="input-group" required>
                             </div>
-                            <!-- <div class="input-data">
+                            <div class="input-data">
                                 <label for="tahun-terbit">Stok buku</label>
                                 <input placeholder="Masukkan stok buku" type="text" id="tahun-terbit" name="stok-buku" class="input-group" required>
-                            </div> -->
+                            </div>
                         </div>
                         <input type="hidden" name="perpusID" value="<?php echo mysqli_fetch_assoc($result_perpus)['perpusID']; ?>">
                     </div>
@@ -520,7 +520,7 @@
             <input type="text" class="kategori-name" name="nama-kategori" placeholder="Masukkan kategori">
             <div class="action-btn">
                 <button type="button" class="batalkan" id="close-popup-addkategori" onclick="hideAddkategoriPopup()">Batal</button>
-                <button type="button" class="submit" onclick="submitKategoriForm()">Simpan</button>
+                <button type="button" class="submit" onclick="submitKategoriForm()">Kirim</button>
             </div>
         </form>
     </div>
@@ -614,6 +614,7 @@
     <script src="../js/submitkategori.js"></script>
 <?php endif; ?>
     <script src="../js/konfirmpinjam.js"></script>
+    <script src="../js/batalpinjam.js"></script>
     <script src="../js/ajaxbookmark.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js"></script>

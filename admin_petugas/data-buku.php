@@ -214,10 +214,10 @@
                                 <label for="tahun-terbit">Tahun terbit</label>
                                 <input placeholder="Masukkan tahun terbit" type="text" id="tahun-terbit" name="tahun-terbit" class="input-group" required>
                             </div>
-                            <!-- <div class="input-data">
+                            <div class="input-data">
                                 <label for="tahun-terbit">Stok buku</label>
                                 <input placeholder="Masukkan stok buku" type="text" id="tahun-terbit" name="stok-buku" class="input-group" required>
-                            </div> -->
+                            </div>
                         </div>
                         <input type="hidden" name="perpusID" value="<?php echo mysqli_fetch_assoc($result_perpus)['perpusID']; ?>">
                     </div>
