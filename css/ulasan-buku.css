@@ -7,13 +7,8 @@
     color: #fff;
 }
 /* == End Selected Sidebar == */
-.data-ulasan{
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
 .ulasan-header{
-    width: 95%;
+    width: 75vw;
     margin: 2vh auto;
     text-align: center;
     font-family: var(--script);
@@ -21,4 +16,61 @@
     padding: 15px;
     background-color: #5c8063;
     border-radius: 15px;
+    font-size: 12px
+}
+.data-ulasan{
+    display: flex;
+    flex-direction: column;
+    width: 75vw;
+    margin: 0 auto;
+}
+.ulasan-cont{
+    width: 100%;
+}
+.ulasan-user{
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 10px 80px;
+}
+.ulasan-card{
+}
+.ulasan-desc{
+    background-color: #fff;
+    border-radius: 15px;
+    padding: 20px;
+}
+.ulasan-desc .username{
+    font-family: var(--script);
+    font-weight: 500;
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #eba000;
+}
+.ulasan-desc .username i{
+    color: #555;
+    font-size: 14px;
+    width: 25px;
+    height: 25px;
+    background-color: #fff;
+    border-radius: 5px;
+    border: 1px solid #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: .3s;
+}
+.ulasan-desc .username i:hover{
+    border-color: #d61f1f;
+    background-color: #ffeaea;
+    color: #d61f1f;
+}
+.ulasan-desc .ulasan-text{
+    font-family: var(--default);
+    font-size: 14px;
+    line-height: 17px;
+    margin-top: 10px;
+    padding: 0 50px 0 10px;
 }

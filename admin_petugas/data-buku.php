@@ -168,7 +168,7 @@
             ?>
                 <?php while ($row = mysqli_fetch_assoc($result)) : 
                     $bukuID = $row['bukuID'];
-                    $sql_jumlah_ulasan = "SELECT COUNT(*) AS jumlah FROM ulasanbuku WHERE bukuID = $bukuID";
+                    $sql_jumlah_ulasan = "SELECT COUNT(*) AS jumlah FROM ulasanbuku WHERE bukuID = $bukuID AND ulasan <> ''";
                     $result_jumlah_ulasan = $koneksi->query($sql_jumlah_ulasan);
                     $row_jumlah_ulasan = $result_jumlah_ulasan->fetch_assoc();
                     $jumlah_ulasan = $row_jumlah_ulasan['jumlah'];
