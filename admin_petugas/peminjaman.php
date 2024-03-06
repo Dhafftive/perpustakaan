@@ -3,6 +3,11 @@
 include '../koneksi.php';
 require 'function/cek_login.php';
 
+// Kueri SQL untuk menghitung jumlah peminjaman yang masih dipinjam
+$jumlahPeminjamanDipinjamSQL = "SELECT COUNT(*) AS total FROM peminjaman WHERE status_pinjam = 'dipinjam'";
+$resultJumlahPeminjamanDipinjam = mysqli_query($koneksi, $jumlahPeminjamanDipinjamSQL);
+$totalPeminjamanDipinjam = mysqli_fetch_assoc($resultJumlahPeminjamanDipinjam)['total'];
+
 // Kueri SQL untuk menghitung jumlah peminjaman yang harus dikembalikan hari ini
 $today = date("Y-m-d");
 $jumlahPeminjamanHariIniSQL = "SELECT COUNT(*) AS total FROM peminjaman WHERE status_pinjam = 'dipinjam' AND tanggal_kembali = '$today'";
@@ -71,11 +76,17 @@ mysqli_close($koneksi);
                 <div class="diajukan-nothing">Tidak ada peminjaman diajukan</div>
             <?php endif; ?>
             </div>
-            <div class="deadline-cont">
-                <div class="deadline-data">
-                    <div class="deadline-hdr">Buku yang harus dikembalikan hari ini : <span class="total-buku"><?php echo $totalPeminjamanHariIni > 0 ? $totalPeminjamanHariIni : 'Belum ada'; ?> Buku</span></div>
+            <div class="peminjaman-info">
+                <div class="deadline-cont">
+                    <div class="deadline-data">
+                        <div class="deadline-hdr">Buku yang harus dikembalikan hari ini : <span class="total-buku"><?php echo $totalPeminjamanHariIni > 0 ? $totalPeminjamanHariIni : 'Belum ada'; ?> Buku</span></div>
+                    </div>
+                    <div class="deadline-btn" onclick="kembalikanBuku()">Kembalikan</div>
                 </div>
-                <div class="deadline-btn" onclick="kembalikanBuku()">Kembalikan</div>
+                <div class="total-peminjaman-cont">
+                    <div class="total-header">Total peminjaman buku saat ini</div>
+                    <div class="total-data"><?php echo $totalPeminjamanDipinjam; ?> Buku</div>
+                </div>
             </div>
         </div>
     </div>
