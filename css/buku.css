@@ -407,8 +407,9 @@
     top: 28vh;
     border-radius: 20px;
     display: flex;
-    flex-direction: column;
+
     align-items: center;
+    justify-content: center;
     border: 4px solid #FFB000;
     display: none;
     z-index: 992;
@@ -425,6 +426,9 @@
     justify-content: center;
     flex-direction: column;
     align-items: center;
+}
+#kategoriForm{
+    width: 100%;
 }
 .kategori-name{
     width: 70%;

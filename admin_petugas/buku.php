@@ -281,7 +281,7 @@
                                 <?php if ($btnClass === 'dipinjam-btn') : ?>
                                     <div class="<?php echo $btnClass; ?>">Dipinjam</div>
                                 <?php elseif ($btnClass === 'habis-btn')  : ?>
-                                    <div class="<?php echo $btnClass; ?>">Stok habis</div>
+                                    <div class="<?php echo $btnClass; ?>">Habis</div>
                                 <?php else : ?>
                                     <div class="<?php echo $btnClass; ?>" onclick="pinjamBuku(<?php echo $idbuku; ?>, <?php echo $idperpus; ?>, <?php echo $_SESSION['user_id']; ?>)">Pinjam</div>
                                 <?php endif; ?>
@@ -408,7 +408,7 @@
                         <div class="action-btn">
                             <!-- Tampilkan tombol sesuai dengan kelas yang ditentukan -->
                             <?php if ($btnClass === 'habis-btn') : ?>
-                                <div class="<?php echo $btnClass; ?>">Stok habis</div>
+                                <div class="<?php echo $btnClass; ?>">Habis</div>
                             <?php elseif ($btnClass === 'dipinjam-btn') : ?>
                                 <div class="<?php echo $btnClass; ?>">Dipinjam</div>
                             <?php else : ?>
@@ -486,7 +486,7 @@
                                 <input placeholder="Masukkan tahun terbit" type="text" id="tahun-terbit" name="tahun-terbit" class="input-group" required>
                             </div>
                             <div class="input-data">
-                                <label for="tahun-terbit">Stok buku</label>
+                                <label for="tahun-terbit">Batas peminjaman buku</label>
                                 <input placeholder="Masukkan stok buku" type="text" id="tahun-terbit" name="stok-buku" class="input-group" required>
                             </div>
                         </div>

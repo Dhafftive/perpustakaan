@@ -84,11 +84,11 @@ $result = mysqli_query($koneksi, $query);
                         <?php if ($btnClass === 'dipinjam') : ?>
                             <div class="<?php echo $btnClass; ?>">Dipinjam</div>
                         <?php elseif ($btnClass === 'habis') : ?>
-                            <div class="<?php echo $btnClass; ?>">Stok Habis</div>
+                            <div class="<?php echo $btnClass; ?>">Mencapai Batas</div>
                         <?php else : ?>
                             <div class="<?php echo $btnClass; ?>" onclick="pinjamBuku(<?php echo $row['bukuID']; ?>, <?php echo $row['perpusID']; ?>, <?php echo $_SESSION['user_id']; ?>)">Pinjam</div>
                         <?php endif; ?>
-                        <div class="remove" onclick="removeBookmark(<?php echo $row['bukuID']; ?>)"><i class="fa-solid fa-bookmark"></i>Remove</div>
+                        <div class="remove" onclick="removeBookmark(<?php echo $row['bukuID']; ?>)"><i class="fa-solid fa-bookmark"></i>Hapus</div>
                     </div>
                 </div>
             <?php endwhile; ?>

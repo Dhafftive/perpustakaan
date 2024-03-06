@@ -69,10 +69,10 @@
 }
 .sidebar .main .list-item{
     display: flex;
-    margin: 10px 0;
+    margin: 5px 0;
     flex-direction: row;
     align-self: center;
-    padding: 12px 10px;
+    padding: 10px;
     border-radius: 8px;
     font-family: var(--default);
     transition: all ease-in .1s;

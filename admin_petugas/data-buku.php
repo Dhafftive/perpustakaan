@@ -182,7 +182,7 @@
                         <!-- Upload button -->
                         <div id="imageInputWrapper">
                             <label for="imageInput" class="custom-file-upload">
-                                <i class="fa-solid fa-images"></i>Upload Image
+                                <i class="fa-solid fa-images"></i>Upload Cover
                             </label>
                             <!-- Actual input file -->
                             <input type="file" id="imageInput" name="cover" accept="image/*" onchange="previewImage(event)" required>
@@ -215,7 +215,7 @@
                                 <input placeholder="Masukkan tahun terbit" type="text" id="tahun-terbit" name="tahun-terbit" class="input-group" required>
                             </div>
                             <div class="input-data">
-                                <label for="tahun-terbit">Stok buku</label>
+                                <label for="tahun-terbit">Batas peminjaman buku</label>
                                 <input placeholder="Masukkan stok buku" type="text" id="tahun-terbit" name="stok-buku" class="input-group" required>
                             </div>
                         </div>
@@ -226,7 +226,7 @@
                         <textarea name="sinopsis" id="" cols="30" rows="10"></textarea>
                         <div class="buku-file">
                             <label for="bukuFile" class="custom-file-input" style="color: #777;">
-                                <i class="fas fa-file-pdf"></i> Pilih file
+                                <i class="fas fa-file-pdf"></i> Pilih file PDF
                                 <input type="file" id="bukuFile" name="bukuFile" onchange="showFileName(this)">
                             </label>
                             <span id="fileName" class="file-name"></span>

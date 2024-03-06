@@ -31,12 +31,13 @@
     padding-bottom: 10px;
 }
 .card-header{
-    padding: 30px;
+    padding: 20px 30px;
     color: #FFB000;
     font-family: var(--default);
     font-size: 30px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 .card-header i:hover{
     color: #fff;
