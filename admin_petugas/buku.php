@@ -308,7 +308,9 @@
         <?php if ($access_level !== 'peminjam') : ?>
             <div class="addcontent-icon" onclick="showAddbookPopup()" id="addbook-icon"><i class="fa-solid fa-plus"></i></div>
         <?php endif; ?>
-            <h1 class="header">Daftar Buku</h1>
+            <h1 class="header" style="display: flex; justify-content: space-between; align-items: center;  width: 100%;">Daftar Buku 
+                <div class="search"><i class="fa-solid fa-magnifying-glass"></i><input type="search" name="search" id="searchInput" placeholder="cari buku..."></div>
+            </h1>
         </div>
         <?php
             // Memasukkan ID buku yang telah di-bookmark ke dalam array
@@ -387,7 +389,7 @@
                         
                         
             ?>
-                <div class="books">
+                <div class="books searchable">
                     <div class="books-cover">
                         <!-- Gunakan foto dari kolom 'foto' dalam tabel buku -->
                         <?php if ($access_level !== 'petugas') : ?>
@@ -646,6 +648,16 @@
         document.addEventListener('DOMContentLoaded', function() {
             const container = document.querySelector('.books-kategori');
             const kategoriScrollbar = new PerfectScrollbar(container);
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('#searchInput').on('keyup', function() {
+                var value = $(this).val().toLowerCase(); // Ambil nilai input pencarian dan ubah menjadi lowercase
+                $('.searchable').filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1); // Tampilkan atau sembunyikan buku berdasarkan input pencarian
+                });
+            });
         });
     </script>
     <script src="../libs/perfect-scrollbar/dist/perfect-scrollbar.js"></script>

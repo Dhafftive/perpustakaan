@@ -102,8 +102,12 @@
 <!-- Data Buku -->
 <div class="card">
     <h5 class="card-header">
-        <div class="addcontent-icon" onclick="showAddbookPopup()" id="addbook-icon"><i class="fa-solid fa-plus"></i></div>
-        Data Buku
+        <div class="header">
+            <div class="addcontent-icon" onclick="showAddbookPopup()" id="addbook-icon">
+                <i class="fa-solid fa-plus"></i>
+            </div>Data Buku
+        </div>
+        <div class="search"><i class="fa-solid fa-magnifying-glass"></i><input type="search" name="search" id="searchInput" placeholder="cari buku..."></div>
     </h5>
     <div class="table-responsive">
         <table class="table-hover" style="max-height: 40vh; overflow: scroll;">
@@ -132,7 +136,7 @@
                     $row_jumlah_ulasan = $result_jumlah_ulasan->fetch_assoc();
                     $jumlah_ulasan = $row_jumlah_ulasan['jumlah'];
                 ?>
-                    <tr>
+                    <tr class="searchable">
                         <td style="padding-right: 5px;"><?php echo $row['judul']; ?></td>
                         <td styk="padding-left: 5px; padding-right: 5px;"><?php echo $row['penulis']; ?></td>
                         <td style="width: 140px; padding-left: 5px; padding-right: 5px;"><?php echo $row['penerbit']; ?></td>
@@ -376,6 +380,16 @@
     });
 
         
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('#searchInput').on('keyup', function() {
+                var value = $(this).val().toLowerCase(); // Ambil nilai input pencarian dan ubah menjadi lowercase
+                $('.table-body tr').filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1); // Tampilkan baris yang mengandung kata kunci pencarian, sembunyikan yang tidak
+                });
+            });
+        });
     </script>
 
     <!-- script Library -->
