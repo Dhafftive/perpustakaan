@@ -30,7 +30,7 @@
             $gettahun_terbit = $row['tahunterbit'];
             $getstok = $row['stok'];
             $getsinopsis = $row['deskripsi'];
-            $getnama_file_buku = $row['isibuku'];
+            $getnama_file_buku = isset($row['isibuku']) ? $row['isibuku'] : '';
         } else {
             // Menampilkan pesan jika data tidak ditemukan
         }

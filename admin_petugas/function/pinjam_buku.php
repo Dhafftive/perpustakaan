@@ -23,10 +23,11 @@
         }
         
         $tanggal_sekarang = date("Y-m-d"); // Menghasilkan tanggal dalam format "YYYY-MM-DD"
+        $tanggal_kembali = date("Y-m-d", strtotime($tanggal_sekarang . "+1 days")); // Tanggal kembali adalah tanggal sekarang ditambah 1 hari
 
         // Buat kueri SQL untuk memasukkan data peminjaman ke dalam tabel peminjaman
-        $query_pinjam = "INSERT INTO peminjaman (bukuID, perpusID, userID, status_pinjam, tanggal_pinjam) 
-                        VALUES ($bukuID, $perpusID, $userID, 'dipinjam', '$tanggal_sekarang')";
+        $query_pinjam = "INSERT INTO peminjaman (bukuID, perpusID, userID, status_pinjam, tanggal_pinjam, tanggal_kembali) 
+                        VALUES ($bukuID, $perpusID, $userID, 'dipinjam', '$tanggal_sekarang', '$tanggal_kembali')";
         $result_pinjam = mysqli_query($koneksi, $query_pinjam);
         // Buat kueri SQL untuk mengurangi stok buku dari tabel buku
         $query_buku = "UPDATE buku SET stok = stok - 1 WHERE bukuID = '$bukuID'";

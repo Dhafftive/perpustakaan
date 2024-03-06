@@ -96,7 +96,7 @@ $result = mysqli_query($koneksi, $query);
     </div>
 
     <!-- Peminjaman JS -->
-    <script src="../js/pinjam-buku.js"></script>
+    <script src="../js/konfirmpinjam.js"></script>
     <!-- Bookmark JS -->
     <script src="../js/ajaxbookmark.js"></script>
 </body>

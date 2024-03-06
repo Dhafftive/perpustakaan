@@ -614,7 +614,7 @@ if ($btnClass == 'habis-btn' && isset($_SESSION['user_id'])) {
     <script src="../js/submitbook.js"></script>
     <script src="../js/submitkategori.js"></script>
 <?php endif; ?>
-    <script src="../js/pinjam-buku.js"></script>
+    <script src="../js/konfirmpinjam.js"></script>
     <script src="../js/batalpinjam.js"></script>
     <script src="../js/ajaxbookmark.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

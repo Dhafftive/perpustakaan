@@ -57,7 +57,7 @@ mysqli_close($koneksi);
                                 <div class="peminjam"><?php echo $rowpengajuan['namalengkap']; ?></div>
                             </div>
                         </div>
-                        <div class="kembalikan-btn" onclick="konfirmasiPengembalian(<?= $rowpengajuan['peminjamanID']?>)">Kembalikan</div>
+                        <!-- <div class="kembalikan-btn" onclick="konfirmasiPengembalian(<?= $rowpengajuan['peminjamanID']?>)">Kembalikan</div> -->
                     </div>
                 <?php endwhile; ?>
             <?php else : ?>
@@ -119,8 +119,8 @@ mysqli_close($koneksi);
                                 ?>
                                 </td>
                                 <td>
-                                    <div class="delete">
-                                        <button type="button" class="delete-btn" data-peminjamanid="<?= $row['peminjamanID'] ?>">
+                                    <div class="delete-btn" data-peminjamanid="<?= $row['peminjamanID'] ?>">
+                                        <button type="button" class="delete">
                                             <i class="fa-regular fa-trash-can"></i>
                                         </button>
                                     </div>
@@ -157,9 +157,8 @@ mysqli_close($koneksi);
                 text: "Apakah Anda yakin ingin menghapus peminjaman ini?",
                 icon: "warning",
                 showCancelButton: true,
-                confirmButtonText: "Ya",
                 cancelButtonText: "Batal",
-                reverseButtons: true
+                confirmButtonText: "Ya",
             }).then((result) => {
                 if (result.isConfirmed) {
                     // Kirim permintaan AJAX

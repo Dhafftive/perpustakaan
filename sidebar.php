@@ -19,6 +19,8 @@ if (isset($_SESSION['acces_level'])) {
             break;
         case 'petugas':
             $sidebar_items = array(
+                array("selected-menu" => "etalase-page", "page" => "buku.php", "icon" => "fa-solid fa-book", "description" => "Etalase"),
+                array("selected-menu" => "buku-page", "page" => "data-buku.php", "icon" => "fa-solid fa-book", "description" => "Data Buku"),
                 array("selected-menu" => "peminjaman-page", "page" => "peminjaman.php", "icon" => "fa-solid fa-book-open-reader", "description" => "Peminjaman")
             );
             break;
