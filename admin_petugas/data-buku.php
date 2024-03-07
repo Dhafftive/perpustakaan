@@ -220,7 +220,7 @@
                             </div>
                             <div class="input-data">
                                 <label for="tahun-terbit">Batas peminjaman buku</label>
-                                <input placeholder="Masukkan stok buku" type="text" id="tahun-terbit" name="stok-buku" class="input-group" required>
+                                <input placeholder="Masukkan batas peminjaman" type="text" id="tahun-terbit" name="stok-buku" class="input-group" required>
                             </div>
                         </div>
                         <input type="hidden" name="perpusID" value="<?php echo mysqli_fetch_assoc($result_perpus)['perpusID']; ?>">
@@ -230,7 +230,7 @@
                         <textarea name="sinopsis" id="" cols="30" rows="10"></textarea>
                         <div class="buku-file">
                             <label for="bukuFile" class="custom-file-input" style="color: #777;">
-                                <i class="fas fa-file-pdf"></i> Pilih file PDF
+                                <i class="fas fa-file-pdf"></i> Pilih file
                                 <input type="file" id="bukuFile" name="bukuFile" onchange="showFileName(this)">
                             </label>
                             <span id="fileName" class="file-name"></span>
@@ -338,7 +338,8 @@
             showCancelButton: true,
             confirmButtonColor: '#d33',
             cancelButtonColor: '#3085d6',
-            confirmButtonText: 'Ya, hapus!'
+            confirmButtonText: 'Ya, hapus!',
+            cancelButtonText: 'Batal'
         }).then((result) => {
             if (result.isConfirmed) {
                 // Kirim permintaan AJAX untuk menghapus buku

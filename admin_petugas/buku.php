@@ -180,7 +180,7 @@
         <?php endif; ?>
             <h1 class="header"> Kategori</h1>
             <div class="action-btn">
-                <button type="button" class="kategori" onclick="filterBooks(null)">All</button>
+                <button type="button" class="kategori" onclick="filterBooks(null)">Semua</button>
                 <?php
                     // Buat kueri SQL untuk mengambil kategori yang unik dari buku
                     $query_kategori_unik = "SELECT DISTINCT kb.kategoriID, kb.namakategori 
@@ -389,7 +389,7 @@
                         
                         
             ?>
-                <div class="books searchable">
+                <div class="books search-data">
                     <div class="books-cover">
                         <!-- Gunakan foto dari kolom 'foto' dalam tabel buku -->
                         <?php if ($access_level !== 'petugas') : ?>
@@ -489,7 +489,7 @@
                             </div>
                             <div class="input-data">
                                 <label for="tahun-terbit">Batas peminjaman buku</label>
-                                <input placeholder="Masukkan stok buku" type="text" id="tahun-terbit" name="stok-buku" class="input-group" required>
+                                <input placeholder="Masukkan batas peminjaman" type="text" id="tahun-terbit" name="stok-buku" class="input-group" required>
                             </div>
                         </div>
                         <input type="hidden" name="perpusID" value="<?php echo mysqli_fetch_assoc($result_perpus)['perpusID']; ?>">
@@ -654,7 +654,7 @@
         $(document).ready(function() {
             $('#searchInput').on('keyup', function() {
                 var value = $(this).val().toLowerCase(); // Ambil nilai input pencarian dan ubah menjadi lowercase
-                $('.searchable').filter(function() {
+                $('.search-data').filter(function() {
                     $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1); // Tampilkan atau sembunyikan buku berdasarkan input pencarian
                 });
             });

@@ -322,7 +322,7 @@
     margin: 30px 0 20px;
 }
 .addkategori-cont form{
-    width: 90%;
+    width: 100%;
     display: flex;
     justify-content: center;
     flex-direction: column;

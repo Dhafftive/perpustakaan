@@ -61,7 +61,7 @@ require '../sidebar.php';
                     <input placeholder="Masukkan email" id="email" type="text" name="email" class="input-group" value="<?= $email ?>" required>
                     <label for="telepon">No. Telepon</label>
                     <input placeholder="Masukkan nomor telepon" type="text" id="telepon" name="telepon" class="input-group" value="<?= $telepon ?>" required>
-                    <label for="perpustakaan">Perpustakaan</label>
+                    <label for="level-akses">Level Akses</label>
                     <input type="hidden" name="idperpus" value="<?= $perpusID ?>">
                     <input type="hidden" name="iduser" value="<?= $userID ?>">
                     <select name="level-akses" id="acces-level" class="input-group">

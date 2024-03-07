@@ -156,7 +156,7 @@ if (!empty($_POST)) {
                                                 <i class="fa-solid fa-wand-magic-sparkles"></i> Edit
                                             </a>
                                             <a class="dropdown-item" href="javascript:void(0);" onclick="deleteUser(<?php echo $row['userID']; ?>)">
-                                                <i class="fa-regular fa-trash-can"></i> Delete
+                                                <i class="fa-regular fa-trash-can"></i> Hapus
                                             </a>
                                         </div>
                                     </div>
@@ -186,20 +186,20 @@ if (!empty($_POST)) {
                         <input placeholder="Masukkan nama  lengkap" type="text" id="namalengkap" name="namalengkap" class="input-group" required>
                         <label for="alamat">Alamat</label>
                         <input placeholder="Masukkan alamat rumah" type="text" id="alamat" name="alamat" class="input-group" required>
-                        <label for="password">Password</label>
-                        <input placeholder="Masukkan password" type="password" id="password" name="password" class="input-group" required>
-                    </div>
-                    <div class="input-form">
                         <label for="email">Email</label>
                         <input placeholder="Masukkan email" id="email" type="text" name="email" class="input-group" required>
+                    </div>
+                    <div class="input-form">
                         <label for="telepon">No. Telepon</label>
                         <input placeholder="Masukkan nomor telepon" type="text" id="telepon" name="telepon" class="input-group" required>
-                        <label for="perpustakaan">Perpustakaan</label>
+                        <label for="level-akses">Level Akses</label>
                         <select name="level-akses" id="acces_level" class="input-group">
                             <option value="peminjam">Peminjam</option>
                             <option value="petugas">Petugas</option>
                             <option value="admin">Admin</option>
                         </select>
+                        <label for="password">Password</label>
+                        <input placeholder="Masukkan password" type="password" id="password" name="password" class="input-group" required>
                         <input type="hidden" name="idperpus" value="<?= $perpusID ?>">
                         <label for="confirm">Konfirmasi</label>
                         <input placeholder="Masukkan password sekali lagi" type="password" id="confirm" name="confirm" class="input-group" required>

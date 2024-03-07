@@ -21,21 +21,21 @@ if (isset($_SESSION['acces_level'])) {
             $sidebar_items = array(
                 array("selected-menu" => "etalase-page", "page" => "buku.php", "icon" => "fa-solid fa-book", "description" => "Etalase"),
                 array("selected-menu" => "buku-page", "page" => "data-buku.php", "icon" => "fa-solid fa-book", "description" => "Data Buku"),
-                array("selected-menu" => "list-kategori", "page" => "list-kategori.php", "icon" => "fa-solid fa-book", "description" => "List Kategori"),
-                array("selected-menu" => "rekap-page", "page" => "rekap-page.php", "icon" => "fa-solid fa-book", "description" => "Rekap Peminjaman"),
-                array("selected-menu" => "peminjaman-page", "page" => "peminjaman.php", "icon" => "fa-solid fa-book-open-reader", "description" => "Peminjaman")
+                array("selected-menu" => "list-kategori", "page" => "list-kategori.php", "icon" => "fa-solid fa-tags", "description" => "List Kategori"),
+                array("selected-menu" => "peminjaman-page", "page" => "peminjaman.php", "icon" => "fa-solid fa-book-open-reader", "description" => "Data Peminjaman"),
+                array("selected-menu" => "rekap-page", "page" => "rekap-page.php", "icon" => "fa-regular fa-folder-open", "description" => "Rekap Peminjaman")
             );
             break;
         case 'admin' OR 'super_admin':
             $sidebar_items = array(
                 array("selected-menu" => "etalase-page", "page" => "buku.php", "icon" => "fa-solid fa-book", "description" => "Etalase"),
-                array("selected-menu" => "buku-page", "page" => "data-buku.php", "icon" => "fa-solid fa-book", "description" => "Data Buku"),
-                array("selected-menu" => "list-kategori", "page" => "list-kategori.php", "icon" => "fa-solid fa-book", "description" => "List Kategori"),
-                array("selected-menu" => "rekap-page", "page" => "rekap-page.php", "icon" => "fa-solid fa-book", "description" => "Rekap Peminjaman"),
-                array("selected-menu" => "datauser-page", "page" => "data_user.php", "icon" => "fa-regular fa-address-book", "description" => "Anggota"),
-                array("selected-menu" => "peminjaman-page", "page" => "peminjaman.php", "icon" => "fa-solid fa-book-open-reader", "description" => "Peminjaman"),
                 array("selected-menu" => "koleksibuku-page", "page" => "koleksibuku.php", "icon" => "fa-solid fa-book-bookmark", "description" => "Koleksi"),
                 array("selected-menu" => "bukuanda-page", "page" => "bukuanda.php", "icon" => "fa-solid fa-book-open", "description" => "Buku Anda"),
+                array("selected-menu" => "buku-page", "page" => "data-buku.php", "icon" => "fa-solid fa-book", "description" => "Data Buku"),
+                array("selected-menu" => "list-kategori", "page" => "list-kategori.php", "icon" => "fa-solid fa-tags", "description" => "List Kategori"),
+                array("selected-menu" => "peminjaman-page", "page" => "peminjaman.php", "icon" => "fa-solid fa-book-open-reader", "description" => "Data Peminjaman"),
+                array("selected-menu" => "rekap-page", "page" => "rekap-page.php", "icon" => "fa-regular fa-folder-open", "description" => "Rekap Peminjaman"),
+                array("selected-menu" => "datauser-page", "page" => "data_user.php", "icon" => "fa-solid fa-address-book", "description" => "Data User"),
                 array("selected-menu" => "logs-page", "page" => "logs_data.php", "icon" => "fa-solid fa-circle-exclamation", "description" => "Log Aktivitas")
             );
             break;
@@ -108,7 +108,7 @@ if (isset($_SESSION['acces_level'])) {
                 foreach ($sidebar_items as $item) {
                     echo '<a href="' . $item["page"] . '">';
                     echo '<div class="list-item ' . $item["selected-menu"] . '">';
-                    echo '<div class="icon"><i class="fa-solid ' . $item["icon"] . '"></i></div>';
+                    echo '<div class="icon"><i class="' . $item["icon"] . '"></i></div>';
                     echo '<span class="description">' . $item["description"] . '</span>';
                     echo '</div>';
                 }
