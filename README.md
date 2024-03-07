@@ -13,6 +13,8 @@ Proyek ini adalah sebuah aplikasi perpustakaan online yang memungkinkan pengguna
 - Famous book berdasarkan rating tertinggi
 - Baca buku secara online
 - Generate laporan peminjaman (Excel)
+- Filter by date
+- Realtime filter
 
 ## Teknologi yang digunakan
 - JS, JQuery dan AJAX sebagai Frontend
@@ -25,6 +27,7 @@ Proyek ini adalah sebuah aplikasi perpustakaan online yang memungkinkan pengguna
 - Sweetalert2.css
 - Toastr
 - Perfect-scrollbar
+- PDFJsLibs
 
 ## Instalasi
 1. Siapkan folder perpustakaan kosong
