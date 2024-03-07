@@ -14,7 +14,7 @@ Proyek ini adalah sebuah aplikasi perpustakaan online yang memungkinkan pengguna
 - Baca buku secara online
 - Generate laporan peminjaman (Excel)
 - Filter by date
-- Realtime filter
+- live search
 
 ## Teknologi yang digunakan
 - JS, JQuery dan AJAX sebagai Frontend
