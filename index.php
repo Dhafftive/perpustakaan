@@ -12,7 +12,7 @@
     <div class="bg-img"></div>
     <div class="head-page">
         <p class="logo">Bookshelf.<span>Idn</span></p>
-        <div class="account-confirm"><p>kamu belum punya akun?</p><button class="sign-up"><a href="sign-up.php">Sign Up</a></button></div>
+        <div class="account-confirm"><p>kamu belum punya akun?</p><button class="sign-up"><a href="sign-up.php">Buat Akun</a></button></div>
     </div>
     <div class="page-login">
         <h1 class="hdr">Masuk Akun</h1>
@@ -23,7 +23,7 @@
                 <label for="password">Password</label>
                 <input placeholder="Masukkan password" type="password" id="password" name="password" required>
             </div>
-            <input type="submit" value="Login" name="login">
+            <input type="submit" value="Masuk" name="login">
         </form>
     </div>
 

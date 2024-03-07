@@ -127,7 +127,7 @@ $result_kategori = mysqli_query($koneksi, $query_kategori);
     </script>
     <script src="../js/submitkategori.js"></script>
     <script src="../js/editkategori.js"></script>
-    <script src="../js/delete-kategori.js"></script>
+    <script src="../js/deletekategori.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 

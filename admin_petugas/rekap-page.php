@@ -115,43 +115,43 @@ mysqli_close($koneksi);
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <!-- Script Rekap data peminjaman -->
     <script>
-function filterTanggal() {
-    var start = document.getElementById("tanggal-awal").value;
-    var end = document.getElementById("tanggal-akhir").value;
-    var table = document.getElementById("bookTable");
-    var rows = table.getElementsByTagName("tr");
-    
-    for (var i = 1; i < rows.length; i++) {
-        var row = rows[i];
-        var borrowCell = row.getElementsByTagName("td")[2]; // Mengubah index menjadi 1 karena kita ingin memeriksa tanggal pinjam
-        var borrowDate = new Date(borrowCell.textContent);
-        var rowVisible = true;
-        
-        if (start) {
-            if (borrowDate < new Date(start)) {
-                rowVisible = false;
+        function filterTanggal() {
+            var start = document.getElementById("tanggal-awal").value;
+            var end = document.getElementById("tanggal-akhir").value;
+            var table = document.getElementById("bookTable");
+            var rows = table.getElementsByTagName("tr");
+            
+            for (var i = 1; i < rows.length; i++) {
+                var row = rows[i];
+                var borrowCell = row.getElementsByTagName("td")[2]; // Mengubah index menjadi 1 karena kita ingin memeriksa tanggal pinjam
+                var borrowDate = new Date(borrowCell.textContent);
+                var rowVisible = true;
+                
+                if (start) {
+                    if (borrowDate < new Date(start)) {
+                        rowVisible = false;
+                    }
+                }
+                
+                if (end) {
+                    if (borrowDate > new Date(end)) {
+                        rowVisible = false;
+                    }
+                }
+                
+                // Menambahkan kondisi untuk memeriksa apakah tanggal pinjam sama dengan tanggal awal atau akhir
+                if (borrowDate.toDateString() === new Date(start).toDateString() || borrowDate.toDateString() === new Date(end).toDateString()) {
+                    rowVisible = true;
+                }
+                
+                if (rowVisible) {
+                    row.style.display = "";
+                } else {
+                    row.style.display = "none";
+                }
             }
         }
-        
-        if (end) {
-            if (borrowDate > new Date(end)) {
-                rowVisible = false;
-            }
-        }
-        
-        // Menambahkan kondisi untuk memeriksa apakah tanggal pinjam sama dengan tanggal awal atau akhir
-        if (borrowDate.toDateString() === new Date(start).toDateString() || borrowDate.toDateString() === new Date(end).toDateString()) {
-            rowVisible = true;
-        }
-        
-        if (rowVisible) {
-            row.style.display = "";
-        } else {
-            row.style.display = "none";
-        }
-    }
-}
-</script>
+    </script>
 
 
     <script>

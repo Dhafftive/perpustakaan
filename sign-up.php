@@ -22,7 +22,7 @@
     <div class="bg-img"></div>
     <div class="head-page">
         <p class="logo">Bookshelf.<span>Idn</span></p>
-        <div class="account-confirm"><p>Sudah punya akun?</p><button class="sign-up"><a href="index.php">Login</a></button></div>
+        <div class="account-confirm"><p>Sudah punya akun?</p><button class="sign-up"><a href="index.php">Masuk</a></button></div>
     </div>
     <div class="page-signup">
         <h1 class="hdr">Buat Akun Baru</h1>
@@ -50,7 +50,7 @@
                     <input placeholder="Masukkan password sekali lagi" type="password" id="confirm" name="confirm" required>
                 </div>
             </div>
-            <input type="submit" value="Submit" name="Submit">
+            <input type="submit" value="Buat Akun" name="Submit">
         </form>
     </div>
     <script>

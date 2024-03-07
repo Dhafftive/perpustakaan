@@ -23,7 +23,7 @@ if (isset($_SESSION['acces_level'])) {
                 array("selected-menu" => "buku-page", "page" => "data-buku.php", "icon" => "fa-solid fa-book", "description" => "Data Buku"),
                 array("selected-menu" => "list-kategori", "page" => "list-kategori.php", "icon" => "fa-solid fa-tags", "description" => "List Kategori"),
                 array("selected-menu" => "peminjaman-page", "page" => "peminjaman.php", "icon" => "fa-solid fa-book-open-reader", "description" => "Data Peminjaman"),
-                array("selected-menu" => "rekap-page", "page" => "rekap-page.php", "icon" => "fa-regular fa-folder-open", "description" => "Rekap Peminjaman")
+                array("selected-menu" => "rekap-page", "page" => "rekap-page.php", "icon" => "fa-regular fa-folder-open", "description" => "Detail Peminjaman")
             );
             break;
         case 'admin' OR 'super_admin':
@@ -34,7 +34,7 @@ if (isset($_SESSION['acces_level'])) {
                 array("selected-menu" => "buku-page", "page" => "data-buku.php", "icon" => "fa-solid fa-book", "description" => "Data Buku"),
                 array("selected-menu" => "list-kategori", "page" => "list-kategori.php", "icon" => "fa-solid fa-tags", "description" => "List Kategori"),
                 array("selected-menu" => "peminjaman-page", "page" => "peminjaman.php", "icon" => "fa-solid fa-book-open-reader", "description" => "Data Peminjaman"),
-                array("selected-menu" => "rekap-page", "page" => "rekap-page.php", "icon" => "fa-regular fa-folder-open", "description" => "Rekap Peminjaman"),
+                array("selected-menu" => "rekap-page", "page" => "rekap-page.php", "icon" => "fa-regular fa-folder-open", "description" => "Detail Peminjaman"),
                 array("selected-menu" => "datauser-page", "page" => "data_user.php", "icon" => "fa-solid fa-address-book", "description" => "Data User"),
                 array("selected-menu" => "logs-page", "page" => "logs_data.php", "icon" => "fa-solid fa-circle-exclamation", "description" => "Log Aktivitas")
             );

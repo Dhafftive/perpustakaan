@@ -30,7 +30,7 @@ if (isset($_POST['peminjamanID'])) {
         // Eksekusi kueri update
         if ($result_kembalikan && $result_update_stok) {
             // Jika berhasil, kirimkan respons "success"
-            echo "success";
+            echo "Buku berhasil dikembalikan";
         } else {
             // Jika terjadi kesalahan, kirimkan respons "error"
             echo "error";

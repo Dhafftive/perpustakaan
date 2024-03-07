@@ -126,8 +126,8 @@
                                 <input placeholder="Masukkan tahun terbit" type="text" id="tahun-terbit" name="tahun-terbit" class="input-group" value="<?php echo $gettahun_terbit;?>" required>
                             </div>
                             <div class="input-data">
-                                <label for="stok-buku">Stok buku</label>
-                                <input placeholder="Masukkan stok buku" type="text" id="stok-buku" name="stok-buku" class="input-group" value="<?php echo $getstok;?>" required>
+                                <label for="stok-buku">Batas peminjaman buku</label>
+                                <input placeholder="Masukkan batas peminjaman" type="text" id="stok-buku" name="stok-buku" class="input-group" value="<?php echo $getstok;?>" required>
                             </div>
                         </div>
                         <input type="hidden" name="perpusID" value="<?php echo mysqli_fetch_assoc($result_perpus)['perpusID']; ?>">
