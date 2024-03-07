@@ -39,6 +39,22 @@
     justify-content: space-between;
     align-items: center;
 }
+.card-header .filter-data{
+    display: flex;
+    flex-direction: row;
+    padding: 5px;
+    font-size: 14px;
+    align-items: center;
+}
+.card-header .filter-data .filter-input{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    margin: 0 10px;
+}
+.card-header .filter-data .download-btn i{
+    font-size: 28px;
+}
 .card-header i:hover{
     color: #fff;
     transition: .2s;
@@ -146,4 +162,27 @@ td .delete i{
 .download-btn{
     font-size: 34px;
     color: #FFB000;
+}
+/* Gaya input tanggal */
+input[type="date"] {
+    padding: 5px 10px;
+    border: 2px solid #FFB000;
+    border-radius: 5px;
+    font-size: 14px;
+    background-color: #fff;
+    color: #333;
+    font-family: var(--default);
+    width: 150px;
+    cursor: pointer;
+    appearance: none;
+}
+.filter-btn{
+    padding: 7px 10px;
+    color: #FFB000;
+    font-weight: 700;
+    font-family: var(--default);
+    font-size: 14px;
+    background-color: #fffcf6;
+    border: 2px solid #FFB000;
+    border-radius: 5px;
 }

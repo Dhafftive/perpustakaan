@@ -31,9 +31,18 @@ mysqli_close($koneksi);
     <?php require 'navbar.php'?>
     <div class="data-peminjaman">
         <div class="card">
-            <h5 class="card-header">Data Peminjaman Buku  <div class="download-btn" onclick="downloadExcel()"><i class="fa-solid fa-file-arrow-down"></i></div></h5>
+            <h5 class="card-header">Data Peminjaman Buku  
+                <div class="filter-data">
+                    <div class="filter-input">
+                        <div class="tanggal-awal"><input type="date" id="tanggal-awal" name="tanggal-awal"></div>
+                        <div class="tanggal-akhir"><input type="date" id="tanggal-akhir" name="tanggal-akhir"></div>
+                        <button onclick="filterTanggal()" class="filter-btn">Filter</button>
+                    </div>
+                    <div class="download-btn" onclick="downloadExcel()" style="font-size: 16px;"><i class="fa-solid fa-file-arrow-down"></i></div>
+                </div>
+            </h5>
             <div class="table-responsive">
-                <table class="table-hover">
+                <table class="table-hover" id="bookTable">
                     <thead class="head-table">
                         <tr>
                             <th>Judul Buku</th>
@@ -105,6 +114,46 @@ mysqli_close($koneksi);
     <!-- SweetAlert2 JS -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <!-- Script Rekap data peminjaman -->
+    <script>
+function filterTanggal() {
+    var start = document.getElementById("tanggal-awal").value;
+    var end = document.getElementById("tanggal-akhir").value;
+    var table = document.getElementById("bookTable");
+    var rows = table.getElementsByTagName("tr");
+    
+    for (var i = 1; i < rows.length; i++) {
+        var row = rows[i];
+        var borrowCell = row.getElementsByTagName("td")[2]; // Mengubah index menjadi 1 karena kita ingin memeriksa tanggal pinjam
+        var borrowDate = new Date(borrowCell.textContent);
+        var rowVisible = true;
+        
+        if (start) {
+            if (borrowDate < new Date(start)) {
+                rowVisible = false;
+            }
+        }
+        
+        if (end) {
+            if (borrowDate > new Date(end)) {
+                rowVisible = false;
+            }
+        }
+        
+        // Menambahkan kondisi untuk memeriksa apakah tanggal pinjam sama dengan tanggal awal atau akhir
+        if (borrowDate.toDateString() === new Date(start).toDateString() || borrowDate.toDateString() === new Date(end).toDateString()) {
+            rowVisible = true;
+        }
+        
+        if (rowVisible) {
+            row.style.display = "";
+        } else {
+            row.style.display = "none";
+        }
+    }
+}
+</script>
+
+
     <script>
         $(document).ready(function() {
             $('.delete-btn').on('click', function() {
