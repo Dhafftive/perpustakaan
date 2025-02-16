@@ -105,6 +105,8 @@
     top: 0; /* Atur posisi scrollbar-y */
     right: 0; /* Atur posisi scrollbar-y */
 }
+
+/* navbar style */
 .navbar{
     width: 95%;
     height: 10vh;
@@ -132,7 +134,12 @@
     margin: auto;
 }
 .logout{
-    color: #a3a3a3;
+    color: #c2c2c2;
+    cursor: pointer;
+}
+.logout:hover{
+    color: #666;
+    transition: 0.2s;
 }
 .nama-user .label i{
     color: #FFB000;

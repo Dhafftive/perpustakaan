@@ -258,33 +258,33 @@
         function showAddbookPopup() {
             addbookContainer.style.display = 'block'; // Tampilkan popup
             overlay.style.display = 'block'; // Tampilkan overlay
-            addbookContainer.classList.add('animate__animated', 'animate__bounceIn'); // Tambahkan animasi bounce in
+            addbookContainer.classList.add('animate__animated', 'animate__zoomIn'); // Tambahkan animasi bounce in
         }
         function showAddkategoriPopup() {
             addkategoriContainer.style.display = 'block'; // Tampilkan popup
             overlay.style.display = 'block'; // Tampilkan overlay
-            addkategoriContainer.classList.add('animate__animated', 'animate__bounceIn'); // Tambahkan animasi bounce in
+            addkategoriContainer.classList.add('animate__animated', 'animate__zoomIn'); // Tambahkan animasi bounce in
         }
 
         function hideAddkategoriPopup() {
-            addkategoriContainer.classList.remove('animate__bounceIn'); // Hapus animasi bounce in jika ada
-            addkategoriContainer.classList.add('animate__bounceOut'); // Tambahkan animasi bounce out
+            addkategoriContainer.classList.remove('animate__zoomIn'); // Hapus animasi bounce in jika ada
+            addkategoriContainer.classList.add('animate__zoomOut'); // Tambahkan animasi bounce out
             setTimeout(() => {
                 addkategoriContainer.style.display = 'none'; // Sembunyikan popup setelah animasi selesai
                 overlay.style.display = 'none'; // Sembunyikan overlay
-                addkategoriContainer.classList.remove('animate__bounceOut'); // Hapus kelas animasi bounce out setelah selesai
-            }, 500); // Sesuaikan dengan durasi animasi bounceOut (dalam milidetik)
+                addkategoriContainer.classList.remove('animate__zoomOut'); // Hapus kelas animasi bounce out setelah selesai
+            }, 500); // Sesuaikan dengan durasi animasi zoomOut (dalam milidetik)
         }
 
         // Fungsi untuk menyembunyikan popup dengan animasi bounce out
         function hideAddbookPopup() {
-            addbookContainer.classList.remove('animate__bounceIn'); // Hapus animasi bounce in jika ada
-            addbookContainer.classList.add('animate__bounceOut'); // Tambahkan animasi bounce out
+            addbookContainer.classList.remove('animate__zoomIn'); // Hapus animasi bounce in jika ada
+            addbookContainer.classList.add('animate__zoomOut'); // Tambahkan animasi bounce out
             setTimeout(() => {
                 addbookContainer.style.display = 'none'; // Sembunyikan popup setelah animasi selesai
                 overlay.style.display = 'none'; // Sembunyikan overlay
-                addbookContainer.classList.remove('animate__bounceOut'); // Hapus kelas animasi bounce out setelah selesai
-            }, 500); // Sesuaikan dengan durasi animasi bounceOut (dalam milidetik)
+                addbookContainer.classList.remove('animate__zoomOut'); // Hapus kelas animasi bounce out setelah selesai
+            }, 500); // Sesuaikan dengan durasi animasi zoomOut (dalam milidetik)
         }
 
         // Event listener untuk menampilkan popup ketika ikon "Add Book" diklik
@@ -333,7 +333,7 @@
         // Tampilkan konfirmasi penghapusan dengan SweetAlert
         Swal.fire({
             title: 'Anda yakin?',
-            text: "Anda tidak akan dapat mengembalikan perintah ini! Buku akan dihapus secara permanen",
+            text: "Buku akan dihapus secara permanen dari database",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#d33',
@@ -351,14 +351,14 @@
                         // Tampilkan pesan sukses atau refresh halaman jika perlu
                         if (response === 'success') {
                             Swal.fire(
-                                'Terhapus!',
-                                'Buku telah dihapus.',
+                                'Berhasil!',
+                                'Buku ini telah dihapus dari database.',
                                 'success'
                             );
                             // Beri jeda waktu sebelum refresh halaman
                             setTimeout(function() {
                                 window.location.reload(); // Refresh halaman
-                            }, 1000); // Jeda waktu dalam milidetik (misalnya 1000ms = 1 detik)
+                            }, 800); // Jeda waktu dalam milidetik (misalnya 1000ms = 1 detik)
                         } else {
                             Swal.fire(
                                 'Gagal!',

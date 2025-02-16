@@ -488,8 +488,8 @@
                                 <input placeholder="Masukkan tahun terbit" type="text" id="tahun-terbit" name="tahun-terbit" class="input-group" required>
                             </div>
                             <div class="input-data">
-                                <label for="tahun-terbit">Batas peminjaman buku</label>
-                                <input placeholder="Masukkan batas peminjaman" type="text" id="tahun-terbit" name="stok-buku" class="input-group" required>
+                                <label for="tahun-terbit">Batas jumlah peminjaman</label>
+                                <input placeholder="Masukkan jumlah peminjaman" type="text" id="tahun-terbit" name="stok-buku" class="input-group" required>
                             </div>
                         </div>
                         <input type="hidden" name="perpusID" value="<?php echo mysqli_fetch_assoc($result_perpus)['perpusID']; ?>">
@@ -540,7 +540,7 @@
         function showAddbookPopup() {
             addbookContainer.style.display = 'block'; // Tampilkan popup
             overlay.style.display = 'block'; // Tampilkan overlay
-            addbookContainer.classList.add('animate__animated', 'animate__bounceIn'); // Tambahkan animasi bounce in
+            addbookContainer.classList.add('animate__animated', 'animate__zoomIn'); // Tambahkan animasi bounce in
         }
         function showAddkategoriPopup() {
             addkategoriContainer.style.display = 'block'; // Tampilkan popup
@@ -550,13 +550,13 @@
 
         // Fungsi untuk menyembunyikan popup dengan animasi bounce out
         function hideAddbookPopup() {
-            addbookContainer.classList.remove('animate__bounceIn'); // Hapus animasi bounce in jika ada
-            addbookContainer.classList.add('animate__bounceOut'); // Tambahkan animasi bounce out
+            addbookContainer.classList.remove('animate__zoomIn'); // Hapus animasi bounce in jika ada
+            addbookContainer.classList.add('animate__zoomOut'); // Tambahkan animasi bounce out
             setTimeout(() => {
                 addbookContainer.style.display = 'none'; // Sembunyikan popup setelah animasi selesai
                 overlay.style.display = 'none'; // Sembunyikan overlay
-                addbookContainer.classList.remove('animate__bounceOut'); // Hapus kelas animasi bounce out setelah selesai
-            }, 500); // Sesuaikan dengan durasi animasi bounceOut (dalam milidetik)
+                addbookContainer.classList.remove('animate__zoomOut'); // Hapus kelas animasi bounce out setelah selesai
+            }, 100); // Sesuaikan dengan durasi animasi zoomOut (dalam milidetik)
         }
         function hideAddkategoriPopup() {
             addkategoriContainer.classList.remove('animate__bounceIn'); // Hapus animasi bounce in jika ada
@@ -565,7 +565,7 @@
                 addkategoriContainer.style.display = 'none'; // Sembunyikan popup setelah animasi selesai
                 overlay.style.display = 'none'; // Sembunyikan overlay
                 addkategoriContainer.classList.remove('animate__bounceOut'); // Hapus kelas animasi bounce out setelah selesai
-            }, 500); // Sesuaikan dengan durasi animasi bounceOut (dalam milidetik)
+            }, 100); // Sesuaikan dengan durasi animasi zoomOut (dalam milidetik)
         }
 
         // Event listener untuk menampilkan popup ketika ikon "Add Book" diklik

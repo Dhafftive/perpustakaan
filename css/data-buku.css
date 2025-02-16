@@ -1,3 +1,7 @@
+.animate__animated {
+    --animate-duration: 0.6s; /* 600 milidetik */
+}
+
 /* Selected Sidebar */
 .sidebar .main .list-item.buku-page{
     background-color: #5c8063;
@@ -226,6 +230,7 @@
 .addbook-container .addbook-hdr .header{
     font-family: var(--script);
     color: #289937;
+    font-size: 25px;
 }
 .addbook-container .form{
     display: flex;
@@ -422,7 +427,7 @@
 }
 
 .file-name {
-    width: 220px;
+    width: 200px;
     margin-left: 10px;
     font-family: var(--default);
     font-size: 14px;

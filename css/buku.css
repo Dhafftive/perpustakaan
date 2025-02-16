@@ -1,3 +1,7 @@
+.animate__animated {
+    --animate-duration: 0.7s; /* 700 milidetik */
+}
+
 /* Selected Sidebar */
 .sidebar .main .list-item.etalase-page{
     background-color: #5c8063;
@@ -115,6 +119,7 @@
     font-size: 12px;
     font-family: var(--default);
     border-radius: 10px;
+    cursor: pointer;
 }
 .bookshelf .books-hdr .addcontent-icon:hover{
     background-color: #289937;
@@ -279,7 +284,7 @@
     z-index: 992;
     margin: 4vh 2vw;
     border-radius: 10px;
-    padding: 30px 50px;
+    padding: 15px 30px;
 }
 .addbook-container .addbook-hdr {
     display: flex;
@@ -289,10 +294,12 @@
 .addbook-container .addbook-hdr i{
     font-size: 20px;
     color: #ccc;
+    cursor: pointer;
 }
 .addbook-container .addbook-hdr .header{
     font-family: var(--script);
     color: #289937;
+    font-size: 25px;
 }
 .addbook-container .form{
     display: flex;
@@ -346,7 +353,8 @@
     width: 100%;
     display: flex;
     justify-content: center;
-    margin-top: 8vh;
+    margin-top: 4vh;
+    cursor: pointer;
 }
 .submit-btn .submit{
     padding: 8px 20px;
@@ -481,6 +489,7 @@
     border: 1px solid #ccc;
     padding: 7px 12px;
     border-radius: 5px;
+    cursor: pointer;
 }
 
 .custom-file-input input[type="file"] {
@@ -492,7 +501,7 @@
 }
 
 .file-name {
-    width: 220px;
+    width: 200px;
     margin-left: 10px;
     font-family: var(--default);
     font-size: 14px;
