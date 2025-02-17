@@ -98,6 +98,6 @@ $result = mysqli_query($koneksi, $query);
     <!-- Peminjaman JS -->
     <script src="../js/konfirmpinjam.js"></script>
     <!-- Bookmark JS -->
-    <script src="../js/ajaxbookmark.js"></script>
+    <script src="../js/bookmark.js"></script>
 </body>
 </html>

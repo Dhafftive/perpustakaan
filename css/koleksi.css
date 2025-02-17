@@ -75,10 +75,12 @@
     padding: 7px 10px;
     background-color: var(--secondary);
     border-radius: 5px;
+    cursor: pointer;
 }
 .buku .action-btn .remove{
     padding: 7px 15px;
     background-color: #FFB000;
+    cursor: pointer;
     border-radius: 5px;
 }
 .buku .action-btn .remove i{

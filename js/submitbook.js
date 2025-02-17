@@ -21,8 +21,8 @@
 
                     // Tampilkan notifikasi SweetAlert untuk sukses
                     Swal.fire({
-                        title: 'Berhasil',
-                        text: 'Buku berhasil ditambahkan!',
+                        title: 'Sukses!',
+                        text: 'Buku berhasil ditambahkan',
                         icon: 'success',
                         customClass: {
                             container: 'sweetalert-font sweetalert-background',
@@ -59,7 +59,7 @@
                 // Tampilkan notifikasi SweetAlert untuk error
                 Swal.fire({
                     title: 'Gagal',
-                    text: 'Terjadi kesalahan saat menambahkan buku.',
+                    text: 'Periksa kembali data buku yang sedang anda masukkan.',
                     icon: 'error',
                     customClass: {
                         container: 'sweetalert-font sweetalert-background',

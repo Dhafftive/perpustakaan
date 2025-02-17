@@ -11,7 +11,7 @@ function addBookmark(bukuID) {
         success: function(response) {
             // Tampilkan notifikasi SweetAlert
             Swal.fire({
-                title: 'Berhasil',
+                title: 'Sukses',
                 text: 'Buku berhasil ditambahkan ke koleksi pribadi!',
                 icon: 'success',
                 customClass: {
@@ -58,7 +58,7 @@ function removeBookmark(bukuID) {
         success: function(response) {
             // Tampilkan notifikasi SweetAlert
             Swal.fire({
-                title: 'Berhasil',
+                title: 'Sukses',
                 text: 'Buku berhasil dihapus dari koleksi pribadi!',
                 icon: 'success',
                 customClass: {

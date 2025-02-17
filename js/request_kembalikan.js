@@ -1,12 +1,12 @@
 function kembalikanPeminjaman(peminjamanID) {
     Swal.fire({
-        title: 'Apakah Anda yakin ingin mengembalikan buku?',
-        text: 'Aksi ini tidak dapat dibatalkan!',
+        title: 'Apakah Anda yakin?',
+        text: 'Kamu harus meminjam kembali jika ingin membaca buku ini lagi',
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Ya, kembalikan!',
+        confirmButtonText: 'Kembalikan',
         cancelButtonText: 'Batal'
     }).then((result) => {
         if (result.isConfirmed) {

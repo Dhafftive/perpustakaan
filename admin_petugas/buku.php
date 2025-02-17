@@ -617,7 +617,7 @@
 <?php endif; ?>
     <script src="../js/konfirmpinjam.js"></script>
     <script src="../js/batalpinjam.js"></script>
-    <script src="../js/ajaxbookmark.js"></script>
+    <script src="../js/bookmark.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>

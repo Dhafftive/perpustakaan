@@ -190,10 +190,12 @@
     background-color: var(--secondary);
     padding: 7px 20px;
     border-radius: 5px;
+    cursor: pointer;
 }
 .action-btn i{
     font-size: 28px;
     color: #FFB000;
+    cursor: pointer;
 }
 #imagePreviewContainer {
     position: relative;

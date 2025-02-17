@@ -101,6 +101,7 @@
 .yourbook .books-content .kembalikan-btn{
     background-color: #FFB000;
     padding: 7px 10px;
+    cursor: pointer;
 }
 .yourbook .books-content .baca-btn,
 .yourbook .books-content .kembalikan-btn{
