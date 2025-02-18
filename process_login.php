@@ -2,6 +2,12 @@
 session_start();
 include "koneksi.php"; // Sesuaikan dengan nama file koneksi ke database
 
+// Memeriksa apakah token CSRF yang dikirimkan cocok dengan yang ada di session
+if ($_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+    echo json_encode(['status' => 'error', 'message' => 'Token CSRF tidak valid']);
+    exit(); // Hentikan proses jika token tidak valid
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $usernameOrEmail = $_POST["username"];
     $password = $_POST["password"];
@@ -13,6 +19,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (mysqli_num_rows($result) > 0) {
             $row = mysqli_fetch_assoc($result);
             if (password_verify($password, $row["password"])) {
+                // Ganti ID sesi untuk mencegah session fixation attack
+                session_regenerate_id(true);
+                
+                // Simpan data user ke session
                 $_SESSION["user_id"] = $row["userID"];
                 $_SESSION["username"] = $row["username"];
                 $_SESSION["email"] = $row["email"];

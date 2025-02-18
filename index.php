@@ -1,3 +1,11 @@
+<?php
+session_start();
+
+// Membuat token CSRF jika belum ada
+if (empty($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32)); // Membuat token acak
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,6 +32,8 @@
                 <label for="password">Password</label>
                 <input placeholder="Masukkan password" type="password" id="password" name="password" required>
             </div>
+            <!-- Token CSRF disertakan dalam form sebagai input tersembunyi -->
+            <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
             <input type="submit" value="Masuk">
         </form>
     </div>
@@ -37,6 +47,7 @@
                 // Mengambil data dari form
                 var username = $('#username').val();
                 var password = $('#password').val();
+                var csrfToken = $('input[name="csrf_token"]').val(); // Mengambil token CSRF dari form
 
                 // Melakukan request AJAX
                 $.ajax({
@@ -44,7 +55,8 @@
                     type: 'POST',
                     data: {
                         username: username,
-                        password: password
+                        password: password,
+                        csrf_token: csrfToken // Kirimkan token CSRF
                     },
                     success: function(response) {
                         // Menggunakan SweetAlert untuk menampilkan hasil
