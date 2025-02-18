@@ -27,38 +27,37 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $logs = "INSERT INTO c_logs (detail_histori) VALUES ('User bernama " . $_SESSION["username"] . " telah login')";
                 // Redirect ke halaman sesuai dengan acces_level
                 if (mysqli_query($koneksi, $logs)) {
-                    // Redirect ke halaman sesuai dengan acces_level
-                    switch ($_SESSION["acces_level"]) {
-                        case "admin":
-                            header("Location: admin_petugas/buku.php");
-                            exit();
-                        case "super_admin":
-                            header("Location: admin_petugas/buku.php");
-                            exit();
-                        case "petugas":
-                            header("Location: admin_petugas/peminjaman.php");
-                            exit();
-                        case "peminjam":
-                            header("Location: admin_petugas/buku.php");
-                            exit();
-                        default:
-                            // Jika acces_level tidak valid, arahkan ke halaman login
-                            header("Location: index.php");
-                            exit();
-                        }
+                    $response = [
+                        'status' => 'success',
+                        'redirect' => getRedirectPage($_SESSION["acces_level"])
+                    ];
+                    echo json_encode($response);
                 } else {
-                // saya ibung untuk apa echo disini
-                echo "Gagal mencatat log aktivitas";
+                    echo json_encode(['status' => 'error', 'message' => 'Terjadi kesalahan saat mencatat log']);
                 }
             } else {
                 // Password salah
-                echo "Password salah";
+                echo json_encode(['status' => 'error', 'message' => 'Password salah']);
             }
         } else {
             // Username atau akun salah
-            echo "Akun ini tidak ditemukan";
+            echo json_encode(['status' => 'error', 'message' => 'Akun ini tidak ditemukan']);
         }
         mysqli_close($koneksi);
     }   
+}
+
+function getRedirectPage($role) {
+    switch ($role) {
+        case 'admin':
+        case 'super_admin':
+            return 'admin_petugas/buku.php';
+        case 'petugas':
+            return 'admin_petugas/peminjaman.php';
+        case 'peminjam':
+            return 'admin_petugas/buku.php';
+        default:
+            return 'index.php';
+    }
 }
 ?>

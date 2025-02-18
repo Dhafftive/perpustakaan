@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +6,8 @@
     <title>Masuk Akun</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/login.css?v=<?php echo time(); ?>">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
     <div class="bg-img"></div>
@@ -16,16 +17,56 @@
     </div>
     <div class="page-login">
         <h1 class="hdr">Masuk Akun</h1>
-        <form action="process_login.php" method="post">
+        <form id="loginForm">
             <div class="input-form">
                 <label for="username">Username atau email</label>
                 <input placeholder="Masukkan username atau email" id="username" type="text" name="username" required>
                 <label for="password">Password</label>
                 <input placeholder="Masukkan password" type="password" id="password" name="password" required>
             </div>
-            <input type="submit" value="Masuk" name="login">
+            <input type="submit" value="Masuk">
         </form>
     </div>
 
+    <script>
+        $(document).ready(function() {
+            // Saat form login disubmit
+            $('#loginForm').submit(function(event) {
+                event.preventDefault(); // Menghindari reload halaman
+
+                // Mengambil data dari form
+                var username = $('#username').val();
+                var password = $('#password').val();
+
+                // Melakukan request AJAX
+                $.ajax({
+                    url: 'process_login.php', // File proses login
+                    type: 'POST',
+                    data: {
+                        username: username,
+                        password: password
+                    },
+                    success: function(response) {
+                        // Menggunakan SweetAlert untuk menampilkan hasil
+                        try {
+                            var jsonResponse = JSON.parse(response);
+                            if (jsonResponse.status === 'success') {
+                                Swal.fire('Selamat datang!', 'Login berhasil!', 'success').then(() => {
+                                    window.location.href = jsonResponse.redirect; // Redirect ke halaman sesuai role
+                                });
+                            } else {
+                                Swal.fire('Gagal!', jsonResponse.message, 'error');
+                            }
+                        } catch (e) {
+                            Swal.fire('Gagal!', 'Terjadi kesalahan saat memproses data.', 'error');
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        Swal.fire('Gagal!', 'Terjadi kesalahan pada server.', 'error');
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
