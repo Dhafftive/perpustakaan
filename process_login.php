@@ -47,16 +47,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             exit();
                         }
                 } else {
-                // Password salah
-                echo "Password salah";
+                // saya ibung untuk apa echo disini
+                echo "Gagal mencatat log aktivitas";
                 }
             } else {
-                // Akun tidak ditemukan
-                echo "Akun ini tidak ditemukan";
+                // Password salah
+                echo "Password salah";
             }
         } else {
-            // Kesalahan query
-            echo "Terjadi kesalahan saat melakukan query";
+            // Username atau akun salah
+            echo "Akun ini tidak ditemukan";
         }
         mysqli_close($koneksi);
     }   

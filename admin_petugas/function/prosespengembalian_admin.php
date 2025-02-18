@@ -19,7 +19,7 @@ if (isset($_POST['peminjamanID'])) {
         // Ambil bukuID dari baris hasil kueri
         $bukuID = $row['bukuID'];
 
-        // Kueri SQL untuk memperbarui status_pinjam menjadi 'dikembalikan' dan tanggal_kembali menjadi tanggal sekarang
+        // Kueri SQL untuk memperbarui status_pinjam menjadi 'dikembalikan'
         $query_kembalikan = "UPDATE peminjaman SET status_pinjam = 'dikembalikan' WHERE peminjamanID = $peminjamanID";
         $result_kembalikan = mysqli_query($koneksi, $query_kembalikan);
 
