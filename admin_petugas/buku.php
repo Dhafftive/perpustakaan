@@ -613,7 +613,7 @@
 
     <!-- script Library -->
     <script src="../js/submitbook.js"></script>
-    <script src="../js/submitkategori.js"></script>
+    <script src="../js/submit_kategori.js"></script>
 <?php endif; ?>
     <script src="../js/konfirmpinjam.js"></script>
     <script src="../js/batalpinjam.js"></script>

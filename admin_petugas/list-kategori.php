@@ -125,7 +125,7 @@ $result_kategori = mysqli_query($koneksi, $query_kategori);
         closePopupKategori.onclick = hideAddkategoriPopup;
 
     </script>
-    <script src="../js/submitkategori.js"></script>
+    <script src="../js/submit_kategori.js"></script>
     <script src="../js/editkategori.js"></script>
     <script src="../js/delete_kategori.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>

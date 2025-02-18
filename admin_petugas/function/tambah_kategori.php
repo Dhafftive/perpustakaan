@@ -5,8 +5,13 @@ include "../../koneksi.php";
 // Pastikan metode yang digunakan adalah POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Tangkap data yang dikirimkan melalui AJAX
-    $namaKategori = $_POST['nama-kategori'];
-
+    $namaKategori = trim($_POST['nama-kategori']);
+    
+    // Validasi input tidak boleh kosong
+    if (empty($namaKategori)) {
+        echo json_encode(array("status" => "error", "message" => "Nama kategori tidak boleh kosong!"));
+        exit;
+    }
     // Buat kueri SQL untuk menambahkan kategori baru
     $query = "INSERT INTO kategoribuku (namakategori) VALUES ('$namaKategori')";
 
