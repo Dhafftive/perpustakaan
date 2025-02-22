@@ -17,6 +17,8 @@
     <title>Buat Akun Baru</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/sign-up.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
     <div class="bg-img"></div>
@@ -54,23 +56,76 @@
         </form>
     </div>
     <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var form = document.getElementById('signupForm');
 
-        // Validasi form pada sisi klien menggunakan JavaScript
-        document.getElementById('signupForm').addEventListener('submit', function (event) {
+        if (!form) return;
+
+        form.addEventListener('submit', function (event) {
+            event.preventDefault(); // Cegah form dikirim langsung
+
+            var formData = new FormData(form); // Ambil data form
+
+            // Validasi password sebelum submit
             var password = document.getElementById('password').value;
             var confirm = document.getElementById('confirm').value;
 
             if (password !== confirm) {
-                alert('Password dan konfirmasi harus sama.');
-                event.preventDefault(); // Mencegah formulir dikirim jika password tidak cocok
-            } else {
-                // Jika password cocok, tampilkan konfirmasi tambahan
-                var konfirmasi = confirm('Apakah Anda yakin dengan password ini?');
-                if (!konfirmasi) {
-                    event.preventDefault(); // Mencegah formulir dikirim jika konfirmasi ditolak
-                }
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Password Tidak Cocok',
+                    text: 'Harap masukkan password yang sama!',
+                });
+                return;
             }
+
+            // Konfirmasi sebelum registrasi
+            Swal.fire({
+                title: 'Konfirmasi Registrasi',
+                text: 'Apakah data sudah benar?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Ya, Daftar!',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Kirim data menggunakan AJAX
+                    fetch('admin_petugas/function/simpan_user.php', {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(response => response.json()) // Ubah response ke JSON
+                    .then(data => {
+                        if (data.success) {
+                            Swal.fire({
+                                title: 'Registrasi Berhasil!',
+                                text: 'Akun Anda telah dibuat, silakan login.',
+                                icon: 'success',
+                                confirmButtonText: 'OK'
+                            }).then(() => {
+                                window.location.href = 'index.php'; // Redirect setelah user klik OK
+                            });
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Registrasi Gagal!',
+                                text: data.message
+                            });
+                        }
+                    })
+                    .catch(error => {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Terjadi Kesalahan',
+                            text: 'Silakan coba lagi nanti.'
+                        });
+                        console.error('Error:', error);
+                    });
+                }
+            });
         });
-    </script>
+    });
+</script>
+
 </body>
 </html>
